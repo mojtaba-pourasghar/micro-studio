@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="هوهو فارسی">
+  <rect width="256" height="256" fill="#1BC1BE"/>
+  <circle cx="48" cy="48" r="6" fill="#FFF3DF"/>
+  <path d="M212 36l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z" fill="#FEB230"/>
+  <path d="M70 92l-6-40 36 24zM186 92l6-40-36 24z" fill="#FA9447"/>
+  <ellipse cx="128" cy="146" rx="70" ry="78" fill="#FA9447"/>
+  <ellipse cx="128" cy="184" rx="40" ry="34" fill="#FFF3DF"/>
+  <ellipse cx="62" cy="160" rx="14" ry="34" fill="#F25371"/>
+  <ellipse cx="194" cy="160" rx="14" ry="34" fill="#F25371"/>
+  <circle cx="100" cy="122" r="27" fill="#fff"/>
+  <circle cx="156" cy="122" r="27" fill="#fff"/>
+  <circle cx="104" cy="124" r="11" fill="#330185"/>
+  <circle cx="152" cy="124" r="11" fill="#330185"/>
+  <circle cx="108" cy="120" r="3.5" fill="#fff"/>
+  <circle cx="156" cy="120" r="3.5" fill="#fff"/>
+  <path d="M118 140h20l-10 17z" fill="#FEB230"/>
+  <circle cx="198" cy="204" r="32" fill="#fff"/>
+  <path d="M198 192q-10-8-20-4v26q10-4 20 4zM198 192q10-8 20-4v26q-10-4-20 4z" fill="#4E279B"/>
+  <path d="M198 192v26" stroke="#fff" stroke-width="3"/>
+</svg>
