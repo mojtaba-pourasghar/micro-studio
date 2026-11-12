@@ -1,83 +1,69 @@
 (function () {
   "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hdr = document.getElementById("hdr");
+  var nav = document.getElementById("nav");
+  var burger = document.querySelector(".burger");
+
+  // هدر: پس‌زمینه بعد از اسکرول
+  var onScroll = function () { hdr.classList.toggle("solid", scrollY > 40); };
+  onScroll(); addEventListener("scroll", onScroll, { passive: true });
 
   // منوی موبایل
-  var btn = document.querySelector(".menu-btn");
-  var nav = document.getElementById("site-nav");
-  if (btn && nav) {
-    var setOpen = function (open) {
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      nav.classList.toggle("open", open);
-    };
-    btn.addEventListener("click", function () {
-      setOpen(btn.getAttribute("aria-expanded") !== "true");
-    });
+  if (burger && nav) {
+    var setOpen = function (o) { burger.setAttribute("aria-expanded", o ? "true" : "false"); nav.classList.toggle("open", o); };
+    burger.addEventListener("click", function () { setOpen(burger.getAttribute("aria-expanded") !== "true"); });
+    nav.addEventListener("click", function (e) { if (e.target.tagName === "A") setOpen(false); });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
-        setOpen(false);
-        btn.focus();
-      }
+      if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") { setOpen(false); burger.focus(); }
     });
   }
 
-  // گالری با لایت‌باکس
-  var shots = Array.prototype.slice.call(document.querySelectorAll(".shot"));
-  if (!shots.length) return;
-
-  var box = document.createElement("div");
-  box.className = "lightbox";
-  box.setAttribute("role", "dialog");
-  box.setAttribute("aria-modal", "true");
-  box.setAttribute("aria-label", "نمایش بزرگ تصویر");
-  box.innerHTML =
-    '<button type="button" class="lb-btn lb-close" aria-label="بستن">×</button>' +
-    '<button type="button" class="lb-btn lb-prev" aria-label="تصویر قبلی">›</button>' +
-    '<button type="button" class="lb-btn lb-next" aria-label="تصویر بعدی">‹</button>' +
-    '<img alt=""><p></p>';
-  document.body.appendChild(box);
-
-  var img = box.querySelector("img");
-  var cap = box.querySelector("p");
-  var idx = 0;
-  var opener = null;
-
-  function show(i) {
-    idx = (i + shots.length) % shots.length;
-    img.src = shots[idx].getAttribute("data-full");
-    img.alt = shots[idx].getAttribute("data-cap") || "";
-    cap.textContent = shots[idx].getAttribute("data-cap") || "";
-  }
-  function open(i) {
-    opener = shots[i];
-    show(i);
-    box.classList.add("open");
-    document.body.style.overflow = "hidden";
-    box.querySelector(".lb-close").focus();
-  }
-  function close() {
-    box.classList.remove("open");
-    document.body.style.overflow = "";
-    if (opener) opener.focus();
+  // نمایان شدن بخش‌ها
+  var items = document.querySelectorAll(".rv");
+  if (reduce) { items.forEach(function (e) { e.classList.add("in"); }); }
+  else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    items.forEach(function (e) { io.observe(e); });
   }
 
-  shots.forEach(function (s, i) {
-    s.addEventListener("click", function () { open(i); });
-  });
-  box.querySelector(".lb-close").addEventListener("click", close);
-  box.querySelector(".lb-prev").addEventListener("click", function () { show(idx - 1); });
-  box.querySelector(".lb-next").addEventListener("click", function () { show(idx + 1); });
-  box.addEventListener("click", function (e) { if (e.target === box) close(); });
-  document.addEventListener("keydown", function (e) {
-    if (!box.classList.contains("open")) return;
-    if (e.key === "Escape") close();
-    // در RTL فلش چپ = بعدی
-    else if (e.key === "ArrowLeft") show(idx + 1);
-    else if (e.key === "ArrowRight") show(idx - 1);
-    else if (e.key === "Tab") {
-      var f = box.querySelectorAll("button");
-      var first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
+  // شمارنده
+  var fa = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+  var toFa = function (n) { return String(n).replace(/\d/g, function (d) { return fa[+d]; }); };
+  var nums = document.querySelectorAll("[data-to]");
+  if (nums.length && !reduce) {
+    var no = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        no.unobserve(e.target);
+        var el = e.target, to = +el.getAttribute("data-to"), t0 = 0;
+        requestAnimationFrame(function step(t) {
+          if (!t0) t0 = t;
+          var k = Math.min((t - t0) / 1100, 1);
+          el.textContent = toFa(Math.round(to * (1 - Math.pow(1 - k, 3))));
+          if (k < 1) requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (e) { no.observe(e); });
+  }
+
+  // پخش ویدیو
+  var lb = document.getElementById("lb");
+  var play = document.querySelector(".play");
+  if (lb && play) {
+    var box = lb.querySelector(".lb-in"), x = lb.querySelector(".lb-x");
+    var close = function () {
+      lb.hidden = true; box.innerHTML = ""; document.body.style.overflow = ""; play.focus();
+    };
+    play.addEventListener("click", function () {
+      box.innerHTML = '<video controls autoplay playsinline src="' + play.getAttribute("data-video") + '"></video>';
+      lb.hidden = false; document.body.style.overflow = "hidden"; x.focus();
+    });
+    x.addEventListener("click", close);
+    lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !lb.hidden) close(); });
+  }
 })();
