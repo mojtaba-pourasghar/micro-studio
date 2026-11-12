@@ -109,6 +109,7 @@ html[dir=rtl] .tri{transform:scaleX(-1)}
 
 /* ۲. ما که هستیم */
 .wordmark{position:absolute;inset-inline-start:0;top:38%;font:800 clamp(6rem,17vw,15rem)/1 "Poppins",var(--fa);color:rgba(51,1,133,.055);letter-spacing:-4px;pointer-events:none;z-index:-1;white-space:nowrap}
+.about-in>*{min-width:0}
 .about-in{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
 .about-art{position:relative;aspect-ratio:1/.9}
 .shot{position:absolute;border-radius:24px;overflow:hidden;border:5px solid #fff;box-shadow:0 30px 60px -34px rgba(51,1,133,.6)}
@@ -196,26 +197,12 @@ html[dir=rtl] .tri{transform:scaleX(-1)}
 .ch h3{font-size:1.25rem;margin-bottom:2px}
 .ch p{margin:0;font-size:.92rem}
 
-/* ۹. نظرها */
-.says-note{max-width:40em;margin:14px 0 0;color:#C6B6E4}
-.say-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.say{position:relative;padding:32px 26px 26px;border-radius:24px;background:rgba(255,255,255,.07);border:1px solid var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.say .q{position:absolute;top:6px;inset-inline-end:22px;font:900 4rem/1 var(--fa);color:rgba(254,178,48,.5)}
-.say h3{font-size:1.15rem;margin-bottom:8px}
-.say p{font-size:.97rem;line-height:1.9;color:#C6B6E4}
-
-/* ۱۰. تماس */
-.ct-in{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.ct-copy{position:relative}
-.ct-copy .disp{font-size:clamp(1.9rem,4.2vw,3.1rem);margin-bottom:18px}
-.pur{color:var(--purple)}
-.ct-char{width:46%;max-width:260px;margin-top:18px;filter:drop-shadow(0 20px 26px rgba(51,1,133,.28))}
-.ct-card{background:#fff;border:1.5px solid var(--hair);border-radius:28px;padding:34px;box-shadow:0 30px 60px -38px rgba(51,1,133,.5)}
-.ct-card h3{font-size:1.3rem;margin-bottom:18px}
-.ct-list{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:12px}
-.ct-list li{display:flex;gap:12px;align-items:flex-start;line-height:1.8}
-.ct-list span{font-weight:900;color:var(--purple);flex:none}
-.ct-handle{margin:14px 0 0;text-align:center;font-weight:700;color:var(--indigo)}
+/* دکمه‌های بخش همکاری و لینک‌های فعال */
+.tg-btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn--ghost{border-color:rgba(51,1,133,.35);color:var(--indigo)}
+.btn--ghost:hover{background:#fff}
+.srv-all{margin:34px 0 0}
+.nav a[aria-current=page]{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 -3px 0 var(--yellow)}
 
 /* فوتر */
 .ftr{position:relative;isolation:isolate;overflow:hidden;background:var(--night);padding:64px 0 22px}
@@ -245,9 +232,9 @@ html[dir=rtl] .tri{transform:scaleX(-1)}
 
 @media (max-width:1100px){
   .srv-row,.ch-grid{grid-template-columns:repeat(2,1fr)}
-  .say-grid,.ftr-cols{grid-template-columns:repeat(2,1fr)}
-  .about-in,.tg-in,.ct-in{grid-template-columns:1fr;gap:40px}
-  .about-art{min-height:420px;max-width:520px}
+  .ftr-cols{grid-template-columns:repeat(2,1fr)}
+  .about-in,.tg-in{grid-template-columns:1fr;gap:40px}
+  .about-art{width:100%;max-width:520px}
   .vert{display:none}
   .sec{padding:76px 0}
   .gc--wide{width:min(620px,86vw);height:470px}
@@ -268,13 +255,11 @@ html[dir=rtl] .tri{transform:scaleX(-1)}
   .hero-in{padding-bottom:46px}
   .hero-veil{background:linear-gradient(0deg,rgba(20,4,49,.95) 10%,rgba(20,4,49,.72) 55%,rgba(20,4,49,.45) 100%)}
   .circ{width:104px;height:104px}
-  .srv-row,.ch-grid,.say-grid,.ftr-cols{grid-template-columns:1fr}
+  .srv-row,.ch-grid,.ftr-cols{grid-template-columns:1fr}
   .pl-list li{grid-template-columns:auto 1fr;gap:14px}
   .pl-list .st{grid-column:2}
   .gc{width:280px;height:430px}
   .gc--wide{width:min(520px,84vw);height:470px}
-  .ct-card{padding:26px 22px}
-  .about-art{min-height:340px}
   .sec{padding:64px 0}
   .video-band{padding:80px 0}
 }
