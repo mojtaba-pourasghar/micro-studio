@@ -29,27 +29,6 @@
     items.forEach(function (e) { io.observe(e); });
   }
 
-  // شمارنده
-  var fa = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
-  var toFa = function (n) { return String(n).replace(/\d/g, function (d) { return fa[+d]; }); };
-  var nums = document.querySelectorAll("[data-to]");
-  if (nums.length && !reduce) {
-    var no = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        no.unobserve(e.target);
-        var el = e.target, to = +el.getAttribute("data-to"), t0 = 0;
-        requestAnimationFrame(function step(t) {
-          if (!t0) t0 = t;
-          var k = Math.min((t - t0) / 1100, 1);
-          el.textContent = toFa(Math.round(to * (1 - Math.pow(1 - k, 3))));
-          if (k < 1) requestAnimationFrame(step);
-        });
-      });
-    }, { threshold: 0.6 });
-    nums.forEach(function (e) { no.observe(e); });
-  }
-
   // پخش ویدیو
   var lb = document.getElementById("lb");
   var play = document.querySelector(".play");
@@ -64,6 +43,16 @@
     });
     x.addEventListener("click", close);
     lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !lb.hidden) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (lb.hidden) return;
+      if (e.key === "Escape") { close(); return; }
+      if (e.key === "Tab") {
+        var f = lb.querySelectorAll("button,video[controls]");
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
   }
 })();
