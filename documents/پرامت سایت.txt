@@ -1,0 +1,47 @@
+مخوام قالب سایت میکرو استودیو رو برام کد نویسی کنی ب 
+به صورت html,css.js
+ریسپانسیو هم باشه
+از اسکیل ui-ux-pro-max  و taste استفاده کن
+اینم محل ذخیره سازی
+https://github.com/mojtaba-pourasghar/micro-studio
+
+دیزان اپ دقیقا میخوام کپی کلیپ باشه ولی با تم فارسی
+فعلا باید صفحه اول زده بشه تایید شد بریم برای صفحات دیگه
+منو ها:
+صفحه اصلی ، بازی ها و اپ ها، خدمات ، درباره ما ، تماس با ما
+تصاویری که میخوای استفاده کنی تو مسیر پروژه ارسال کردم به اسم:  تصاویر مورد نیاز سایت میکرو استودیو که فولدر بندی شده برو بخون
+
+بازی ها و اپ ها :
+اسمشون و مسیر ها رو میدم برو بخون در مورد چی هستند:
+پشمک:
+https://github.com/mojtaba-pourasghar/pashmak_game
+پیلو:
+https://github.com/mojtaba-pourasghar/pilo
+پوپو:
+https://github.com/mojtaba-pourasghar/pokpok
+رازینو:
+https://github.com/mojtaba-pourasghar/razino
+
+2 اسمان:
+https://github.com/mojtaba-pourasghar/two-skies
+
+گوشیار:
+https://github.com/mojtaba-pourasghar/goshyar_game
+
+هوهو فارسی کلاس سوم :
+https://github.com/mojtaba-pourasghar/hohoapp_farsi_p3e
+
+هوهو ریاضی کلاس سوم :
+https://github.com/mojtaba-pourasghar/hohoapp_math_p3e
+
+هوهو علوم کلاس سوم :
+https://github.com/mojtaba-pourasghar/hohoapp_olom_p3e
+
+
+خوب بابت عکس ها و تصاویر  و کاراکتر های سایت طبق کلیپ ارسالی میتونی به ترتیب از تصاویر 2 اسمان ، رازینو ، پیلو استفاده کنی
+سایر پروژه ها تصاویرشون تو بخش محصولات و اپ و نمونه کارها استفاده کن
+
+
+
+
+

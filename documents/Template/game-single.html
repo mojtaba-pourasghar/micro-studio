@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>رازینو: ماجرای آغاز | بازی‌ها و اپ‌های میکرو استودیو</title>
+  <meta name="description" content="رازینو؛ بازی ماجراجویی معمایی دوبعدی فارسی برای کودکان ۸ تا ۱۲ سال با ۱۰ فصل، ۱۶۶ صحنه، ۲۹ معما و ۲۱ پایان. ساخت میکرو استودیو.">
+  <meta name="theme-color" content="#15162a">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/scenes/razino-menu.webp" as="image">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="home game-page">
+  <!-- ============ SVG ICON SPRITE ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
+    </defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.53.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.6 6.9L22 9.2l-5.8 4.6 2 7.2L12 17l-6.2 4 2-7.2L2 9.2l7.4-.3z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path fill="currentColor" d="M7 9h10v8a1 1 0 0 1-1 1h-1v3h-2v-3h-2v3H9v-3H8a1 1 0 0 1-1-1zm-3 0h2v6H4zm14 0h2v6h-2zM7.3 8a4.8 4.8 0 0 1 2.2-3.4L8.6 3.2l.7-.4.9 1.5a5 5 0 0 1 3.6 0l.9-1.5.7.4-.9 1.4A4.8 4.8 0 0 1 16.7 8zM10 6.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4zm4 0a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4z"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></g></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24"><path fill="currentColor" d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.5zM8.6 14l9.6-6c.5-.3.9-.1.5.2l-8.1 7.3-.3 3.4z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></g></symbol>
+    <symbol id="i-trophy" viewBox="0 0 120 120">
+      <path d="M30 14h60v26a30 30 0 0 1-60 0z" fill="#ffb547"/>
+      <path d="M30 22H14v8a18 18 0 0 0 18 18M90 22h16v8a18 18 0 0 1-18 18" fill="none" stroke="#ffb547" stroke-width="7"/>
+      <path d="M52 68h16v16H52z" fill="#e0901f"/>
+      <rect x="36" y="84" width="48" height="12" rx="3" fill="#5b3ef5"/>
+      <rect x="28" y="96" width="64" height="12" rx="3" fill="#7457ff"/>
+      <path d="m60 22 4.6 9.4 10.4 1.5-7.5 7.3 1.8 10.3L60 45.6l-9.3 4.9 1.8-10.3-7.5-7.3 10.4-1.5z" fill="#fff3d6"/>
+    </symbol>
+  </svg>
+
+  <a class="skip" href="#main">رفتن به محتوای اصلی</a>
+
+  <!-- page intro curtain, scroll progress bar, custom cursor (decorative; removed/ignored without JS) -->
+  <div class="intro" aria-hidden="true">
+    <svg class="intro-mark" viewBox="0 0 40 40"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+    <span class="intro-bar"><i></i></span>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="میکرو استودیو - صفحه اصلی">
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+        <span class="brand-text">میکرو <b>استودیو</b></span>
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="منوی اصلی">
+        <ul>
+          <li><a href="index.html">صفحه اصلی</a></li>
+          <li><a href="games.html" aria-current="page">بازی‌ها و اپ‌ها</a></li>
+          <li><a href="services.html">خدمات</a></li>
+          <li><a href="about.html">درباره ما</a></li>
+          <li><a href="contact.html">تماس با ما</a></li>
+        </ul>
+        <a class="btn btn-primary nav-cta-mobile" href="index.html#contact">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      </nav>
+      <a class="btn btn-primary header-cta" href="index.html#contact">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!--
+      TEMPLATE: game-single.html — one representative game page (sample data: Razino).
+      PHP: every element with data-field="..." maps to a column in `games`;
+      every element with data-repeat is a loop over a child table. See documents/design-language.md §13.
+    -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+      <symbol id="i-age" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-chip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-text" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v2.5h-6.7V20h-2.6V7.5H4z"/></symbol>
+      <symbol id="i-branch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="8" r="2.2"/><path d="M6 7.2v9.6M18 10.2c0 4-6 3.5-11 7"/></g></symbol>
+      <symbol id="i-puzzle" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3a2 2 0 0 1 4 0v1h4a1 1 0 0 1 1 1v4h-1a2 2 0 0 0 0 4h1v4a1 1 0 0 1-1 1h-4v-1a2 2 0 0 0-4 0v1H6a1 1 0 0 1-1-1v-4h1a2 2 0 0 0 0-4H5V5a1 1 0 0 1 1-1h4z"/></symbol>
+      <symbol id="i-offline" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v11M7.5 9.5 12 14l4.5-4.5M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.3 2.3 4.2-4.6" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></symbol>
+    </svg>
+
+    <!-- ============ GAME HERO (games) ============ -->
+    <section class="hero page-hero notch-bottom" id="home" aria-labelledby="game-title">
+      <div class="hero-bg" aria-hidden="true" data-depth="-0.6"><img src="assets/img/scenes/razino-menu.webp" alt="" width="1200" height="800" data-parallax="0.12" fetchpriority="high" data-field="hero_image"></div>
+      <div class="hero-fx" aria-hidden="true" data-depth="-1.4"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <nav class="breadcrumb reveal from-right" aria-label="مسیر صفحه">
+            <ol><li><a href="index.html">صفحه اصلی</a></li><li><a href="games.html">بازی‌ها و اپ‌ها</a></li><li aria-current="page" data-field="short_title">رازینو</li></ol>
+          </nav>
+          <div class="tags reveal from-right" style="--d:.1s" data-repeat="game_tags"><span class="tag t-blue">معمایی</span><span class="tag t-pink">داستانی</span><span class="tag t-green">ماجراجویی</span></div>
+          <h1 id="game-title" class="display" data-split data-field="title"><span>رازینو</span><span>ماجرای آغاز</span></h1>
+          <p class="hero-lead reveal blur" style="--d:.7s" data-field="tagline">ماجراجویی معمایی دوبعدی فارسی برای کودکان ۸ تا ۱۲ سال؛ سرنخ‌ها را پیدا کن، معماها را حل کن و داستان را به یکی از ۲۱ پایان برسان.</p>
+          <ul class="meta-chips reveal from-right" style="--d:.85s">
+            <li data-field="age_range"><svg aria-hidden="true"><use href="#i-age"/></svg>۸ تا ۱۲ سال</li>
+            <li data-field="platforms"><svg aria-hidden="true"><use href="#i-android"/></svg>اندروید</li>
+            <li data-field="engine"><svg aria-hidden="true"><use href="#i-chip"/></svg>Godot 4.3</li>
+            <li data-field="language"><svg aria-hidden="true"><use href="#i-text"/></svg>فارسی، راست‌چین</li>
+          </ul>
+          <div class="hero-actions reveal zoom" style="--d:1s">
+            <a class="btn btn-primary" href="#download" data-magnetic>دریافت بازی <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+            <button class="play-btn small" type="button" data-video="assets/video/trailer.mp4" data-field="trailer_url" aria-label="پخش تریلر رازینو"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <span class="play-label" aria-hidden="true">تماشای تریلر</span>
+          </div>
+        </div>
+        <figure class="hero-char reveal-up" style="--d:.3s">
+          <img class="float-slow" src="assets/img/characters/razino-hero.webp" alt="قهرمان بازی رازینو" width="230" height="452" data-depth="1.6" data-speed="-0.3" data-field="hero_character">
+          <figcaption class="char-tag" data-depth="2.6">رازینو <small>میکرو استودیو</small></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ STATS (game_stats) ============ -->
+    <section class="stat-strip" aria-label="رازینو در یک نگاه">
+      <div class="container stat-grid stagger" data-repeat="game_stats">
+        <div class="stat"><span class="stat-num" data-count="10">۱۰</span><span class="stat-label">فصل داستانی</span></div>
+        <div class="stat"><span class="stat-num" data-count="166">۱۶۶</span><span class="stat-label">صحنه</span></div>
+        <div class="stat"><span class="stat-num" data-count="29">۲۹</span><span class="stat-label">معما</span></div>
+        <div class="stat"><span class="stat-num" data-count="21">۲۱</span><span class="stat-label">پایان متفاوت</span></div>
+      </div>
+    </section>
+
+    <!-- ============ STORY (games.story_*) ============ -->
+    <section class="section about game-story" id="story" aria-labelledby="story-title">
+      <p class="watermark" aria-hidden="true" data-sx="-180">RAZINO</p>
+      <div class="container about-grid">
+        <div class="about-media">
+          <div class="notch-card wipe"><img src="assets/img/scenes/razino-map.webp" alt="نقشه‌ی جهان بازی رازینو" width="1200" height="800" loading="lazy" data-field="story_image"></div>
+          <img class="about-hero-char" src="assets/img/characters/razino-girl.webp" alt="" width="190" height="378" loading="lazy" data-x="160" data-speed="-0.25" data-depth="1.3">
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> داستان بازی</p>
+          <h2 id="story-title" class="h2" data-split data-field="story_title">رازی که فقط <span class="outline">تو</span><br><span class="outline">می‌توانی حل کنی</span></h2>
+          <div class="lead reveal blur" style="--d:.35s" data-field="story_html">
+            <p>رازینو داستانی ده‌فصلی است که در آن کودک با جست‌وجوی صحنه‌ها، گفت‌وگو با شخصیت‌ها و جمع‌کردن سرنخ‌ها، رازهای جهان بازی را یکی‌یکی باز می‌کند.</p>
+            <p>انتخاب‌هایی که در طول داستان انجام می‌دهی مسیر را عوض می‌کند؛ برای همین هر بار بازی‌کردن می‌تواند به پایان تازه‌ای برسد.</p>
+          </div>
+          <ul class="check-list reveal from-right" style="--d:.5s">
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg> ۵۴ انتخاب داستانی که مسیر را تغییر می‌دهد</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg> ۹۶ سرنخ برای کشف</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg> ۴۰ قسمت و ۲۲۳ خط دیالوگ فارسی</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES (game_features) ============ -->
+    <section class="section services notch-both game-features" id="features" aria-labelledby="features-title">
+      <div class="services-bg" aria-hidden="true"><img src="assets/img/scenes/dark-castle.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.08"></div>
+      <div class="container">
+        <p class="eyebrow light reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> ویژگی‌ها</p>
+        <h2 id="features-title" class="h2 light" data-split>چرا رازینو<br>متفاوت است؟</h2>
+        <div class="feature-grid stagger" data-repeat="game_features">
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-branch"/></svg></span><h3>داستان چندپایانی</h3><p>۵۴ انتخاب در طول بازی و ۲۱ پایان متفاوت؛ هر بار یک ماجرای تازه.</p></article>
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-puzzle"/></svg></span><h3>معما و سرنخ</h3><p>۲۹ معما و ۹۶ سرنخ که فکر کردن، دقت و استدلال را تمرین می‌دهند.</p></article>
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-text"/></svg></span><h3>کاملاً فارسی</h3><p>راست‌چین از روز اول، با فونت وزیرمتن و ۲۲۳ خط دیالوگ فارسی.</p></article>
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-refresh"/></svg></span><h3>فصل‌های تازه</h3><p>فصل‌ها داده هستند، نه کد؛ فصل جدید بدون به‌روزرسانی از فروشگاه اضافه می‌شود.</p></article>
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><h3>بسته‌های امضاشده</h3><p>محتوای دانلودی امضا و بررسی می‌شود و هرگز کد اجرا نمی‌کند.</p></article>
+          <article class="feature-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-offline"/></svg></span><h3>بازی آفلاین</h3><p>بعد از دریافت فصل‌ها، بازی بدون اینترنت اجرا می‌شود.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY (game_screenshots) ============ -->
+    <section class="section works game-gallery" id="gallery" aria-labelledby="gallery-title" data-rail>
+      <div class="container works-head">
+        <div>
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> تصاویر بازی</p>
+          <h2 id="gallery-title" class="h2" data-split>نگاهی به <span class="outline">دنیای رازینو</span></h2>
+        </div>
+      </div>
+      <div class="rail-track stagger" tabindex="0" aria-label="تصاویر بازی؛ با کلیدهای جهت‌نما یا کشیدن جابه‌جا شوید" data-repeat="game_screenshots">
+        <figure class="shot-card"><img src="assets/img/scenes/razino-menu.webp" alt="منوی اصلی رازینو" width="1200" height="800" loading="lazy"><figcaption>منوی اصلی</figcaption></figure>
+        <figure class="shot-card"><img src="assets/img/scenes/razino-map.webp" alt="نقشه‌ی جهان رازینو" width="1200" height="800" loading="lazy"><figcaption>نقشه‌ی جهان</figcaption></figure>
+        <figure class="shot-card"><img src="assets/img/scenes/razino-board.webp" alt="صفحه‌ی معما در رازینو" width="1200" height="751" loading="lazy"><figcaption>صفحه‌ی معما</figcaption></figure>
+        <figure class="shot-card"><img src="assets/img/scenes/razino-ui.webp" alt="رابط کاربری رازینو" width="1200" height="800" loading="lazy"><figcaption>رابط بازی</figcaption></figure>
+        <figure class="shot-card"><img src="assets/img/scenes/razino-screens.webp" alt="صحنه‌های بازی رازینو" width="1200" height="800" loading="lazy"><figcaption>صحنه‌های داستان</figcaption></figure>
+      </div>
+      <div class="container rail-nav">
+        <button class="icon-btn dark" type="button" data-dir="prev" aria-label="تصویر قبلی"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <div class="rail-progress" aria-hidden="true"><span></span></div>
+        <button class="icon-btn dark" type="button" data-dir="next" aria-label="تصویر بعدی"><svg class="flip" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ CHARACTERS (game_characters) ============ -->
+    <section class="section game-chars" id="characters" aria-labelledby="chars-title">
+      <div class="container">
+        <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> شخصیت‌ها</p>
+        <h2 id="chars-title" class="h2" data-split>با <span class="outline">همسفرهایت</span> آشنا شو</h2>
+        <div class="char-grid stagger" data-repeat="game_characters">
+          <figure class="char-card"><img src="assets/img/characters/razino-hero.webp" alt="" width="230" height="452" loading="lazy"><figcaption><b>قهرمان</b><span>کاوشگر کنجکاوی که راز را دنبال می‌کند</span></figcaption></figure>
+          <figure class="char-card"><img src="assets/img/characters/razino-companion.webp" alt="" width="207" height="294" loading="lazy"><figcaption><b>همراه نقشه‌خوان</b><span>راه‌ها و نشانه‌ها را می‌شناسد</span></figcaption></figure>
+          <figure class="char-card"><img src="assets/img/characters/razino-wizard.webp" alt="" width="221" height="395" loading="lazy"><figcaption><b>جادوگر پیر</b><span>معماها را می‌سازد و راهنمایی می‌کند</span></figcaption></figure>
+          <figure class="char-card"><img src="assets/img/characters/razino-merchant.webp" alt="" width="185" height="284" loading="lazy"><figcaption><b>بازرگان</b><span>سرنخ‌ها را با وسایل عوض می‌کند</span></figcaption></figure>
+          <figure class="char-card dark"><img src="assets/img/characters/razino-enemy.webp" alt="" width="253" height="351" loading="lazy"><figcaption><b>نگهبان سایه</b><span>راز را از همه پنهان می‌کند</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO BANNER (games.trailer_url) ============ -->
+    <section class="video-banner notch-top" aria-labelledby="vb-title">
+      <img class="vb-bg" src="assets/img/scenes/puzzle-room.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.1" data-field="banner_image">
+      <div class="vb-inner">
+        <h2 id="vb-title" class="display-md" data-split>رازینو را<br>در حرکت ببین</h2>
+        <button class="play-btn reveal zoom" style="--d:.5s" data-magnetic type="button" data-video="assets/video/trailer.mp4" data-field="trailer_url" aria-label="پخش تریلر رازینو"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ DETAILS + DOWNLOAD (games + game_downloads) ============ -->
+    <section class="section game-download" id="download" aria-labelledby="download-title">
+      <div class="container download-grid">
+        <div class="spec-card reveal from-left">
+          <h3 class="spec-title">مشخصات بازی</h3>
+          <dl class="spec-list">
+            <div><dt>ژانر</dt><dd data-field="genre">ماجراجویی معمایی دوبعدی</dd></div>
+            <div><dt>گروه سنی</dt><dd data-field="age_range">۸ تا ۱۲ سال</dd></div>
+            <div><dt>پلتفرم</dt><dd data-field="platforms">اندروید</dd></div>
+            <div><dt>موتور</dt><dd data-field="engine" dir="ltr">Godot 4.3 · GDScript</dd></div>
+            <div><dt>زبان</dt><dd data-field="language">فارسی (راست‌چین)</dd></div>
+            <div><dt>اینترنت</dt><dd data-field="internet">فقط برای دریافت فصل‌ها</dd></div>
+            <div><dt>وضعیت</dt><dd><span class="status-badge" data-field="status">در حال توسعه</span></dd></div>
+          </dl>
+        </div>
+        <div class="download-copy">
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> دریافت</p>
+          <h2 id="download-title" class="h2 big" data-split>همین حالا <span class="grad">رازینو</span> را بازی کن</h2>
+          <p class="lead reveal blur" style="--d:.35s" data-field="download_note">نسخه‌ی اندروید به‌زودی منتشر می‌شود. برای باخبر شدن از انتشار، با ما در تماس باشید.</p>
+          <div class="store-btns reveal from-right" style="--d:.5s" data-repeat="game_downloads">
+            <span class="store-btn is-soon" aria-disabled="true"><svg aria-hidden="true"><use href="#i-android"/></svg><span><small>به‌زودی در</small>کافه‌بازار</span></span>
+            <span class="store-btn is-soon" aria-disabled="true"><svg aria-hidden="true"><use href="#i-android"/></svg><span><small>به‌زودی در</small>مایکت</span></span>
+            <a class="store-btn" href="https://github.com/mojtaba-pourasghar/razino" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg><span><small>کد و مستندات</small>گیت‌هاب</span></a>
+          </div>
+          <a class="btn btn-primary reveal from-right" style="--d:.65s" href="index.html#contact" data-magnetic>خبرم کنید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RELATED (games WHERE id != current LIMIT 3) ============ -->
+    <section class="section works related" aria-labelledby="related-title">
+      <div class="container works-head">
+        <div>
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> بازی‌های دیگر</p>
+          <h2 id="related-title" class="h2" data-split>شاید این‌ها را هم <span class="outline">دوست داشته باشی</span></h2>
+        </div>
+        <a class="btn btn-primary reveal from-left" href="games.html" data-magnetic>همه‌ی بازی‌ها <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      </div>
+      <div class="container related-grid stagger" data-repeat="related_games">
+        <a class="work-card" href="game-single.html"><img class="work-bg" src="assets/img/scenes/sunset-cliff.webp" alt="" width="1456" height="818" loading="lazy"><span class="work-badge">دو آسمان</span><div class="work-info"><div class="tags"><span class="tag t-red">ماجراجویی</span></div><h3>دو آسمان: کایرو و ایلارا</h3></div></a>
+        <a class="work-card" href="game-single.html"><img class="work-bg" src="assets/img/scenes/pilo-1.webp" alt="" width="1200" height="800" loading="lazy"><span class="work-badge">پیلو</span><div class="work-info"><div class="tags"><span class="tag t-green">پلتفرمر</span></div><h3>سفر پیلو در رنگارستان</h3></div></a>
+        <a class="work-card phone" href="game-single.html"><img class="work-bg" src="assets/img/works/goshyar-shot.webp" alt="" width="480" height="1040" loading="lazy"><span class="work-badge">گوش‌یار</span><div class="work-info"><div class="tags"><span class="tag t-orange">آموزشی</span></div><h3>گوش‌یار</h3></div></a>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <img class="footer-bg" src="assets/img/scenes/hero-two-skies.webp" alt="" width="1456" height="818" loading="lazy">
+    <div class="container footer-grid">
+      <div class="f-col">
+        <h3 class="sr-only">شبکه‌های اجتماعی</h3>
+        <div class="f-social">
+          <a href="https://instagram.com/microstudio.ir" target="_blank" rel="noopener" aria-label="اینستاگرام"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>
+          <a href="https://t.me/microstudio_ir" target="_blank" rel="noopener" aria-label="تلگرام"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>
+          <a href="https://github.com/mojtaba-pourasghar" target="_blank" rel="noopener" aria-label="گیت‌هاب"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+          <a href="mailto:mojtaba.pourasghar@gmail.com" aria-label="ایمیل"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+      <nav class="f-col" aria-label="درباره ما">
+        <h3>درباره ما</h3>
+        <a href="about.html">معرفی استودیو</a><a href="about.html">تیم ما</a><a href="games.html">بازی‌های ما</a><a href="contact.html">همکاری با ما</a>
+      </nav>
+      <nav class="f-col" aria-label="خدمات">
+        <h3>خدمات</h3>
+        <a href="services.html">ساخت بازی</a><a href="services.html">طراحی شخصیت</a><a href="services.html">اپ آموزشی</a><a href="services.html">صداگذاری فارسی</a>
+      </nav>
+      <nav class="f-col" aria-label="پشتیبانی">
+        <h3>پشتیبانی</h3>
+        <a href="contact.html">سؤالات متداول</a><a href="contact.html">حریم خصوصی کودکان</a><a href="contact.html">راهنمای والدین</a><a href="contact.html">گزارش مشکل</a>
+      </nav>
+      <div class="f-col f-contact">
+        <h3>راه‌های ارتباطی</h3>
+        <p>ایران، تهران</p>
+        <a class="f-phone" href="tel:+982100000000" dir="ltr">+98 (21) 0000 0000</a>
+        <a href="mailto:mojtaba.pourasghar@gmail.com" dir="ltr">mojtaba.pourasghar@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-mega" aria-hidden="true">
+      <svg class="fm-logo" viewBox="0 0 40 40" data-speed="-0.15" data-rot="-8"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="currentColor"/></svg>
+      <span class="fm-word" data-sx="120">MICRO</span>
+      <img class="fm-left" src="assets/img/characters/razino-buddy.webp" alt="" width="172" height="417" loading="lazy" data-x="120" data-depth="1.6">
+      <img class="fm-dino" src="assets/img/characters/razino-dino.webp" alt="" width="200" height="264" loading="lazy" data-x="200" data-depth="2.2">
+      <img class="fm-right" src="assets/img/characters/razino-merchant.webp" alt="" width="185" height="284" loading="lazy" data-x="-160" data-depth="1.8">
+    </div>
+    <p class="footer-bottom">© <span id="year">۱۴۰۵</span> <a href="index.html">میکرو استودیو</a> - همه‌ی حقوق محفوظ است.</p>
+  </footer>
+
+  <a class="to-top" href="#top" aria-label="بازگشت به بالا"><svg aria-hidden="true"><use href="#i-up"/></svg></a>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="پخش تریلر" hidden>
+    <button class="lb-close" type="button" aria-label="بستن"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="lb-frame"><video controls playsinline preload="none"></video></div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js"></script>
+</body>
+</html>
