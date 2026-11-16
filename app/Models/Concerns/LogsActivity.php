@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 /** Writes an activity_logs row (with a before/after snapshot) for every create, update and delete. */
 trait LogsActivity
 {
+    /** Persian names used in activity summaries. */
+    protected const LABELS = [
+        'Game' => 'بازی', 'Service' => 'خدمت', 'TeamMember' => 'عضو تیم', 'Testimonial' => 'نظر', 'Faq' => 'سؤال', 'Block' => 'کارت',
+        'Post' => 'مطلب', 'PostCategory' => 'دسته', 'Media' => 'تصویر', 'ContentRule' => 'قانون', 'ContentPlan' => 'برنامه', 'Setting' => 'تنظیم',
+    ];
+
     public static function bootLogsActivity(): void
     {
         static::created(fn (Model $m) => static::writeLog($m, 'created', null, $m->attributesToArray()));
@@ -35,7 +41,7 @@ trait LogsActivity
             'action' => $action,
             'subject_type' => $m->getMorphClass(),
             'subject_id' => $m->getKey(),
-            'summary' => class_basename($m).' «'.($m->title ?? $m->name ?? $m->question ?? $m->key ?? $m->path ?? '#'.$m->getKey()).'»',
+            'summary' => (self::LABELS[class_basename($m)] ?? class_basename($m)).' «'.($m->title ?? $m->name ?? $m->question ?? $m->key ?? $m->path ?? '#'.$m->getKey()).'»',
             'before' => $before,
             'after' => $after,
         ]);

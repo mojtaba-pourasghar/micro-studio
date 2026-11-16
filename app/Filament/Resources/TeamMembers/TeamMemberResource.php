@@ -59,7 +59,7 @@ class TeamMemberResource extends Resource
         return $table->defaultSort('sort_order')->reorderable('sort_order')
             ->columns([
                 ImageColumn::make('avatar')->label('')->disk('site')->height(44),
-                TextColumn::make('name')->label('نام')->searchable()->weight('bold')->description(fn ($r) => $r->role),
+                TextColumn::make('name')->label('نام')->searchable()->weight('bold')->description(fn ($record) => $record->role),
                 TextColumn::make('tag')->label('برچسب')->badge(),
                 IconColumn::make('is_published')->label('نمایش')->boolean(),
             ])

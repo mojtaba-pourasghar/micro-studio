@@ -28,3 +28,6 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# media uploaded through the admin / agent (back these up from the server)
+/public/uploads

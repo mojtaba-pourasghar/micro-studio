@@ -60,7 +60,7 @@ class TestimonialResource extends Resource
         return $table->defaultSort('sort_order')->reorderable('sort_order')
             ->columns([
                 ImageColumn::make('avatar')->label('')->disk('site')->circular()->height(40),
-                TextColumn::make('name')->label('نام')->searchable()->weight('bold')->description(fn ($r) => $r->role),
+                TextColumn::make('name')->label('نام')->searchable()->weight('bold')->description(fn ($record) => $record->role),
                 TextColumn::make('quote')->label('نظر')->limit(80),
                 IconColumn::make('is_published')->label('نمایش')->boolean(),
             ])
