@@ -1,0 +1,36 @@
+name: tests & cPanel package
+
+on:
+  push:
+    branches: [master, laravel-site]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: intl, zip, gd, sqlite3, pdo_sqlite, fileinfo, mbstring
+      - run: composer install --no-interaction --no-progress
+      - run: cp .env.example .env && php artisan key:generate
+      - run: php artisan test
+
+  package:
+    needs: test
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: intl, zip, gd, fileinfo, mbstring
+      - run: ./deploy/build-cpanel.sh micro-studio-cpanel.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: micro-studio-cpanel
+          path: micro-studio-cpanel.zip
+          retention-days: 30

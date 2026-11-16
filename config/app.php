@@ -65,6 +65,9 @@ return [
     |
     */
 
+    // one-time web installer key (/install?key=…); leave empty to disable
+    'install_key' => env('INSTALL_KEY', ''),
+
     'timezone' => env('APP_TIMEZONE', 'Asia/Tehran'),
 
     /*

@@ -1,58 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# میکرو استودیو — سایت لاراول + پنل مدیریت + اتصال کلاد
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+سایت رسمی میکرو استودیو با **Laravel 13**، پنل مدیریت **Filament 5** (فارسی و راست‌چین) و یک **سرور MCP**. کلاد از طریق این سرور، از داخل چت یا با تسک زمان‌بندی‌شده، به سایت وصل می‌شود و محتوا را مدیریت می‌کند.
 
-## About Laravel
+> قالب HTML اصلی و زبان طراحی در پوشه‌ی `documents/` دست‌نخورده نگه داشته شده است.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ساختار
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| بخش | مسیر |
+|---|---|
+| صفحات سایت (Blade، تبدیل‌شده از قالب) | `resources/views/pages`، `resources/views/partials` |
+| CSS / JS / فونت / تصاویر قالب | `public/assets` |
+| مدل‌ها و جدول‌ها | `app/Models`، `database/migrations` |
+| متن صفحات (Hero، تیترها، تماس…) و مقادیر پیش‌فرض | `config/site.php` |
+| پنل مدیریت | `app/Filament` → `/admin` |
+| سرور MCP برای کلاد | `app/Mcp` → `/mcp/{token}` |
+| آپلود تصویر برای ایجنت (REST) | `POST /api/agent/media` |
+| محتوای اولیه (همان محتوای قالب) | `database/seeders/ContentSeeder.php` |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## پنل مدیریت (`/admin`)
+- **محتوای سایت:** متن همه‌ی صفحات و تنظیمات، بازی‌ها و اپ‌ها، خدمات، تیم، نظرات، سؤالات متداول و کارت‌ها/آمار.
+- **وبلاگ:** مطالب (با گردش کار تأیید) و دسته‌ها.
+- **ایجنت هوش مصنوعی:**
+  - قوانین محتوا: شما تأیید می‌کنید.
+  - تقویم محتوا: ورود از اکسل یا CSV.
+  - اتصال کلاد: ساخت توکن.
+  - گزارش تغییرات: با دکمه‌ی بازگرداندن هر تغییر.
+- **رسانه:** کتابخانه‌ی تصاویر.
+- **ارتباطات:** پیام‌های فرم تماس.
+- **سیستم:** مدیران.
 
-## Learning Laravel
+## کلاد چطور سایت را مدیریت می‌کند
+1. در پنل، بخش **ایجنت هوش مصنوعی ← اتصال کلاد**، یک توکن بسازید. آدرس `https://سایت/mcp/ms_...` فقط یک بار نمایش داده می‌شود.
+2. در claude.ai به مسیر **Settings ← Connectors ← Add custom connector** بروید و همین آدرس را وارد کنید.
+3. از آن به بعد در چت، یا در یک **تسک زمان‌بندی‌شده** که این کانکتور را دارد، کلاد این ابزارها را در اختیار دارد:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| ابزار | کار |
+|---|---|
+| `site_overview` | وضعیت سایت، کارهای سررسیده‌ی تقویم، مطالب برگشت‌خورده |
+| `get_content_rules` / `propose_content_rule` | خواندن قوانین تأییدشده / پیشنهاد قانون تازه |
+| `describe_content_types` | فهرست فیلدهای هر بخش و قالب داده‌ی هر فیلد |
+| `list_items` / `get_item` / `save_item` / `delete_item` | خواندن و نوشتن همه‌ی بخش‌ها: بازی، خدمت، تیم، نظر، سؤال، کارت، مطلب، دسته، تقویم |
+| `get_settings` / `update_settings` | متن صفحات و اطلاعات تماس |
+| `upload_image` | بارگذاری تصویر، مثلاً طراحی‌شده با Canva |
+| `get_activity` / `rollback_change` | گزارش تغییرات و بازگرداندن آن‌ها |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**قوانین امنیتی پیش‌فرض:**
+- کلاد مطلب را فقط به‌صورت پیش‌نویس می‌سازد یا برای تأیید می‌فرستد. **انتشار با شماست.**
+- مطلبِ منتشرشده را کلاد بدون اجازه تغییر نمی‌دهد.
+- قوانین پیشنهادی کلاد تا تأیید شما اعمال نمی‌شوند.
+- پیام‌های فرم تماس را کلاد نمی‌بیند.
+- هر کدام از این محدودیت‌ها برای هر توکن جداگانه قابل تغییر است.
+- همه‌ی کارها ثبت می‌شوند و قابل بازگشت‌اند. حذف‌ها نرم هستند.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+راهنمای کامل ایجنت، شامل متن پیشنهادی تسک زمان‌بندی‌شده و روند کار با Canva: [`documents/claude-agent.md`](documents/claude-agent.md)
 
-## Agentic Development
+## نصب روی cPanel
+پیش‌نیاز: PHP 8.3 یا بالاتر با افزونه‌های `intl`، `zip`، `gd`، `fileinfo`، `mbstring` و `pdo_mysql`، به‌علاوه‌ی یک دیتابیس MySQL.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+1. **بسته را بگیرید:** هر push، در GitHub Actions فایل `micro-studio-cpanel.zip` را می‌سازد. فایل را از تب **Actions ← آخرین اجرا ← Artifacts** دانلود کنید. این بسته `vendor` را هم دارد و روی سرور به Composer نیازی نیست. ساخت دستی: `./deploy/build-cpanel.sh`.
+2. در **File Manager**، zip را در پوشه‌ی خانه (مثلاً `/home/USER/`) آپلود و Extract کنید. پوشه‌ی `micro-studio` ساخته می‌شود.
+3. **ریشه‌ی دامنه:**
+   - **روش پیشنهادی:** در **Domains**، Document Root دامنه را `micro-studio/public` بگذارید.
+   - **اگر سایت باید در `public_html` باشد:** محتوای `micro-studio/public/` را در `public_html` کپی کنید و `public_html/index.php` را با فایل `deploy/public_html-index.php` جایگزین کنید.
+4. در **MySQL® Databases**، دیتابیس و کاربر بسازید و کاربر را با همه‌ی دسترسی‌ها به دیتابیس وصل کنید.
+5. `micro-studio/.env.example` را به `.env` تغییر نام دهید و این مقادیر را پر کنید:
+   - `APP_URL` (با https)
+   - `DB_*`
+   - `APP_KEY`: یک مقدار `base64:` با ۳۲ بایت تصادفی. در Terminal: `php artisan key:generate`.
+   - `INSTALL_KEY`: یک رمز موقت.
+6. **نصب:**
+   - **با Terminal:** `cd ~/micro-studio && php artisan ms:install`
+   - **بدون Terminal:** آدرس `https://سایت/install?key=INSTALL_KEY` را باز کنید، ایمیل و رمز مدیر را وارد کنید، و بعد `INSTALL_KEY` را در `.env` خالی کنید.
+7. وارد `https://سایت/admin` شوید. آدرس کانکتور کلاد در صفحه‌ی پایان نصب نمایش داده می‌شود. اگر آن را از دست دادید، از بخش «اتصال کلاد» در پنل یک توکن تازه بسازید.
 
+> ⚠️ سرور در ایران است. مطمئن شوید مسیر `/mcp` از خارج ایران در دسترس است و فایروال یا CDN (مثل ابرآروان) برای آن چالش امنیتی (کپچا یا JS) نمی‌گذارد. کلاد از سرورهای خودش به این آدرس درخواست می‌فرستد.
+
+**به‌روزرسانی سایت:** zip تازه را روی پوشه‌ی قبلی Extract کنید. فایل `.env` و پوشه‌ی `public/uploads` نباید پاک شوند. بعد در Terminal `php artisan migrate --force` را اجرا کنید.
+
+**پشتیبان‌گیری:** از دیتابیس و پوشه‌ی `public/uploads` نسخه‌ی پشتیبان بگیرید. تصاویر آپلودشده در گیت نیستند.
+
+## توسعه‌ی محلی
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+cp .env.example .env    # DB_CONNECTION=sqlite و APP_ENV=local
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate --seed   # مدیر: admin@example.com (رمز در خروجی چاپ می‌شود)
+php artisan serve
+php artisan test
 ```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -16,3 +16,7 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/blog/{post}', 'post')->name('blog.show');
     Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
 });
+
+// one-time installer for cPanel hosts without SSH (needs INSTALL_KEY in .env)
+Route::get('/install', [\App\Http\Controllers\InstallController::class, 'show']);
+Route::post('/install', [\App\Http\Controllers\InstallController::class, 'store'])->middleware('throttle:5,1');
