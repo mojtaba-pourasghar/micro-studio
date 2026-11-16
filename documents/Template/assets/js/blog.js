@@ -7,9 +7,9 @@
   const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- category filter (blog.html) — client-side preview; PHP will use ?cat=slug ---------- */
+  /* ---------- category filter (blog.html + games.html) — client-side preview; PHP will use ?cat=slug ---------- */
   const chips = $$('.cat-chip');
-  const cards = $$('.post-grid [data-cat]');
+  const cards = $$('.post-grid [data-cat], .games-grid [data-cat]');
   const empty = $('.filter-empty');
   if (chips.length && cards.length) {
     const apply = (cat) => {
@@ -25,6 +25,8 @@
         c.setAttribute('aria-pressed', String(on));
       });
       if (empty) empty.hidden = shown > 0;
+      const counter = $('[data-shown]');
+      if (counter) counter.textContent = String(shown).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
     };
     chips.forEach((chip) => chip.addEventListener('click', () => apply(chip.dataset.filter)));
     const initial = new URLSearchParams(window.location.search).get('cat');

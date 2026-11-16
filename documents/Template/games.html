@@ -2,20 +2,59 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>بازی‌ها و اپ‌ها | میکرو استودیو</title>
-  <meta name="description" content="۱۰ بازی و اپ آموزشی فارسی از میکرو استودیو: پشمک، پیلو، پوپو، رازینو، دو آسمان، گوش‌یار و هوهو.">
-  <meta name="theme-color" content="#0d0f1a">
+  <meta name="description" content="همه‌ی بازی‌ها و اپ‌های آموزشی میکرو استودیو: دو آسمان، رازینو، سفر پیلو، پشمک، پوپو، گوش‌یار و هوهو فارسی، ریاضی و علوم کلاس سوم.">
+  <meta name="theme-color" content="#15162a">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/scenes/sunset-cliff.webp" as="image">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="home inner-page games-page">
+  <!-- ============ SVG ICON SPRITE ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
+    </defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.53.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.6 6.9L22 9.2l-5.8 4.6 2 7.2L12 17l-6.2 4 2-7.2L2 9.2l7.4-.3z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path fill="currentColor" d="M7 9h10v8a1 1 0 0 1-1 1h-1v3h-2v-3h-2v3H9v-3H8a1 1 0 0 1-1-1zm-3 0h2v6H4zm14 0h2v6h-2zM7.3 8a4.8 4.8 0 0 1 2.2-3.4L8.6 3.2l.7-.4.9 1.5a5 5 0 0 1 3.6 0l.9-1.5.7.4-.9 1.4A4.8 4.8 0 0 1 16.7 8zM10 6.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4zm4 0a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4z"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></g></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24"><path fill="currentColor" d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.5zM8.6 14l9.6-6c.5-.3.9-.1.5.2l-8.1 7.3-.3 3.4z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></g></symbol>
+    <symbol id="i-trophy" viewBox="0 0 120 120">
+      <path d="M30 14h60v26a30 30 0 0 1-60 0z" fill="#ffb547"/>
+      <path d="M30 22H14v8a18 18 0 0 0 18 18M90 22h16v8a18 18 0 0 1-18 18" fill="none" stroke="#ffb547" stroke-width="7"/>
+      <path d="M52 68h16v16H52z" fill="#e0901f"/>
+      <rect x="36" y="84" width="48" height="12" rx="3" fill="#5b3ef5"/>
+      <rect x="28" y="96" width="64" height="12" rx="3" fill="#7457ff"/>
+      <path d="m60 22 4.6 9.4 10.4 1.5-7.5 7.3 1.8 10.3L60 45.6l-9.3 4.9 1.8-10.3-7.5-7.3 10.4-1.5z" fill="#fff3d6"/>
+    </symbol>
+  </svg>
+
   <a class="skip" href="#main">رفتن به محتوای اصلی</a>
+
+  <!-- page intro curtain, scroll progress bar, custom cursor (decorative; removed/ignored without JS) -->
+  <div class="intro" aria-hidden="true">
+    <svg class="intro-mark" viewBox="0 0 40 40"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+    <span class="intro-bar"><i></i></span>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+
+  <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
     <div class="container header-row">
       <a class="brand" href="index.html" aria-label="میکرو استودیو - صفحه اصلی">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset="1" stop-color="#4a2fd6"/></linearGradient></defs></svg>
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
         <span class="brand-text">میکرو <b>استودیو</b></span>
       </a>
       <nav class="main-nav" id="main-nav" aria-label="منوی اصلی">
@@ -26,71 +65,289 @@
           <li><a href="about.html">درباره ما</a></li>
           <li><a href="contact.html">تماس با ما</a></li>
         </ul>
-        <a class="btn btn-primary nav-cta-mobile" href="#contact">در تماس باشید <svg><use href="#i-play"/></svg></a>
+        <a class="btn btn-primary nav-cta-mobile" href="contact.html">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
       </nav>
-      <a class="btn btn-primary header-cta" href="#contact">در تماس باشید <svg><use href="#i-play"/></svg></a>
-      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو"><svg><use href="#i-menu"/></svg></button>
+      <a class="btn btn-primary header-cta" href="contact.html">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </header>
+
   <main id="main">
-      <section class="section works" id="works" aria-labelledby="works-title">
-        <div class="works-bg"><img src="assets/img/scenes/hero-two-skies.webp" alt="" width="1456" height="818" loading="lazy"></div>
-        <div class="container-wide works-grid">
-          <p class="eyebrow reveal"><svg><use href="#i-gem"/></svg> محصولات</p>
-          <h2 id="works-title" class="h2 reveal">بازی‌ها و اپ‌ها</h2>
-          <p class="lead reveal">۱۰ جمله‌ی داستانی، پلتفرمر، آموزشی و سنتی‌ترین بازی‌های داستانی و اپ‌های آموزشی فارسی؛ از کودکان تا نوجوانان، با شخصیت، داستان و زبان فارسی.</p>
-          <div class="works-wrap">
+    <!--
+      PAGE: games.html — all games & apps (9 products, data: design-language.md §10-2 / §13-3).
+      Filter: client-side preview via assets/js/blog.js (chips[data-filter] → cards[data-cat]); PHP can use ?cat=game|edu.
+    -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+      <symbol id="i-age" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-text" viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h16v2.5h-6.7V20h-2.6V7.5H4z"/></symbol>
+      <symbol id="i-offline" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v11M7.5 9.5 12 14l4.5-4.5M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.3 2.3 4.2-4.6" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-noads" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></g></symbol>
+      <symbol id="i-pad" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 8h9a4.5 4.5 0 0 1 0 9c-1.6 0-2.4-1.3-4.5-1.3S9.1 17 7.5 17a4.5 4.5 0 0 1 0-9z" stroke-linejoin="round"/><path d="M8 11v3M6.5 12.5h3"/></g><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor"/><circle cx="17" cy="13.6" r="1.1" fill="currentColor"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></g></symbol>
+    </svg>
 
-            <figure class="proj-card reveal"><img src="assets/img/works/pashmak.webp" alt="بازی پشمک" loading="lazy"><figcaption><h3>پشمک</h3><p>بازی پشمک برای کودکان، با داستان ساده و تحریف‌های رنگاراست، در محیط اسب‌بازی سه‌بعدی.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/pilo.webp" alt="بازی پیلو" loading="lazy"><figcaption><h3>سفر پیلو</h3><p>پیلو در سرزمین رنگارستان، با چالش‌های حیات و طبیعت، در پلتفرم‌رولر فعلی.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/pokpok.webp" alt="بازی پوپو" loading="lazy"><figcaption><h3>پوپو</h3><p>پوپو، بازی پوکت مونز فارسی از ساخته‌های ما، با شخصیت‌های چهارگانه و ماجراجویی بچه‌ها.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/razino.webp" alt="توانایی رازینو" loading="lazy"><figcaption><h3>رازینو</h3><p>بازی رازینو، داستان راز و حریفِ حکیم، در ماجراجویی ماجراجو.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/two-skies.webp" alt="دو آسمان" loading="lazy"><figcaption><h3>دو آسمان</h3><p>جنگ دو آسمان، بازی ماجراجویی که پاییز را برای درختان شکایت به ذهن می‌برد.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/goshyar.webp" alt="بازی گوش‌یار" loading="lazy"><figcaption><h3>گوش‌یار</h3><p>گوش‌یار، بازی پوچسازی فارسی، با داستان رفیعی و کارت‌بازی تولتی.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/hoho-p3e.webp" alt="هوهو - پل زنگ‌افشان‌های ۳D" loading="lazy"><figcaption><h3>هوهو (پل زنگ‌افشان ۳D)</h3><p>اپ آموزشی ۳D؛ پل زنگ‌افشان با سکه‌های عددی، برای کودکان سال سوم ابتدایی.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/hoho-math.webp" alt="هوهو - شمارش ۳D" loading="lazy"><figcaption><h3>هوهو (مثل‌سنجی ۳D)</h3><p>اپ آموزشی ۳D؛ مثل‌سنجی با اعداد به همراه استعدادهای مجاز؛ برای کودکان ابتدایی.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/hoho-olom.webp" alt="هوهو - اصول ۳D" loading="lazy"><figcaption><h3>هوهو (اصول ۳D)</h3><p>اپ آموزشی ۳D؛ ماجراجویی اصول premium، با دوست‌های پویا و داستان دوران.</p></figcaption></figure>
-            <figure class="proj-card reveal"><img src="assets/img/works/hoho-2d.webp" alt="هوهو - ماجراجویی 2D" loading="lazy"><figcaption><h3>هوهو (ماجراجویی 2D)</h3><p>اپ آموزشی ۲D؛ ماجراجویی فرهنگ و زبان فارسی، با کمدستان و چالش‌های متنی.</p></figcaption></figure>
+    <!-- ============ PAGE HERO ============ -->
+    <section class="hero page-hero compact notch-bottom" id="home" aria-labelledby="games-title">
+      <div class="hero-bg" aria-hidden="true" data-depth="-0.6"><img src="assets/img/scenes/sunset-cliff.webp" alt="" width="1456" height="818" data-parallax="0.12" fetchpriority="high"></div>
+      <div class="hero-fx" aria-hidden="true" data-depth="-1.4"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <nav class="breadcrumb reveal from-right" aria-label="مسیر صفحه">
+            <ol><li><a href="index.html">صفحه اصلی</a></li><li aria-current="page">بازی‌ها و اپ‌ها</li></ol>
+          </nav>
+          <h1 id="games-title" class="display" data-split><span>دنیای بازی‌ها</span><span>و اپ‌های ما</span></h1>
+          <p class="hero-lead reveal blur" style="--d:.7s">از ماجراجویی پیکسل‌آرت «دو آسمان» و معماهای «رازینو» تا اپ‌های درسی «هوهو»؛ همه فارسی، راست‌چین، بدون تبلیغ مزاحم و ساخته‌شده برای خانواده‌ها.</p>
+          <ul class="meta-chips reveal from-right" style="--d:.85s">
+            <li><svg aria-hidden="true"><use href="#i-pad"/></svg>۵ بازی داستانی و خلاقانه</li>
+            <li><svg aria-hidden="true"><use href="#i-book"/></svg>۴ اپ آموزشی</li>
+            <li><svg aria-hidden="true"><use href="#i-age"/></svg>۲ تا ۱۲ سال</li>
+            <li><svg aria-hidden="true"><use href="#i-android"/></svg>اندروید</li>
+          </ul>
+        </div>
+        <figure class="hero-char reveal-up" style="--d:.3s">
+          <img class="float-slow pixel" src="assets/img/characters/ilara.webp" alt="ایلارا، قهرمان بازی دو آسمان" width="517" height="699" data-depth="1.6" data-speed="-0.3">
+          <figcaption class="char-tag" data-depth="2.6">ایلارا <small>دو آسمان</small></figcaption>
+        </figure>
+      </div>
+    </section>
 
+    <!-- ============ FILTER + GRID (games) ============ -->
+    <section class="section games-list" id="all-games" aria-labelledby="list-title">
+      <p class="watermark" aria-hidden="true" data-sx="-180">GAMES</p>
+      <div class="container" style="position:relative;z-index:1">
+        <div class="games-toolbar">
+          <div>
+            <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> همه‌ی محصولات</p>
+            <h2 id="list-title" class="h2" data-split>بازی کن، <span class="outline">یاد بگیر،</span><br><span class="outline">کشف کن</span></h2>
           </div>
+          <p class="games-count reveal from-left" aria-live="polite"><b data-shown>۹</b> بازی و اپ</p>
         </div>
-      </section>
-"""
-    footer = """  </main>
-  <footer class="site-footer" id="contact">
+
+        <div class="cat-filter reveal from-right" role="group" aria-label="دسته‌بندی محصولات">
+          <button type="button" class="cat-chip is-active" data-filter="all" aria-pressed="true">همه</button>
+          <button type="button" class="cat-chip" data-filter="game" aria-pressed="false">بازی‌ها</button>
+          <button type="button" class="cat-chip" data-filter="edu" aria-pressed="false">اپ‌های آموزشی</button>
+        </div>
+
+        <div class="games-grid stagger">
+          <a class="work-card" href="game-single.html" data-cat="game">
+            <img class="work-bg" src="assets/img/scenes/sunset-cliff.webp" alt="" width="1456" height="818" loading="lazy">
+            <span class="work-badge">دو آسمان</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-red">ماجراجویی</span><span class="tag t-green">نقش‌آفرینی</span></div>
+              <h3>دو آسمان: کایرو و ایلارا</h3>
+              <p>پلتفرمر معمایی پیکسل‌آرت دو شخصیتی با حس نوستالژیک و جهانی زنده.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card" href="game-single.html" data-cat="game">
+            <img class="work-bg" src="assets/img/scenes/razino-screens.webp" alt="" width="1200" height="800" loading="lazy">
+            <span class="work-badge">رازینو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-blue">معمایی</span><span class="tag t-pink">داستانی</span></div>
+              <h3>رازینو: ماجرای آغاز</h3>
+              <p>ماجراجویی معمایی برای ۸ تا ۱۲ سال؛ ده فصل، ۱۶۶ صحنه، ۲۹ معما و ۲۱ پایان.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card" href="game-single.html" data-cat="game">
+            <img class="work-bg" src="assets/img/scenes/pilo-1.webp" alt="" width="1200" height="800" loading="lazy">
+            <span class="work-badge">پیلو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-green">پلتفرمر</span><span class="tag t-blue">معمایی</span></div>
+              <h3>سفر پیلو در رنگارستان</h3>
+              <p>سفری میان گذشته و حال با لنز زمان؛ ۹ جهان و ۷۲ مرحله، برای ۵ تا ۹ سال.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="game">
+            <img class="work-bg" src="assets/img/works/pashmak-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">پشمک</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-orange">خلاقیت</span><span class="tag t-purple">کودکانه</span></div>
+              <h3>دنیای بازی پشمک</h3>
+              <p>نقاشی روی کاغذ، اسکن با دوربین و جان‌گرفتن کنار هیولای نارنجی پشمک؛ ۳ تا ۸ سال.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="game">
+            <img class="work-bg" src="assets/img/works/popo-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">پوپو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-pink">ساختنی</span><span class="tag t-blue">کودکانه</span></div>
+              <h3>پوپو: ببین، لمس کن، کشف کن!</h3>
+              <p>پوپوی روباه با کمک کودک جشن جنگل را از نو می‌سازد؛ ۸ فصل و ۳۲ بخش، ۲ تا ۸ سال.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="edu">
+            <img class="work-bg" src="assets/img/works/goshyar-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">گوش‌یار</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-green">آموزشی</span><span class="tag t-orange">شنیداری</span></div>
+              <h3>گوش‌یار</h3>
+              <p>تقویت شنیداری، تمرکز و حافظه با صدای حیوان‌ها، خانه، طبیعت و موسیقی؛ ۳ تا ۸ سال.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="edu">
+            <img class="work-bg" src="assets/img/works/hoho-farsi-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">هوهو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-purple">آموزشی</span><span class="tag t-red">فارسی</span></div>
+              <h3>هوهو فارسی کلاس سوم</h3>
+              <p>جغد معلم هوهو ۱۷ درس و ۱۱۹ صفحه‌ی کتاب فارسی سوم را با صدا درس می‌دهد.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="edu">
+            <img class="work-bg" src="assets/img/works/hoho-math-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">هوهو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-purple">آموزشی</span><span class="tag t-blue">ریاضی</span><span class="status-chip">در حال طراحی</span></div>
+              <h3>هوهو ریاضی کلاس سوم</h3>
+              <p>اپ ریاضی سوم دبستان با جغد معلم هوهو؛ تمرین، بازی و بازخورد صوتی.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+          <a class="work-card phone" href="game-single.html" data-cat="edu">
+            <img class="work-bg" src="assets/img/works/hoho-olom-shot.webp" alt="" width="480" height="1040" loading="lazy">
+            <span class="work-badge">هوهو</span><span class="more">جزئیات <svg aria-hidden="true"><use href="#i-play"/></svg></span>
+            <div class="work-info">
+              <div class="tags"><span class="tag t-purple">آموزشی</span><span class="tag t-green">علوم</span></div>
+              <h3>هوهو علوم کلاس سوم</h3>
+              <p>۱۴ درس و ۱۲۲ صفحه‌ی علوم سوم با صدا، زوم روی تصویر و آزمون.</p>
+              <div class="platforms"><svg role="img" aria-label="اندروید"><use href="#i-android"/></svg></div>
+            </div>
+          </a>
+        </div>
+        <p class="filter-empty" hidden>محصولی در این دسته پیدا نشد.</p>
+      </div>
+    </section>
+
+    <!-- ============ SPOTLIGHT: RAZINO ============ -->
+    <section class="section night notch-both spotlight" id="spotlight" aria-labelledby="spot-title">
+      <img class="night-bg" src="assets/img/scenes/dark-castle.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.08">
+      <div class="container spotlight-grid">
+        <div class="spotlight-media">
+          <div class="notch-card wipe"><img src="assets/img/scenes/razino-board.webp" alt="تخته‌ی سرنخ‌ها و معماها در بازی رازینو" width="1200" height="751" loading="lazy"></div>
+          <img class="sec-char" src="assets/img/characters/razino-hero.webp" alt="" width="230" height="452" loading="lazy" data-x="160" data-speed="-0.25" data-depth="1.4">
+        </div>
+        <div class="spotlight-copy">
+          <p class="eyebrow light reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> بازی ویژه</p>
+          <h2 id="spot-title" class="h2 light" data-split>رازینو؛ <span class="outline">ماجرای آغاز</span></h2>
+          <p class="lead reveal blur" style="--d:.3s">ماجراجویی معمایی دوبعدی فارسی برای کودکان ۸ تا ۱۲ سال. سرنخ‌ها را پیدا کن، با شخصیت‌ها حرف بزن و داستان را با انتخاب‌هایت به یکی از پایان‌ها برسان؛ بدون تبلیغ و کاملاً آفلاین.</p>
+          <ul class="spot-stats stagger">
+            <li><b data-count="10">۱۰</b><span>فصل</span></li>
+            <li><b data-count="166">۱۶۶</b><span>صحنه</span></li>
+            <li><b data-count="29">۲۹</b><span>معما</span></li>
+            <li><b data-count="21">۲۱</b><span>پایان</span></li>
+          </ul>
+          <a class="btn btn-primary reveal from-right" style="--d:.4s" href="game-single.html" data-magnetic>صفحه‌ی بازی رازینو <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRUST / PROMISES ============ -->
+    <section class="section promises" id="promises" aria-labelledby="promise-title">
+      <img class="sec-char promise-dino float" src="assets/img/characters/razino-dino.webp" alt="" width="200" height="264" loading="lazy" data-x="-140" data-speed="-0.4" data-rot="-10" data-depth="2">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> قول ما به خانواده‌ها</p>
+            <h2 id="promise-title" class="h2" data-split>نصب با <span class="outline">خیال راحت</span></h2>
+          </div>
+          <p class="lead reveal blur" style="--d:.3s">هر بازی و اپ میکرو استودیو با همین چهار قاعده ساخته می‌شود؛ پیش از انتشار با کودکان گروه سنی هدف آزموده و محتوایش بازبینی می‌شود.</p>
+        </div>
+        <div class="feature-grid four stagger">
+          <article class="feature-card light"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-noads"/></svg></span><h3>بدون تبلیغ</h3><p>هیچ تبلیغ ناگهانی و پاپ‌آپی وسط بازی کودک ظاهر نمی‌شود.</p></article>
+          <article class="feature-card light"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-offline"/></svg></span><h3>آفلاین</h3><p>بعد از نصب، بدون اینترنت کار می‌کند؛ در سفر، مدرسه یا خانه.</p></article>
+          <article class="feature-card light"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-text"/></svg></span><h3>فارسی و راست‌چین</h3><p>متن، رابط و صداگذاری از روز اول فارسی طراحی شده است.</p></article>
+          <article class="feature-card light"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><h3>حریم خصوصی کودک</h3><p>بدون ردیاب و حساب کاربری؛ داده‌ها فقط روی دستگاه می‌مانند.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO BANNER ============ -->
+    <section class="video-banner notch-top" aria-labelledby="vb-title">
+      <img class="vb-bg" src="assets/img/scenes/puzzle-room.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.1">
+      <div class="vb-inner">
+        <h2 id="vb-title" class="display-md" data-split>تریلر بازی‌ها را<br>ببین</h2>
+        <button class="play-btn reveal zoom" style="--d:.5s" data-magnetic type="button" data-video="assets/video/trailer.mp4" aria-label="پخش تریلر"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section create" id="create" aria-labelledby="create-title">
+      <div class="container create-grid">
+        <div class="create-art">
+          <div class="orb reveal zoom" data-rot="20"><img class="orb-bg" src="assets/img/scenes/pilo-world.webp" alt="" width="1200" height="800" loading="lazy"></div>
+          <img class="create-char reveal-up pixel" src="assets/img/characters/kairo.webp" alt="کایرو، قهرمان بازی دو آسمان" width="350" height="668" loading="lazy" data-x="120" data-speed="-0.22" data-depth="1.4">
+          <span class="gem g1" aria-hidden="true" data-speed="-0.6" data-rot="90" data-depth="3"></span><span class="gem g2" aria-hidden="true" data-speed="-0.35" data-rot="-70" data-depth="2.2"></span><span class="gem g3" aria-hidden="true" data-speed="-0.8" data-rot="120" data-depth="3.4"></span>
+        </div>
+        <div class="create-copy">
+          <p class="vertical-label reveal from-top" aria-hidden="true"><svg><use href="#i-gem"/></svg> بازی بعدی</p>
+          <h2 id="create-title" class="h2 big" data-split>بازی بعدی<br><span class="outline">مال شما باشد</span></h2>
+          <p class="lead reveal blur" style="--d:.35s">ایده‌ی یک بازی یا اپ آموزشی دارید؟ از سند طراحی و شخصیت‌پردازی تا انتشار در کافه‌بازار کنارتان هستیم.</p>
+          <a class="btn btn-primary reveal from-right" style="--d:.5s" href="contact.html" data-magnetic>شروع پروژه <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <img class="footer-bg" src="assets/img/scenes/hero-two-skies.webp" alt="" width="1456" height="818" loading="lazy">
     <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="index.html">
-          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset="1" stop-color="#4a2fd6"/></linearGradient></defs></svg>
-          <span class="brand-text">میکرو <b>استودیو</b></span>
-        </a>
-        <p class="lead">میکرو استودیو؛ سازنده‌ی بازی‌های داستانی و اپ‌های آموزشی فارسی برای کودکان و نوجوانان.</p>
-      </div>
-      <div class="footer-links">
-        <h3 class="footer-title">راه‌های ارتباطی</h3>
-        <ul class="footer-list">
-          <li><strong>آدرس:</strong> تهران، خیابان ولیعصر، پلاک ۱۲، واحد ۴۵</li>
-          <li><strong>تلفن:</strong> ۰۲۱ ۱۲۳۴ ۵۶۷۸</li>
-          <li><strong>ایمیل:</strong> info@microstudio.ir</li>
-          <li>ساعت کاری: شنبه–جمعه، ۹:۰۰–۱۷:۰۰</li>
-        </ul>
-      </div>
-      <div class="footer-social">
-        <h3 class="footer-title">شبکه‌های اجتماعی</h3>
-        <div class="soc-list">
-          <a href="https://instagram.com/microstudio.ir" target="_blank" rel="noopener" aria-label="اینستاگرام میکرو استادیو"><svg><use href="#i-insta"/></svg></a>
-          <a href="https://telegram.me/microstudio_ir" target="_blank" rel="noopener" aria-label="تلگرام میکرو استودیو"><svg><use href="#i-telegram"/></svg></a>
-          <a href="https://github.com/micro-studio" target="_blank" rel="noopener" aria-label="گیت‌هاب میکرو استودیو"><svg><use href="#i-github"/></svg></a>
+      <div class="f-col">
+        <h3 class="sr-only">شبکه‌های اجتماعی</h3>
+        <div class="f-social">
+          <a href="https://instagram.com/microstudio.ir" target="_blank" rel="noopener" aria-label="اینستاگرام"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>
+          <a href="https://t.me/microstudio_ir" target="_blank" rel="noopener" aria-label="تلگرام"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>
+          <a href="https://github.com/mojtaba-pourasghar" target="_blank" rel="noopener" aria-label="گیت‌هاب"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+          <a href="mailto:mojtaba.pourasghar@gmail.com" aria-label="ایمیل"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>
       </div>
+      <nav class="f-col" aria-label="درباره ما">
+        <h3>درباره ما</h3>
+        <a href="about.html">معرفی استودیو</a><a href="about.html">تیم ما</a><a href="games.html">بازی‌های ما</a><a href="contact.html">همکاری با ما</a>
+      </nav>
+      <nav class="f-col" aria-label="خدمات">
+        <h3>خدمات</h3>
+        <a href="services.html">ساخت بازی</a><a href="services.html">طراحی شخصیت</a><a href="services.html">اپ آموزشی</a><a href="services.html">صداگذاری فارسی</a>
+      </nav>
+      <nav class="f-col" aria-label="پشتیبانی">
+        <h3>پشتیبانی</h3>
+        <a href="contact.html">سؤالات متداول</a><a href="contact.html">حریم خصوصی کودکان</a><a href="contact.html">راهنمای والدین</a><a href="contact.html">گزارش مشکل</a>
+      </nav>
+      <div class="f-col f-contact">
+        <h3>راه‌های ارتباطی</h3>
+        <p>ایران، تهران</p>
+        <a class="f-phone" href="tel:+982100000000" dir="ltr">+98 (21) 0000 0000</a>
+        <a href="mailto:mojtaba.pourasghar@gmail.com" dir="ltr">mojtaba.pourasghar@gmail.com</a>
+      </div>
     </div>
-    <div class="container footer-bottom">
-      <p class="copyright">&copy; ۱۴۰۵ میکرو استودیو. کلیه‌ی حقوق محفوظ است.</p>
-      <p class="solar-hijri">۱۴۰۵ - سال ششم electrophysi</p>
+    <div class="footer-mega" aria-hidden="true">
+      <svg class="fm-logo" viewBox="0 0 40 40" data-speed="-0.15" data-rot="-8"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="currentColor"/></svg>
+      <span class="fm-word" data-sx="120">MICRO</span>
+      <img class="fm-left" src="assets/img/characters/razino-buddy.webp" alt="" width="172" height="417" loading="lazy" data-x="120" data-depth="1.6">
+      <img class="fm-dino" src="assets/img/characters/razino-dino.webp" alt="" width="200" height="264" loading="lazy" data-x="200" data-depth="2.2">
+      <img class="fm-right" src="assets/img/characters/razino-merchant.webp" alt="" width="185" height="284" loading="lazy" data-x="-160" data-depth="1.8">
     </div>
+    <p class="footer-bottom">© <span id="year">۱۴۰۵</span> <a href="index.html">میکرو استودیو</a> - همه‌ی حقوق محفوظ است.</p>
   </footer>
+
+  <a class="to-top" href="#top" aria-label="بازگشت به بالا"><svg aria-hidden="true"><use href="#i-up"/></svg></a>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="پخش تریلر" hidden>
+    <button class="lb-close" type="button" aria-label="بستن"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="lb-frame"><video controls playsinline preload="none"></video></div>
+  </div>
+
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js"></script>
+  <script src="assets/js/blog.js"></script>
 </body>
 </html>
-"""
-    return open(r"c:/xampp/htdocs/microstudio/_tools/B1.txt", encoding="utf-8").read() + open(r"c:/xampp/htdocs/microstudio/_tools/B2.txt", encoding="utf-8").read() + open(r"c:/xampp/htdocs/microstudio/_tools/B3.txt", encoding="utf-8").read() + open(r"c:/xampp/htdocs/microstudio/_tools/B4.txt", encoding="utf-8").read()

@@ -2,20 +2,59 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>خدمات | میکرو استودیو</title>
-  <meta name="description" content="خدمات ساخت بازی میکرو استودیو: ساخت بازی، طراحی شخصیت و هنر، اپ‌توسطار و داستان‌نویسی.">
-  <meta name="theme-color" content="#0d0f1a">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>خدمات | ساخت بازی و اپ آموزشی — میکرو استودیو</title>
+  <meta name="description" content="خدمات میکرو استودیو: ساخت بازی با Godot و Flutter، طراحی شخصیت و پیکسل‌آرت، اپ آموزشی هم‌گام با کتاب‌های دبستان و صداگذاری فارسی.">
+  <meta name="theme-color" content="#15162a">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/Vazirmatn-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/scenes/dark-castle.webp" as="image">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="home inner-page services-page">
+  <!-- ============ SVG ICON SPRITE ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
+    </defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.53.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.6 6.9L22 9.2l-5.8 4.6 2 7.2L12 17l-6.2 4 2-7.2L2 9.2l7.4-.3z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path fill="currentColor" d="M7 9h10v8a1 1 0 0 1-1 1h-1v3h-2v-3h-2v3H9v-3H8a1 1 0 0 1-1-1zm-3 0h2v6H4zm14 0h2v6h-2zM7.3 8a4.8 4.8 0 0 1 2.2-3.4L8.6 3.2l.7-.4.9 1.5a5 5 0 0 1 3.6 0l.9-1.5.7.4-.9 1.4A4.8 4.8 0 0 1 16.7 8zM10 6.2a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4zm4 0a.7.7 0 1 0 0 1.4.7.7 0 0 0 0-1.4z"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></g></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-telegram" viewBox="0 0 24 24"><path fill="currentColor" d="M21.4 4.2 2.9 11.3c-1.2.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.5zM8.6 14l9.6-6c.5-.3.9-.1.5.2l-8.1 7.3-.3 3.4z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></g></symbol>
+    <symbol id="i-trophy" viewBox="0 0 120 120">
+      <path d="M30 14h60v26a30 30 0 0 1-60 0z" fill="#ffb547"/>
+      <path d="M30 22H14v8a18 18 0 0 0 18 18M90 22h16v8a18 18 0 0 1-18 18" fill="none" stroke="#ffb547" stroke-width="7"/>
+      <path d="M52 68h16v16H52z" fill="#e0901f"/>
+      <rect x="36" y="84" width="48" height="12" rx="3" fill="#5b3ef5"/>
+      <rect x="28" y="96" width="64" height="12" rx="3" fill="#7457ff"/>
+      <path d="m60 22 4.6 9.4 10.4 1.5-7.5 7.3 1.8 10.3L60 45.6l-9.3 4.9 1.8-10.3-7.5-7.3 10.4-1.5z" fill="#fff3d6"/>
+    </symbol>
+  </svg>
+
   <a class="skip" href="#main">رفتن به محتوای اصلی</a>
+
+  <!-- page intro curtain, scroll progress bar, custom cursor (decorative; removed/ignored without JS) -->
+  <div class="intro" aria-hidden="true">
+    <svg class="intro-mark" viewBox="0 0 40 40"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+    <span class="intro-bar"><i></i></span>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+
+  <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
     <div class="container header-row">
       <a class="brand" href="index.html" aria-label="میکرو استودیو - صفحه اصلی">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset="1" stop-color="#4a2fd6"/></linearGradient></defs></svg>
+        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
         <span class="brand-text">میکرو <b>استودیو</b></span>
       </a>
       <nav class="main-nav" id="main-nav" aria-label="منوی اصلی">
@@ -26,88 +65,275 @@
           <li><a href="about.html">درباره ما</a></li>
           <li><a href="contact.html">تماس با ما</a></li>
         </ul>
-        <a class="btn btn-primary nav-cta-mobile" href="#contact">در تماس باشید <svg><use href="#i-play"/></svg></a>
+        <a class="btn btn-primary nav-cta-mobile" href="contact.html">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
       </nav>
-      <a class="btn btn-primary header-cta" href="#contact">در تماس باشید <svg><use href="#i-play"/></svg></a>
-      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو"><svg><use href="#i-menu"/></svg></button>
+      <a class="btn btn-primary header-cta" href="contact.html">در تماس باشید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="باز کردن منو"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     </div>
   </header>
+
   <main id="main">
+    <!-- PAGE: services.html — 4 services in detail · process · tools · CTA · FAQ (design-language.md §10-3, §12) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.2 4.2L19 7"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-pad" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7.5 8h9a4.5 4.5 0 0 1 0 9c-1.6 0-2.4-1.3-4.5-1.3S9.1 17 7.5 17a4.5 4.5 0 0 1 0-9z" stroke-linejoin="round"/><path d="M8 11v3M6.5 12.5h3"/></g><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor"/><circle cx="17" cy="13.6" r="1.1" fill="currentColor"/></symbol>
+      <symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5-8 8-5-5z"/><path d="M6.5 12.5c-2 .5-3 2-3 4 0 1.5-.5 2.5-1.5 3 3 .5 6.5 0 7.5-2.5"/></g></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></g></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></g></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></symbol>
+      <symbol id="i-test" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5.5 9.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9" stroke-linecap="round"/></g></symbol>
+      <symbol id="i-store" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 9h16l-1 11H5z"/><path d="M8.5 9V7a3.5 3.5 0 0 1 7 0v2" stroke-linecap="round"/></g></symbol>
+    </svg>
 
-      <section class="section services" id="services" aria-labelledby="services-title">
-        <div class="services-bg"><img src="assets/img/scenes/dark-castle.webp" alt="" width="1456" height="818" loading="lazy"></div>
-        <div class="services-grid container-wide">
-          <figure class="services-char reveal-up">
-            <img src="assets/img/characters/ilara.webp" alt="ایلارا، شخصیت بازی دو آسمان" width="517" height="699" class="pixel" loading="lazy">
-          </figure>
-          <div class="services-main">
-            <p class="eyebrow reveal"><svg><use href="#i-gem"/></svg> خدمات ما</p>
-            <h2 id="services-title" class="h2 reveal">طراحی هنری و توسعه‌ی بازی</h2>
-            <div class="slider" data-slider>
-              <div class="slider-track" tabindex="0" aria-label="فهرست خدمات">
+    <!-- ============ PAGE HERO ============ -->
+    <section class="hero page-hero compact notch-bottom" id="home" aria-labelledby="svc-title">
+      <div class="hero-bg" aria-hidden="true" data-depth="-0.6"><img src="assets/img/scenes/dark-castle.webp" alt="" width="1456" height="818" data-parallax="0.12" fetchpriority="high"></div>
+      <div class="hero-fx" aria-hidden="true" data-depth="-1.4"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <nav class="breadcrumb reveal from-right" aria-label="مسیر صفحه">
+            <ol><li><a href="index.html">صفحه اصلی</a></li><li aria-current="page">خدمات</li></ol>
+          </nav>
+          <h1 id="svc-title" class="display" data-split><span>از ایده</span><span>تا انتشار</span></h1>
+          <p class="hero-lead reveal blur" style="--d:.7s">ساخت بازی، طراحی شخصیت، اپ آموزشی و صداگذاری فارسی؛ هر چیزی که یک بازی یا اپ کودکانه‌ی خوب لازم دارد، زیر یک سقف.</p>
+          <ul class="meta-chips reveal from-right" style="--d:.85s">
+            <li><svg aria-hidden="true"><use href="#i-pad"/></svg>ساخت بازی</li>
+            <li><svg aria-hidden="true"><use href="#i-brush"/></svg>طراحی شخصیت</li>
+            <li><svg aria-hidden="true"><use href="#i-book"/></svg>اپ آموزشی</li>
+            <li><svg aria-hidden="true"><use href="#i-mic"/></svg>صداگذاری فارسی</li>
+          </ul>
+        </div>
+        <figure class="hero-char reveal-up" style="--d:.3s">
+          <img class="float-slow" src="assets/img/characters/razino-wizard.webp" alt="جادوگر پیر از بازی رازینو" width="221" height="395" data-depth="1.6" data-speed="-0.3">
+          <figcaption class="char-tag" data-depth="2.6">خدمات <small>میکرو استودیو</small></figcaption>
+        </figure>
+      </div>
+    </section>
 
-                <article class="svc-card">
-                  <div class="svc-text"><h3>ساخت بازی</h3><p>از ایده و سند طراحی تا انتشار در کافه‌بازار؛ پلتفرمر، ماجراجویی معمایی و نقش‌آفرینی با Godot و Flutter.</p></div>
-                  <img src="assets/img/characters/razino-wizard.webp" alt="" width="221" height="395" loading="lazy">
-                  <div class="svc-foot"><span class="svc-num">01</span><a href="#contact" class="more">بیشتر <svg><use href="#i-play"/></svg></a></div>
-                </article>
-                <article class="svc-card">
-                  <div class="svc-text"><h3>طراحی شخصیت و هنر</h3><p>شخصیت‌پردازی، برگه‌ی حالت‌ها، پیکسل‌آرت و صحنه‌های نقاشی‌شده؛ هر قهرمان با هویت و داستان خودش.</p></div>
-                  <img src="assets/img/characters/razino-companion.webp" alt="" width="207" height="294" loading="lazy">
-                  <div class="svc-foot"><span class="svc-num">02</span><a href="#contact" class="more">بیشتر <svg><use href="#i-play"/></svg></a></div>
-                </article>
-                <article class="svc-card">
-                  <div class="svc-text"><h3>اپ‌توسطار</h3><p>اپ‌شناسی توافقی، ترجمه‌ی معنایی‌اشتراکی، و پشتیبانی از بازخورد به صورت متمرکز.</p></div>
-                  <img src="assets/img/characters/pilo.webp" alt="" width="207" height="294" loading="lazy">
-                  <div class="svc-foot"><span class="svc-num">03</span><a href="#contact" class="more">بیشتر <svg><use href="#i-play"/></svg></a></div>
-                </article>
-                <article class="svc-card">
-                  <div class="svc-text"><h3>داستان‌نویسی</h3><p>ساخت داستان دو‌سطحی، کامپوزیت چندرسانه‌ای، و متن‌ساز برای تمام استراتژی‌پردازم.</p></div>
-                  <img src="assets/img/characters/kairo.webp" alt="" width="207" height="294" loading="lazy">
-                  <div class="svc-foot"><span class="svc-num">04</span><a href="#contact" class="more">بیشتر <svg><use href="#i-play"/></svg></a></div>
-                </article>
-              </div>
-            </div>
-            <a class="btn btn-primary reveal" href="#contact">برای مشاوره <svg><use href="#i-play"/></svg></a>
+    <!-- ============ SERVICES IN DETAIL ============ -->
+    <section class="section svc-detail" id="services" aria-labelledby="detail-title">
+      <p class="watermark" aria-hidden="true" data-sx="-180">STUDIO</p>
+      <div class="container" style="position:relative;z-index:1">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> چهار خدمت اصلی</p>
+            <h2 id="detail-title" class="h2" data-split>کاری که <span class="outline">بهتر از همه</span><br><span class="outline">بلدیم</span></h2>
           </div>
+          <p class="lead reveal blur" style="--d:.3s">هر خدمت را می‌توانید جداگانه سفارش دهید یا یک پروژه را از صفر تا انتشار به ما بسپارید.</p>
         </div>
-      </section>
-"""
-    footer = """  </main>
-  <footer class="site-footer" id="contact">
+
+        <div class="svc-rows">
+          <article class="svc-row" id="svc-game">
+            <div class="svc-row-media">
+              <div class="notch-card wipe"><img src="assets/img/scenes/razino-screens.webp" alt="صفحه‌های مختلف بازی رازینو" width="1200" height="800" loading="lazy"></div>
+              <img class="sec-char" src="assets/img/characters/razino-hero.webp" alt="" width="230" height="452" loading="lazy" data-x="-120" data-speed="-0.2" data-depth="1.4">
+            </div>
+            <div class="svc-row-copy">
+              <span class="svc-big-num reveal from-right" aria-hidden="true">01</span>
+              <h3 class="h2" data-split>ساخت بازی</h3>
+              <p class="lead reveal blur" style="--d:.3s">از ایده و سند طراحی تا انتشار در کافه‌بازار؛ پلتفرمر، ماجراجویی معمایی، بازی داستانی و نقش‌آفرینی با Godot و Flutter.</p>
+              <p class="deliver-label reveal">آنچه تحویل می‌گیرید:</p>
+              <ul class="check-list stagger">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>سند طراحی بازی و نقشه‌ی مراحل</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>نسخه‌ی قابل بازی (پروتوتایپ) در همان هفته‌های اول</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>تست با کودکان گروه سنی هدف</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>انتشار در فروشگاه و پشتیبانی پس از انتشار</li>
+              </ul>
+              <a class="btn btn-primary reveal from-right" href="contact.html" data-magnetic>سفارش ساخت بازی <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+            </div>
+          </article>
+
+          <article class="svc-row" id="svc-art">
+            <div class="svc-row-media">
+              <div class="notch-card wipe"><img src="assets/img/scenes/sunset-cliff.webp" alt="صحنه‌ی پیکسل‌آرت غروب در بازی دو آسمان" width="1456" height="818" loading="lazy"></div>
+              <img class="sec-char pixel" src="assets/img/characters/kairo.webp" alt="" width="350" height="668" loading="lazy" data-x="120" data-speed="-0.2" data-depth="1.4">
+            </div>
+            <div class="svc-row-copy">
+              <span class="svc-big-num reveal from-right" aria-hidden="true">02</span>
+              <h3 class="h2" data-split>طراحی شخصیت و هنر</h3>
+              <p class="lead reveal blur" style="--d:.3s">شخصیت‌پردازی، برگه‌ی حالت‌ها، پیکسل‌آرت و صحنه‌های نقاشی‌شده؛ هر قهرمان با هویت، داستان و حالت‌های چهره‌ی خودش.</p>
+              <p class="deliver-label reveal">آنچه تحویل می‌گیرید:</p>
+              <ul class="check-list stagger">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>طراحی شخصیت و برگه‌ی حالت‌های چهره</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>پیکسل‌آرت و انیمیشن حرکت</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>پس‌زمینه‌ها و صحنه‌های بازی</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>آیکن، رابط کاربری و تصاویر فروشگاه</li>
+              </ul>
+              <a class="btn btn-primary reveal from-right" href="contact.html" data-magnetic>سفارش طراحی <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+            </div>
+          </article>
+
+          <article class="svc-row" id="svc-edu">
+            <div class="svc-row-media">
+              <div class="notch-card wipe phone-shot"><img src="assets/img/works/hoho-farsi-shot.webp" alt="صفحه‌ی درس در اپ هوهو فارسی کلاس سوم" width="480" height="1040" loading="lazy"></div>
+              <img class="sec-char" src="assets/img/characters/razino-girl.webp" alt="" width="190" height="378" loading="lazy" data-x="-120" data-speed="-0.2" data-depth="1.4">
+            </div>
+            <div class="svc-row-copy">
+              <span class="svc-big-num reveal from-right" aria-hidden="true">03</span>
+              <h3 class="h2" data-split>اپ آموزشی</h3>
+              <p class="lead reveal blur" style="--d:.3s">اپ‌های درسی تعاملی هم‌گام با کتاب‌های دبستان؛ مثل هوهو فارسی و علوم کلاس سوم با ۲۴۱ صفحه‌ی درسی صوتی، تمرین و آزمون.</p>
+              <p class="deliver-label reveal">آنچه تحویل می‌گیرید:</p>
+              <ul class="check-list stagger">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>تبدیل کتاب درسی به درس‌های تعاملی</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>روایت صوتی برای هر صفحه</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>کاربرگ، تمرین و آزمون سطح‌بندی‌شده</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>کار آفلاین، بدون تبلیغ و ردیاب</li>
+              </ul>
+              <a class="btn btn-primary reveal from-right" href="contact.html" data-magnetic>سفارش اپ آموزشی <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+            </div>
+          </article>
+
+          <article class="svc-row" id="svc-voice">
+            <div class="svc-row-media">
+              <div class="notch-card wipe"><img src="assets/img/scenes/puzzle-room.webp" alt="اتاق معما در بازی رازینو" width="1456" height="818" loading="lazy"></div>
+              <img class="sec-char" src="assets/img/characters/razino-merchant.webp" alt="" width="185" height="284" loading="lazy" data-x="120" data-speed="-0.2" data-depth="1.4">
+            </div>
+            <div class="svc-row-copy">
+              <span class="svc-big-num reveal from-right" aria-hidden="true">04</span>
+              <h3 class="h2" data-split>صداگذاری فارسی</h3>
+              <p class="lead reveal blur" style="--d:.3s">دوبله، موسیقی و افکت‌های صوتی؛ صدای فارسی طبیعی و گرم برای شخصیت‌ها، راوی داستان و معلم درس‌ها.</p>
+              <p class="deliver-label reveal">آنچه تحویل می‌گیرید:</p>
+              <ul class="check-list stagger">
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>دوبله‌ی شخصیت‌ها و روایت فارسی</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>موسیقی متن اختصاصی</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>افکت‌های صوتی رابط و محیط</li>
+                <li><svg aria-hidden="true"><use href="#i-check"/></svg>میکس و آماده‌سازی برای موبایل</li>
+              </ul>
+              <a class="btn btn-primary reveal from-right" href="contact.html" data-magnetic>سفارش صداگذاری <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section night notch-both process" id="process" aria-labelledby="process-title">
+      <img class="night-bg" src="assets/img/scenes/night-portal.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.08">
+      <img class="night-char process-char pixel" src="assets/img/characters/ilara.webp" alt="" width="517" height="699" loading="lazy" data-x="-180" data-speed="-0.25" data-depth="1.5">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow light reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> فرایند کار</p>
+            <h2 id="process-title" class="h2 light" data-split>چهار قدم تا <span class="outline">بازی شما</span></h2>
+          </div>
+          <p class="lead reveal blur" style="--d:.3s">در هر مرحله نسخه‌ای قابل دیدن تحویل می‌گیرید؛ هیچ‌وقت تا آخر پروژه منتظر نمی‌مانید.</p>
+        </div>
+        <ol class="step-grid stagger">
+          <li class="step-card"><span class="step-num">۱</span><h3>ایده</h3><p>گفت‌وگو درباره‌ی مخاطب، هدف آموزشی و حس بازی؛ و نوشتن سند طراحی.</p><small>خروجی: سند طراحی</small></li>
+          <li class="step-card"><span class="step-num">۲</span><h3>طراحی</h3><p>شخصیت‌ها، صحنه‌ها و نقشه‌ی مراحل؛ همراه با یک پروتوتایپ ساده برای تست.</p><small>خروجی: پروتوتایپ</small></li>
+          <li class="step-card"><span class="step-num">۳</span><h3>ساخت</h3><p>برنامه‌نویسی، هنر نهایی، صداگذاری فارسی و تست مداوم با کودکان.</p><small>خروجی: نسخه‌ی آزمایشی</small></li>
+          <li class="step-card"><span class="step-num">۴</span><h3>انتشار</h3><p>آماده‌سازی فروشگاه، انتشار در کافه‌بازار و پشتیبانی و به‌روزرسانی.</p><small>خروجی: بازی منتشرشده</small></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ TOOLS / CAPABILITIES ============ -->
+    <section class="section tools" id="tools" aria-labelledby="tools-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> ابزارها و توانمندی‌ها</p>
+            <h2 id="tools-title" class="h2" data-split>با چه <span class="outline">می‌سازیم؟</span></h2>
+          </div>
+          <a class="btn btn-primary reveal from-left" href="games.html" data-magnetic>نمونه‌کارها <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+        </div>
+        <div class="tool-grid stagger">
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-pad"/></svg></span><div><b>Godot Engine</b><span>موتور بازی‌های داستانی و پلتفرمر مثل رازینو و سفر پیلو.</span></div></div>
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-code"/></svg></span><div><b>Flutter</b><span>اپ‌های آموزشی سریع و روان برای اندروید، مثل هوهو.</span></div></div>
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-brush"/></svg></span><div><b>پیکسل‌آرت و نقاشی دیجیتال</b><span>شخصیت‌ها و صحنه‌های دو آسمان و رازینو.</span></div></div>
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-mic"/></svg></span><div><b>استودیوی صدا</b><span>ضبط، دوبله و میکس صدای فارسی شخصیت‌ها و درس‌ها.</span></div></div>
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-test"/></svg></span><div><b>تست خودکار و تست با کودکان</b><span>کیفیت فنی و تجربه‌ی واقعی بازی، هر دو سنجیده می‌شوند.</span></div></div>
+          <div class="tool-card"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-store"/></svg></span><div><b>انتشار در کافه‌بازار</b><span>آماده‌سازی صفحه‌ی فروشگاه، تصاویر و به‌روزرسانی‌ها.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BANNER ============ -->
+    <section class="video-banner notch-top cta-banner" aria-labelledby="cta-title">
+      <img class="vb-bg" src="assets/img/scenes/temple-gate.webp" alt="" width="1456" height="818" loading="lazy" data-parallax="0.1">
+      <div class="vb-inner">
+        <h2 id="cta-title" class="display-md" data-split>ایده‌ات را<br>بازی کنیم؟</h2>
+        <p class="lead reveal blur" style="--d:.3s">برای یک جلسه‌ی مشاوره‌ی رایگان فرم تماس را پر کنید؛ ظرف ۲۴ ساعت کاری پاسخ می‌دهیم.</p>
+        <div class="cta-actions reveal zoom" style="--d:.45s">
+          <a class="btn btn-primary" href="contact.html" data-magnetic>شروع پروژه <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+          <a class="btn btn-ghost" href="games.html">دیدن نمونه‌کارها <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <div class="faq-copy">
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> سؤالات متداول</p>
+          <h2 id="faq-title" class="h2" data-split>پیش از <span class="outline">شروع</span></h2>
+          <p class="lead reveal blur" style="--d:.3s">پاسخ سؤال‌هایی که بیشتر از ما می‌پرسند. سؤال دیگری دارید؟ همین حالا بپرسید.</p>
+          <a class="btn btn-primary reveal from-right" href="contact.html" data-magnetic>سؤال بپرسید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+          <img class="sec-char" src="assets/img/characters/razino-companion.webp" alt="" width="207" height="294" loading="lazy" data-x="100" data-speed="-0.15" data-depth="1.3">
+        </div>
+        <div class="faq-list stagger">
+          <details class="faq-item" open><summary>ساخت یک بازی چقدر زمان می‌برد؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>به اندازه‌ی بازی بستگی دارد. یک بازی کوچک آموزشی معمولاً چند هفته و یک ماجراجویی داستانی چندفصلی چند ماه زمان می‌برد. بعد از جلسه‌ی اول، زمان‌بندی دقیق مرحله‌به‌مرحله را دریافت می‌کنید.</p></details>
+          <details class="faq-item"><summary>هزینه‌ی پروژه چطور محاسبه می‌شود؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>بر اساس دامنه‌ی کار: تعداد مراحل یا درس‌ها، حجم هنر و انیمیشن و میزان صداگذاری. پس از جلسه‌ی مشاوره‌ی رایگان، پیشنهاد مکتوب با هزینه‌ی هر مرحله ارسال می‌کنیم.</p></details>
+          <details class="faq-item"><summary>آیا فقط یک بخش، مثلاً طراحی شخصیت را سفارش دهم؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>بله. هر چهار خدمت را می‌توانید جداگانه سفارش دهید؛ مثلاً فقط شخصیت‌پردازی و برگه‌ی حالت‌ها یا فقط دوبله‌ی فارسی.</p></details>
+          <details class="faq-item"><summary>برای چه پلتفرم‌هایی می‌سازید؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>تمرکز فعلی ما اندروید (موبایل و تبلت) است. با Godot و Flutter امکان خروجی وب و پلتفرم‌های دیگر هم وجود دارد.</p></details>
+          <details class="faq-item"><summary>مالکیت کد و هنر پروژه با کیست؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>در پروژه‌های سفارشی، مالکیت خروجی نهایی طبق قرارداد به سفارش‌دهنده منتقل می‌شود. جزئیات پیش از شروع کار مکتوب می‌شود.</p></details>
+          <details class="faq-item"><summary>بعد از انتشار هم پشتیبانی می‌کنید؟<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>بله؛ رفع اشکال، به‌روزرسانی برای نسخه‌های جدید اندروید و افزودن محتوای تازه (مثل فصل جدید) را پس از انتشار هم انجام می‌دهیم.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <img class="footer-bg" src="assets/img/scenes/hero-two-skies.webp" alt="" width="1456" height="818" loading="lazy">
     <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="index.html">
-          <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset="1" stop-color="#4a2fd6"/></linearGradient></defs></svg>
-          <span class="brand-text">میکرو <b>استودیو</b></span>
-        </a>
-        <p class="lead">میکرو استودیو؛ سازنده‌ی بازی‌های داستانی و اپ‌های آموزشی فارسی برای کودکان و نوجوانان.</p>
-      </div>
-      <div class="footer-links">
-        <h3 class="footer-title">راه‌های ارتباطی</h3>
-        <ul class="footer-list">
-          <li><strong>آدرس:</strong> تهران، خیابان ولیعصر، پلاک ۱۲، واحد ۴۵</li>
-          <li><strong>تلفن:</strong> ۰۲۱ ۱۲۳۴ ۵۶۷۸</li>
-          <li><strong>ایمیل:</strong> info@microstudio.ir</li>
-          <li>ساعت کاری: شنبه–جمعه، ۹:۰۰–۱۷:۰۰</li>
-        </ul>
-      </div>
-      <div class="footer-social">
-        <h3 class="footer-title">شبکه‌های اجتماعی</h3>
-        <div class="soc-list">
-          <a href="https://instagram.com/microstudio.ir" target="_blank" rel="noopener" aria-label="اینستاگرام میکرو استادیو"><svg><use href="#i-insta"/></svg></a>
-          <a href="https://telegram.me/microstudio_ir" target="_blank" rel="noopener" aria-label="تلگرام میکرو استودیو"><svg><use href="#i-telegram"/></svg></a>
-          <a href="https://github.com/micro-studio" target="_blank" rel="noopener" aria-label="گیت‌هاب میکرو استودیو"><svg><use href="#i-github"/></svg></a>
+      <div class="f-col">
+        <h3 class="sr-only">شبکه‌های اجتماعی</h3>
+        <div class="f-social">
+          <a href="https://instagram.com/microstudio.ir" target="_blank" rel="noopener" aria-label="اینستاگرام"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>
+          <a href="https://t.me/microstudio_ir" target="_blank" rel="noopener" aria-label="تلگرام"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>
+          <a href="https://github.com/mojtaba-pourasghar" target="_blank" rel="noopener" aria-label="گیت‌هاب"><svg aria-hidden="true"><use href="#i-github"/></svg></a>
+          <a href="mailto:mojtaba.pourasghar@gmail.com" aria-label="ایمیل"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>
       </div>
+      <nav class="f-col" aria-label="درباره ما">
+        <h3>درباره ما</h3>
+        <a href="about.html">معرفی استودیو</a><a href="about.html">تیم ما</a><a href="games.html">بازی‌های ما</a><a href="contact.html">همکاری با ما</a>
+      </nav>
+      <nav class="f-col" aria-label="خدمات">
+        <h3>خدمات</h3>
+        <a href="services.html">ساخت بازی</a><a href="services.html">طراحی شخصیت</a><a href="services.html">اپ آموزشی</a><a href="services.html">صداگذاری فارسی</a>
+      </nav>
+      <nav class="f-col" aria-label="پشتیبانی">
+        <h3>پشتیبانی</h3>
+        <a href="contact.html">سؤالات متداول</a><a href="contact.html">حریم خصوصی کودکان</a><a href="contact.html">راهنمای والدین</a><a href="contact.html">گزارش مشکل</a>
+      </nav>
+      <div class="f-col f-contact">
+        <h3>راه‌های ارتباطی</h3>
+        <p>ایران، تهران</p>
+        <a class="f-phone" href="tel:+982100000000" dir="ltr">+98 (21) 0000 0000</a>
+        <a href="mailto:mojtaba.pourasghar@gmail.com" dir="ltr">mojtaba.pourasghar@gmail.com</a>
+      </div>
     </div>
-    <div class="container footer-bottom">
-      <p class="copyright">&copy; ۱۴۰۵ میکرو استودیو. کلیه‌ی حقوق محفوظ است.</p>
-      <p class="solar-hijri">۱۴۰۵ - سال ششم electrophysi</p>
+    <div class="footer-mega" aria-hidden="true">
+      <svg class="fm-logo" viewBox="0 0 40 40" data-speed="-0.15" data-rot="-8"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="currentColor"/></svg>
+      <span class="fm-word" data-sx="120">MICRO</span>
+      <img class="fm-left" src="assets/img/characters/razino-buddy.webp" alt="" width="172" height="417" loading="lazy" data-x="120" data-depth="1.6">
+      <img class="fm-dino" src="assets/img/characters/razino-dino.webp" alt="" width="200" height="264" loading="lazy" data-x="200" data-depth="2.2">
+      <img class="fm-right" src="assets/img/characters/razino-merchant.webp" alt="" width="185" height="284" loading="lazy" data-x="-160" data-depth="1.8">
     </div>
+    <p class="footer-bottom">© <span id="year">۱۴۰۵</span> <a href="index.html">میکرو استودیو</a> - همه‌ی حقوق محفوظ است.</p>
   </footer>
+
+  <a class="to-top" href="#top" aria-label="بازگشت به بالا"><svg aria-hidden="true"><use href="#i-up"/></svg></a>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="پخش تریلر" hidden>
+    <button class="lb-close" type="button" aria-label="بستن"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="lb-frame"><video controls playsinline preload="none"></video></div>
+  </div>
+
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/motion.js"></script>
 </body>
 </html>
-"""
-    return open(r"c:/xampp/htdocs/microstudio/_tools/C1.txt", encoding="utf-8").read() + open(r"c:/xampp/htdocs/microstudio/_tools/C2.txt", encoding="utf-8").read() + open(r"c:/xampp/htdocs/microstudio/_tools/C3.txt", encoding="utf-8").read()
