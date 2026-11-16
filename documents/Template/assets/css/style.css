@@ -1156,3 +1156,6 @@ ol.step-grid { list-style: none; margin: 0; padding: 0; }
   .svc-row-media .sec-char { inset-inline-end: 0; }
   .svc-row:nth-child(even) .svc-row-media .sec-char { inset-inline-start: 0; }
 }
+
+/* reveal start offsets (±80px) must not widen the page on phones (it pushed the mobile menu off-screen) */
+main, .site-footer { overflow-x: hidden; overflow-x: clip; }
