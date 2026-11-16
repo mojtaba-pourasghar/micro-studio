@@ -1158,3 +1158,11 @@ ol.step-grid { list-style: none; margin: 0; padding: 0; }
 }
 /* post titles have no line spans: keep split words inline (not one word per line) */
 .post-hero .display.split > .w, .post-featured-body .h2.split > a .w { display: inline-block; }
+
+/* ---- brand mark: game controller shaped like an M (assets/brand) ---- */
+.brand-mark { width: 54px; height: 36px; }
+.brand:hover .brand-mark { transform: rotate(-8deg) scale(1.08); }
+.intro-mark { width: 104px; height: 69px; animation: intro-pad 1.2s var(--ease-out) infinite; }
+@keyframes intro-pad { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-10px) rotate(-6deg); } 60% { transform: translateY(0) rotate(4deg); } }
+.fm-logo { height: auto; aspect-ratio: 200 / 132; width: clamp(160px, 24vw, 340px); color: rgba(116,87,255,.3); }
+@media (max-width: 900px) { .brand-mark { width: 46px; height: 30px; } }

@@ -1,7 +1,9 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
       <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
-    </defs>
+    <linearGradient id="ms-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset=".45" stop-color="#7457ff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
+  <linearGradient id="ms-gt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".32"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  </defs>
   <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.53.85l12-7.5a1 1 0 0 0 0-1.7l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h10"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
@@ -46,4 +48,7 @@
   <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M6.6 3.5h2.6l1.5 4.2-2 1.3a11 11 0 0 0 6.3 6.3l1.3-2 4.2 1.5v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
   <symbol id="i-bug" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="7" width="10" height="13" rx="5"/><path d="M9 7a3 3 0 0 1 6 0M12 11v9M3.5 12H7M17 12h3.5M4.5 18l3-1.5M19.5 18l-3-1.5M4.5 6l3 2M19.5 6l-3 2"/></g></symbol>
+  <!-- brand mark: game controller shaped like an M (assets/brand) -->
+  <symbol id="i-logo" viewBox="0 18 200 132"><path d="M22 28H72L100 64L128 28H178Q192 28 192 44L194 118Q194 146 168 140L146 118Q138 108 126 108H74Q62 108 54 118L32 140Q6 146 6 118L8 44Q8 28 22 28Z" fill="url(#ms-g)" stroke="url(#ms-g)" stroke-width="10" stroke-linejoin="round"/><path d="M22 28H72L100 64L128 28H178Q192 28 192 44L193 74H7L8 44Q8 28 22 28Z" fill="url(#ms-gt)"/><g fill="#fff"><rect x="34" y="56" width="12" height="36"/><rect x="22" y="68" width="36" height="12"/></g><rect x="150" y="54" width="14" height="14" fill="#ffb547"/><rect x="164" y="70" width="14" height="14" fill="#fff"/><rect x="136" y="70" width="14" height="14" fill="#d9ccff"/><rect x="150" y="86" width="14" height="14" fill="#d9ccff"/></symbol>
+  <symbol id="i-logo-mono" viewBox="0 18 200 132"><mask id="ms-holes"><rect x="-10" y="-10" width="220" height="180" fill="#fff"/><g fill="#000"><rect x="34" y="56" width="12" height="36"/><rect x="22" y="68" width="36" height="12"/><rect x="150" y="54" width="14" height="14"/><rect x="164" y="70" width="14" height="14"/><rect x="136" y="70" width="14" height="14"/><rect x="150" y="86" width="14" height="14"/></g></mask><path d="M22 28H72L100 64L128 28H178Q192 28 192 44L194 118Q194 146 168 140L146 118Q138 108 126 108H74Q62 108 54 118L32 140Q6 146 6 118L8 44Q8 28 22 28Z" fill="currentColor" stroke="currentColor" stroke-width="10" stroke-linejoin="round" mask="url(#ms-holes)"/></symbol>
 </svg>

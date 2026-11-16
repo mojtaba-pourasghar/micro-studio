@@ -25,8 +25,10 @@
   <meta property="og:site_name" content="{{ $siteName }}">
   <meta property="og:title" content="{{ $pageTitle }}">
   <meta property="og:description" content="{{ \Illuminate\Support\Str::limit(strip_tags($pageDescription), 300) }}">
-  @isset($ogImage)<meta property="og:image" content="{{ img($ogImage) }}">@endisset
+  <meta property="og:image" content="{{ img($ogImage ?? 'assets/brand/logo-horizontal-dark.png') }}">
   <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+  <link rel="icon" href="{{ asset('assets/brand/favicon-32.png') }}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{{ asset('assets/brand/apple-touch-icon.png') }}">
   <link rel="preload" href="{{ asset('assets/fonts/Vazirmatn-var.woff2') }}" as="font" type="font/woff2" crossorigin>
   @isset($preload)<link rel="preload" href="{{ img($preload) }}" as="image">@endisset
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ filemtime(public_path('assets/css/style.css')) }}">
@@ -38,7 +40,7 @@
   <a class="skip" href="#main">رفتن به محتوای اصلی</a>
 
   <div class="intro" aria-hidden="true">
-    <svg class="intro-mark" viewBox="0 0 40 40"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+    <svg class="intro-mark" viewBox="0 18 200 132"><use href="#i-logo"/></svg>
     <span class="intro-bar"><i></i></span>
   </div>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -48,7 +50,7 @@
   <header class="site-header" id="top">
     <div class="container header-row">
       <a class="brand" href="{{ route('home') }}" aria-label="{{ $siteName }} - صفحه اصلی">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="url(#bg1)"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="#fff"/></svg>
+        <svg class="brand-mark" viewBox="0 18 200 132" aria-hidden="true"><use href="#i-logo"/></svg>
         <span class="brand-text">{{ setting('site.brand_first') }} <b>{{ setting('site.brand_second') }}</b></span>
       </a>
       <nav class="main-nav" id="main-nav" aria-label="منوی اصلی">
@@ -103,7 +105,7 @@
       </div>
     </div>
     <div class="footer-mega" aria-hidden="true">
-      <svg class="fm-logo" viewBox="0 0 40 40" data-speed="-0.15" data-rot="-8"><path d="M20 3 35 11.5v17L20 37 5 28.5v-17z" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M14 14v12l5-4 5 4V14l-5 4z" fill="currentColor"/></svg>
+      <svg class="fm-logo" viewBox="0 18 200 132" data-speed="-0.15" data-rot="-8"><use href="#i-logo-mono"/></svg>
       <span class="fm-word" data-sx="120">MICRO</span>
       <img class="fm-left" src="{{ asset('assets/img/characters/razino-buddy.webp') }}" alt="" width="172" height="417" loading="lazy" data-x="120" data-depth="1.6">
       <img class="fm-dino" src="{{ asset('assets/img/characters/razino-dino.webp') }}" alt="" width="200" height="264" loading="lazy" data-x="200" data-depth="2.2">
