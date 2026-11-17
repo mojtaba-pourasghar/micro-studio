@@ -3,7 +3,12 @@
     'title' => $game->seo_title ?: $game->title,
     'description' => $game->seo_description ?: ($game->tagline ?: $game->summary),
     'preload' => $game->hero_image ?: $game->card_image,
-    'ogImage' => $game->hero_image ?: $game->card_image,
+    'ogImage' => $game->logo ?: ($game->hero_image ?: $game->card_image),
+    'ogExtra' => collect($game->videos ?? [])->take(1)->map(fn ($v) => '<meta property="og:video" content="'.e(img($v['src'])).'"><meta property="og:video:type" content="video/mp4">')->implode(''),
+    'schema' => array_merge([
+        \App\Support\Seo::webPage('ItemPage', ['name' => $game->seo_title ?: $game->title, 'description' => $game->seo_description ?: $game->summary, 'mainEntity' => ['@id' => route('games.show', $game).'#app'], 'primaryImageOfPage' => img($game->logo ?: $game->card_image)]),
+        \App\Support\Seo::game($game),
+    ], \App\Support\Seo::videos($game)),
 ])
 
 @php
@@ -15,7 +20,7 @@
 @section('content')
   <!-- ============ GAME HERO ============ -->
   <section class="hero page-hero notch-bottom" id="home" aria-labelledby="game-title">
-    <div class="hero-bg" aria-hidden="true" data-depth="-0.6"><img src="{{ img($game->hero_image ?: $game->card_image) }}" alt="" width="1200" height="800" data-parallax="0.12" fetchpriority="high"></div>
+    <div class="hero-bg {{ ! $game->hero_image && $game->logo ? 'hero-bg-app' : '' }}" aria-hidden="true" data-depth="-0.6"><img src="{{ img($game->hero_image ?: ($game->logo ?: $game->card_image)) }}" alt="" width="1200" height="800" data-parallax="0.12" fetchpriority="high"></div>
     <div class="hero-fx" aria-hidden="true" data-depth="-1.4"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     <div class="container hero-grid">
       <div class="hero-copy">
@@ -45,6 +50,11 @@
         <figure class="hero-char reveal-up" style="--d:.3s">
           <img class="float-slow {{ str_contains($game->hero_character, 'kairo') ? 'pixel' : '' }}" src="{{ img($game->hero_character) }}" alt="{{ $game->short_title }}" data-depth="1.6" data-speed="-0.3">
           <figcaption class="char-tag" data-depth="2.6">{{ $game->short_title }} <small>{{ setting('site.name') }}</small></figcaption>
+        </figure>
+      @elseif ($game->logo)
+        <figure class="hero-app-icon reveal-up" style="--d:.3s">
+          <img class="float-slow" src="{{ img($game->logo) }}" alt="لوگوی {{ $game->title }}" width="512" height="512" data-depth="1.4" data-speed="-0.2">
+          <figcaption class="char-tag" data-depth="2.6">{{ $game->short_title }} <small>{{ \App\Models\Game::CATEGORIES[$game->category] ?? '' }}</small></figcaption>
         </figure>
       @endif
     </div>
@@ -86,6 +96,54 @@
     </section>
   @endif
 
+  @if ($game->videos)
+    <!-- ============ VIDEOS ============ -->
+    <section class="section game-videos" id="videos" aria-labelledby="videos-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> ویدیو</p>
+            <h2 id="videos-title" class="h2" data-split>{{ $game->short_title }} را <span class="outline">در حرکت ببین</span></h2>
+          </div>
+          <p class="lead reveal blur" style="--d:.3s">پیش از دانلود، چند دقیقه با {{ $game->short_title }} همراه شو و ببین چطور کار می‌کند.</p>
+        </div>
+        <div class="video-grid stagger">
+          @foreach ($game->videos as $v)
+            <figure class="video-card {{ ($v['vertical'] ?? true) ? 'is-vertical' : '' }}">
+              <div class="video-frame">
+                <video controls playsinline preload="none" poster="{{ img($v['poster'] ?? null) }}" aria-label="{{ $v['title'] ?? $game->short_title }}">
+                  <source src="{{ img($v['src']) }}" type="video/mp4">
+                </video>
+              </div>
+              <figcaption><b>{{ $v['title'] ?? '' }}</b>@if (! empty($v['duration']))<span>{{ fa_digits(intdiv($v['duration'], 60)) }}:{{ fa_digits(str_pad($v['duration'] % 60, 2, '0', STR_PAD_LEFT)) }}</span>@endif</figcaption>
+            </figure>
+          @endforeach
+        </div>
+      </div>
+    </section>
+  @endif
+
+  @if ($game->gameplay)
+    <!-- ============ GAMEPLAY ============ -->
+    <section class="section night notch-both game-play" id="gameplay" aria-labelledby="gameplay-title">
+      <img class="night-bg" src="{{ img($game->banner_image ?: 'assets/img/scenes/night-portal.webp') }}" alt="" loading="lazy" data-parallax="0.08">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow light reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> گیم‌پلی</p>
+            <h2 id="gameplay-title" class="h2 light" data-split>{{ heading($game->gameplay_title ?: 'چطور [[بازی می‌شود؟]]') }}</h2>
+          </div>
+          <p class="lead reveal blur" style="--d:.3s">{{ $game->summary }}</p>
+        </div>
+        <ol class="step-grid stagger {{ count($game->gameplay) > 4 ? 'five' : '' }}">
+          @foreach ($game->gameplay as $step)
+            <li class="step-card"><span class="step-num">{{ fa_digits($loop->iteration) }}</span><h3>{{ $step['title'] ?? '' }}</h3><p>{{ $step['text'] ?? '' }}</p></li>
+          @endforeach
+        </ol>
+      </div>
+    </section>
+  @endif
+
   @if ($game->features)
     <!-- ============ FEATURES ============ -->
     <section class="section services notch-both game-features" id="features" aria-labelledby="features-title">
@@ -102,18 +160,42 @@
     </section>
   @endif
 
+  @if ($game->benefits)
+    <!-- ============ BENEFITS ============ -->
+    <section class="section game-benefits" id="benefits" aria-labelledby="benefits-title">
+      <div class="container benefits-grid">
+        <div>
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> کاربرد</p>
+          <h2 id="benefits-title" class="h2" data-split>{{ $game->short_title }} <span class="outline">به چه کار می‌آید؟</span></h2>
+          <p class="lead reveal blur" style="--d:.3s">{{ $game->category === 'edu' ? 'همراه درس و یادگیری کودک، در خانه و مدرسه.' : 'سرگرمی‌ای که هم‌زمان مهارت‌های مهمی را تقویت می‌کند.' }}@if ($game->age_range) مناسب {{ $game->age_range }}.@endif</p>
+        </div>
+        <ul class="benefit-list stagger">
+          @foreach ($game->benefits as $b)
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>{{ $b }}</span></li>
+          @endforeach
+        </ul>
+      </div>
+    </section>
+  @endif
+
   @if ($game->screenshots)
     <!-- ============ GALLERY ============ -->
     <section class="section works game-gallery" id="gallery" aria-labelledby="gallery-title" data-rail>
       <div class="container works-head">
         <div>
-          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> تصاویر</p>
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> گالری تصاویر · {{ fa_digits(count($game->screenshots)) }} تصویر</p>
           <h2 id="gallery-title" class="h2" data-split>نگاهی به <span class="outline">دنیای {{ $game->short_title }}</span></h2>
         </div>
       </div>
       <div class="rail-track stagger" tabindex="0" aria-label="تصاویر؛ با کلیدهای جهت‌نما یا کشیدن جابه‌جا شوید">
         @foreach ($game->screenshots as $shot)
-          <figure class="shot-card"><img src="{{ img($shot['image'] ?? null) }}" alt="{{ $shot['caption'] ?? $game->short_title }}" loading="lazy">@if (! empty($shot['caption']))<figcaption>{{ $shot['caption'] }}</figcaption>@endif</figure>
+          @php $path = $shot['image'] ?? null; $dim = $path && is_file(public_path($path)) ? @getimagesize(public_path($path)) : null; $tall = $dim && $dim[1] > $dim[0]; @endphp
+          <figure class="shot-card {{ $tall ? 'is-phone' : '' }}">
+            <a href="{{ img($path) }}" data-lightbox="game-{{ $game->id }}" data-caption="{{ $shot['caption'] ?? '' }}" aria-label="بزرگ‌نمایی تصویر {{ fa_digits($loop->iteration) }}{{ ! empty($shot['caption']) ? '، '.$shot['caption'] : '' }}">
+              <img src="{{ img($path) }}" alt="{{ ($shot['caption'] ?? '') ?: $game->short_title.' — تصویر '.fa_digits($loop->iteration) }}" loading="lazy" @if ($dim) width="{{ $dim[0] }}" height="{{ $dim[1] }}" @endif>
+            </a>
+            @if (! empty($shot['caption']))<figcaption>{{ $shot['caption'] }}</figcaption>@endif
+          </figure>
         @endforeach
       </div>
       <div class="container rail-nav">
@@ -139,7 +221,7 @@
     </section>
   @endif
 
-  @if ($game->trailer_url)
+  @if ($game->trailer_url && ! $game->videos)
     <!-- ============ VIDEO BANNER ============ -->
     <section class="video-banner notch-top" aria-labelledby="vb-title">
       <img class="vb-bg" src="{{ img($game->banner_image ?: setting('home.banner_image')) }}" alt="" width="1456" height="818" loading="lazy" data-parallax="0.1">
@@ -177,9 +259,6 @@
               <span class="store-btn is-soon" aria-disabled="true"><svg aria-hidden="true"><use href="#i-android"/></svg><span><small>به‌زودی در</small>{{ $s['store'] ?? '' }}</span></span>
             @endif
           @endforeach
-          @if ($game->repo_url)
-            <a class="store-btn" href="{{ $game->repo_url }}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg><span><small>کد و مستندات</small>گیت‌هاب</span></a>
-          @endif
         </div>
         <a class="btn btn-primary reveal from-right" style="--d:.65s" href="{{ route('contact') }}" data-magnetic>خبرم کنید <svg aria-hidden="true"><use href="#i-play"/></svg></a>
       </div>
@@ -204,3 +283,7 @@
     </section>
   @endif
 @endsection
+
+@push('scripts')
+  <script src="{{ asset('assets/js/gallery.js') }}?v={{ filemtime(public_path('assets/js/gallery.js')) }}" defer></script>
+@endpush

@@ -228,6 +228,13 @@
     }
   });
   /* ---------- contact form: inline validation + submit to the Laravel backend (JSON) ---------- */
+  /* captcha image refresh (contact form) */
+  const refreshCaptcha = (root = document) => {
+    $$('[data-captcha-img]', root).forEach((im) => { im.src = im.dataset.src + '?t=' + Date.now(); });
+    $$('input[name="captcha"]', root).forEach((i) => { i.value = ''; });
+  };
+  $$('[data-captcha-refresh]').forEach((b) => b.addEventListener('click', () => refreshCaptcha(b.closest('form') || document)));
+
   const form = $('#contact-form');
   if (form) {
     const status = $('.form-status', form);
@@ -236,6 +243,7 @@
       email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'ایمیل معتبر نیست؛ مثال: name@mail.com',
       phone: (v) => !v.trim() || /^[0-9۰-۹+\s()-]{8,}$/.test(v.trim()) || 'شماره تماس معتبر نیست.',
       message: (v) => v.trim().length >= 10 || 'پیام باید دست‌کم ۱۰ حرف باشد.',
+      captcha: (v) => /^[0-9۰-۹]{4,}$/.test(v.trim()) || 'عددهای تصویر را وارد کنید.',
     };
     const check = (input) => {
       const rule = rules[input.name];
@@ -296,7 +304,7 @@
       }).catch(() => {
         status.className = 'form-status err';
         status.textContent = 'ارتباط برقرار نشد؛ اتصال اینترنت را بررسی کنید.';
-      }).finally(() => { btn.disabled = false; });
+      }).finally(() => { btn.disabled = false; refreshCaptcha(form); });
     });
   }
 

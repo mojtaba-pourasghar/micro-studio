@@ -5,16 +5,13 @@
     'preload' => $post->cover_image,
     'ogImage' => $post->cover_image,
     'ogType' => 'article',
+    'noindex' => $post->status !== 'published',
+    'ogExtra' => $post->published_at ? '<meta property="article:published_time" content="'.$post->published_at->toIso8601String().'"><meta property="article:modified_time" content="'.$post->updated_at->toIso8601String().'">'.($post->category ? '<meta property="article:section" content="'.e($post->category->name).'">' : '') : '',
+    'schema' => [
+        \App\Support\Seo::webPage('WebPage', ['name' => $post->title, 'description' => $post->excerpt, 'primaryImageOfPage' => $post->cover_image ? img($post->cover_image) : null]),
+        \App\Support\Seo::post($post),
+    ],
 ])
-
-@push('head')
-  <script type="application/ld+json">{!! json_encode([
-      '@context' => 'https://schema.org', '@type' => 'BlogPosting', 'headline' => $post->title,
-      'description' => $post->excerpt, 'image' => img($post->cover_image),
-      'datePublished' => optional($post->published_at)->toIso8601String(), 'dateModified' => $post->updated_at->toIso8601String(),
-      'author' => ['@type' => 'Organization', 'name' => $post->author], 'inLanguage' => 'fa-IR',
-  ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
-@endpush
 
 @section('content')
   <div class="read-progress" aria-hidden="true"><span></span></div>

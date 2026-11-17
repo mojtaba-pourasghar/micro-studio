@@ -1,4 +1,7 @@
-@extends('layouts.site', ['bodyClass' => 'home inner-page contact-page', 'title' => 'تماس با ما', 'preload' => setting('contact_page.hero_image'), 'description' => setting('contact_page.hero_lead')])
+@extends('layouts.site', ['bodyClass' => 'home inner-page contact-page', 'title' => 'تماس با ما', 'preload' => setting('contact_page.hero_image'), 'description' => setting('contact_page.hero_lead'), 'schema' => [
+    \App\Support\Seo::webPage('ContactPage', ['name' => 'تماس با میکرو استودیو', 'description' => setting('contact_page.hero_lead'), 'mainEntity' => ['@id' => \App\Support\Seo::orgId()]]),
+    \App\Support\Seo::faqPage($faqs),
+]])
 
 @php
     $subjects = array_values(array_filter(array_map('trim', preg_split('/\r?\n/', (string) setting('contact_page.subjects')))));
@@ -15,7 +18,10 @@
   <section class="contact-cards" aria-label="راه‌های ارتباطی">
     <div class="container cc-grid stagger">
       <a class="cc-card" href="mailto:{{ setting('contact.email') }}"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><small>ایمیل</small><b dir="ltr">{{ setting('contact.email') }}</b></a>
-      <a class="cc-card" href="tel:{{ setting('contact.phone') }}"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><small>تلفن</small><b dir="ltr">{{ setting('contact.phone_display') }}</b></a>
+      <a class="cc-card" href="tel:{{ setting('contact.phone') }}"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><small>تماس</small><b dir="ltr">{{ setting('contact.phone_display') }}</b></a>
+      @if (setting('contact.whatsapp_url'))
+        <a class="cc-card" href="{{ setting('contact.whatsapp_url') }}" target="_blank" rel="noopener"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></span><small>واتس‌اپ</small><b dir="ltr">{{ setting('contact.whatsapp_handle') }}</b></a>
+      @endif
       @if (setting('contact.telegram_url'))
         <a class="cc-card" href="{{ setting('contact.telegram_url') }}" target="_blank" rel="noopener"><span class="feature-ico"><svg aria-hidden="true"><use href="#i-telegram"/></svg></span><small>تلگرام</small><b dir="ltr">{{ setting('contact.telegram_handle') }}</b></a>
       @endif

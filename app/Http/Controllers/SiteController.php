@@ -12,6 +12,8 @@ use App\Models\PostCategory;
 use App\Models\Service;
 use App\Models\TeamMember;
 use App\Models\Testimonial;
+use App\Rules\ValidCaptcha;
+use App\Services\SmsIr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -106,7 +108,9 @@ class SiteController extends Controller
             'subject' => ['nullable', 'string', 'max:120'],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
             'newsletter' => ['nullable', 'boolean'],
+            'captcha' => ['required', new ValidCaptcha('contact')],
         ], [
+            'captcha.required' => 'کد امنیتی را وارد کنید.',
             'name.required' => 'لطفاً نام خود را وارد کنید.',
             'email.required' => 'ایمیل را وارد کنید.',
             'email.email' => 'ایمیل معتبر نیست.',
@@ -114,10 +118,14 @@ class SiteController extends Controller
             'message.min' => 'پیام باید دست‌کم ۱۰ حرف باشد.',
             'phone.regex' => 'شماره تماس معتبر نیست.',
         ]);
+        unset($data['captcha']);
         $msg = ContactMessage::create($data + ['newsletter' => $request->boolean('newsletter'), 'ip' => $request->ip()]);
         if ($msg->newsletter) {
             NewsletterSubscriber::firstOrCreate(['email' => mb_strtolower($msg->email)]);
         }
+        $sms = "پیام تازه در سایت میکرو استودیو\nاز: {$msg->name}".($msg->phone ? "\nتلفن: {$msg->phone}" : '')
+            ."\nایمیل: {$msg->email}".($msg->subject ? "\nموضوع: {$msg->subject}" : '')."\n".mb_substr($msg->message, 0, 160);
+        \Illuminate\Support\defer(fn () => app(SmsIr::class)->notifyAdmin($sms));
         if ($to = setting('contact.notify_email')) {
             try {
                 Mail::raw("پیام تازه از {$msg->name} <{$msg->email}>\nموضوع: {$msg->subject}\n\n{$msg->message}", fn ($m) => $m->to($to)->subject('پیام تازه از فرم تماس سایت'));
@@ -141,7 +149,14 @@ class SiteController extends Controller
     public function storeNewsletter(Request $request)
     {
         $data = $request->validate(['email' => ['required', 'email', 'max:190']], ['email.*' => 'لطفاً یک ایمیل معتبر وارد کنید.']);
-        NewsletterSubscriber::firstOrCreate(['email' => mb_strtolower($data['email'])]);
+        if ($request->filled('website')) { // honeypot
+            return $request->expectsJson() ? response()->json(['ok' => true, 'message' => 'عضویت شما ثبت شد.']) : back();
+        }
+        $sub = NewsletterSubscriber::firstOrCreate(['email' => mb_strtolower($data['email'])]);
+        if ($sub->wasRecentlyCreated) {
+            $email = $sub->email;
+            \Illuminate\Support\defer(fn () => app(SmsIr::class)->notifyAdmin("عضو تازه‌ی خبرنامه‌ی میکرو استودیو:\n{$email}"));
+        }
         $text = 'عضویت شما ثبت شد؛ یادداشت بعدی را برایتان می‌فرستیم.';
 
         return $request->expectsJson() ? response()->json(['ok' => true, 'message' => $text]) : back()->with('newsletter_ok', $text);
@@ -179,19 +194,5 @@ class SiteController extends Controller
             'related' => Post::published()->with('category')->where('id', '!=', $post->id)
                 ->orderByRaw('post_category_id = ? desc', [$post->post_category_id])->limit(3)->get(),
         ]);
-    }
-
-    public function sitemap()
-    {
-        $urls = collect([route('home'), route('games.index'), route('services'), route('about'), route('contact'), route('blog.index')])
-            ->map(fn ($u) => ['loc' => $u, 'lastmod' => null]);
-        Game::visible()->get(['slug', 'updated_at'])->each(fn ($g) => $urls->push(['loc' => route('games.show', $g), 'lastmod' => $g->updated_at]));
-        Post::published()->get(['slug', 'updated_at'])->each(fn ($p) => $urls->push(['loc' => route('blog.show', $p), 'lastmod' => $p->updated_at]));
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        foreach ($urls as $u) {
-            $xml .= '<url><loc>'.e($u['loc']).'</loc>'.($u['lastmod'] ? '<lastmod>'.$u['lastmod']->toAtomString().'</lastmod>' : '').'</url>';
-        }
-
-        return response($xml.'</urlset>', 200, ['Content-Type' => 'application/xml']);
     }
 }

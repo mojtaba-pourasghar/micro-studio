@@ -15,7 +15,7 @@ class Game extends Model
 
     protected $casts = [
         'tags' => 'array', 'platforms' => 'array', 'store_links' => 'array', 'stats' => 'array',
-        'features' => 'array', 'screenshots' => 'array', 'characters' => 'array', 'story_points' => 'array',
+        'features' => 'array', 'screenshots' => 'array', 'characters' => 'array', 'story_points' => 'array', 'videos' => 'array', 'gameplay' => 'array', 'benefits' => 'array',
         'card_is_phone' => 'boolean', 'is_featured' => 'boolean', 'is_published' => 'boolean',
     ];
 

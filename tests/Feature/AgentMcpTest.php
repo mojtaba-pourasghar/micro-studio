@@ -117,7 +117,7 @@ class AgentMcpTest extends TestCase
         $this->get('/contact')->assertSee('+98 21 1111 2222');
         $this->assertTrue($this->call_tool('update_settings', ['values' => ['nope.key' => 'x']])['error']);
         $this->assertFalse($this->call_tool('update_settings', ['values' => ['contact.phone_display' => '']])['error']);
-        $this->get('/contact')->assertSee('+98 (21) 0000 0000');
+        $this->get('/contact')->assertSee('0912 891 5975');
     }
 
     public function test_image_upload_via_mcp_and_rest(): void

@@ -1171,3 +1171,71 @@ ol.step-grid { list-style: none; margin: 0; padding: 0; }
    on phones that widened the layout viewport, zoomed the page out and pushed the fixed mobile menu off-screen.
    `clip` (unlike `hidden`) creates no scroll container, so position:sticky inside keeps working. */
 main, .site-footer { overflow-x: hidden; overflow-x: clip; }
+
+/* =========================================================
+   GAME PAGE — app icon hero, videos, gameplay, benefits, gallery lightbox
+   ========================================================= */
+.hero-bg-app img { filter: blur(48px) saturate(1.4); transform: scale(1.3); opacity: .75; }
+.hero-app-icon { position: relative; justify-self: center; }
+.hero-app-icon img { width: clamp(200px, 22vw, 300px); border-radius: 28%; box-shadow: 0 40px 70px -25px rgba(0,0,0,.65), 0 0 0 8px rgba(255,255,255,.08); }
+.hero-app-icon .char-tag { inset-inline-end: -20px; top: auto; bottom: 8%; }
+
+.game-videos { background: var(--paper); }
+.video-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
+.video-card { display: grid; gap: 12px; width: min(100%, 520px); }
+.video-card.is-vertical { width: min(100%, 300px); }
+.video-frame { position: relative; border-radius: 28px; overflow: hidden; background: var(--night); box-shadow: 0 30px 60px -28px rgba(22,16,64,.55); border: 8px solid var(--night); }
+.video-card.is-vertical .video-frame { aspect-ratio: 9 / 16; border-radius: 34px; border-width: 10px; }
+.video-card:not(.is-vertical) .video-frame { aspect-ratio: 16 / 9; }
+.video-frame video { width: 100%; height: 100%; object-fit: cover; background: #000; }
+.video-card figcaption { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 700; color: var(--ink); }
+.video-card figcaption b { font-family: var(--f-display); font-weight: 400; font-size: 1.2rem; }
+.video-card figcaption span { font-size: .85rem; color: var(--ink-2); direction: ltr; }
+
+.step-grid.five { grid-template-columns: repeat(5, 1fr); }
+.game-play .step-card h3 { font-size: 1.35rem; }
+
+.benefits-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 6vw, 90px); align-items: center; }
+.benefits-grid .h2 { margin-bottom: 16px; }
+.benefit-list { display: grid; gap: 14px; }
+.benefit-list li { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; background: #fff; font-weight: 700; color: var(--ink); box-shadow: 0 16px 36px -28px rgba(22,16,64,.5); }
+.benefit-list svg { flex: 0 0 34px; width: 34px; height: 34px; padding: 8px; border-radius: 10px 10px 10px 4px; color: #fff; background: linear-gradient(135deg, var(--brand-deep), var(--brand-2)); }
+
+.shot-card a { display: block; height: 100%; cursor: zoom-in; }
+.shot-card.is-phone { flex-basis: clamp(180px, 20vw, 250px); aspect-ratio: 9 / 19; background: var(--night); }
+.shot-card.is-phone img { object-fit: cover; object-position: top; }
+
+.gallery-lb { position: fixed; inset: 0; z-index: 320; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 64px 16px 48px; background: rgba(8,8,20,.94); animation: fade var(--t-med) both; }
+.gallery-lb[hidden] { display: none; }
+.glb-figure { display: grid; justify-items: center; gap: 12px; margin: 0; min-width: 0; height: 100%; align-content: center; }
+.glb-figure img { max-width: 100%; max-height: calc(100svh - 150px); object-fit: contain; border-radius: 16px; opacity: 0; transform: scale(.98); transition: opacity .25s, transform .25s; }
+.glb-figure img.in { opacity: 1; transform: none; }
+.glb-figure figcaption { color: #e6e8f2; font-weight: 700; }
+.glb-btn { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: #fff; background: rgba(255,255,255,.12); transition: background var(--t-fast); }
+.glb-btn:hover { background: var(--brand); }
+.glb-btn svg { width: 22px; height: 22px; }
+.glb-btn[hidden] { visibility: hidden; display: grid; }
+.glb-close { position: absolute; top: 12px; inset-inline-start: 12px; }
+.glb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: var(--on-night-2); font-weight: 700; }
+
+@media (max-width: 1100px) { .step-grid.five { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) {
+  .benefits-grid { grid-template-columns: 1fr; }
+  .hero-app-icon img { width: clamp(150px, 40vw, 220px); }
+  .step-grid.five { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .step-grid.five { grid-template-columns: 1fr; }
+  .gallery-lb { grid-template-columns: 1fr; padding: 60px 8px 56px; }
+  .glb-prev, .glb-next { position: absolute; bottom: 8px; }
+  .glb-prev { right: 12px; } .glb-next { left: 12px; }
+  .shot-card.is-phone { flex-basis: 62vw; }
+}
+.designer-credit { display: block; margin-top: 6px; font-size: .88rem; font-weight: 600; color: var(--on-night-2); }
+.cc-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.captcha-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.captcha-row img { border-radius: 12px; border: 1.5px solid rgba(116,87,255,.25); background: #f2f2f5; }
+.captcha-row input { flex: 1 1 120px; text-align: center; letter-spacing: .3em; font-weight: 800; }
+.captcha-refresh { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; font-size: 1.3rem; color: var(--brand-ink); background: rgba(116,87,255,.1); transition: background var(--t-fast), transform var(--t-med); }
+.captcha-refresh:hover { background: rgba(116,87,255,.2); transform: rotate(-90deg); }

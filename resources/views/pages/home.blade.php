@@ -1,4 +1,7 @@
-@extends('layouts.site', ['bodyClass' => 'home', 'preload' => setting('home.hero_image')])
+@extends('layouts.site', ['bodyClass' => 'home', 'preload' => setting('home.hero_image'), 'schema' => [
+    \App\Support\Seo::webPage('WebPage', ['name' => setting('site.meta_title'), 'description' => setting('site.meta_description')]),
+    \App\Support\Seo::itemList('games', $games, fn ($g) => ['url' => route('games.show', $g), 'name' => $g->title]),
+]])
 
 @section('content')
   <!-- ============ HERO ============ -->

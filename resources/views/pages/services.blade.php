@@ -1,4 +1,8 @@
-@extends('layouts.site', ['bodyClass' => 'home inner-page services-page', 'title' => 'خدمات', 'preload' => setting('services.hero_image'), 'description' => setting('services.hero_lead')])
+@extends('layouts.site', ['bodyClass' => 'home inner-page services-page', 'title' => 'خدمات', 'preload' => setting('services.hero_image'), 'description' => setting('services.hero_lead'), 'schema' => [
+    \App\Support\Seo::webPage('WebPage', ['name' => 'خدمات میکرو استودیو', 'description' => setting('services.hero_lead')]),
+    \App\Support\Seo::itemList('services', $services, fn ($s) => ['item' => ['@type' => 'Service', 'name' => $s->title, 'description' => $s->description ?: $s->summary, 'url' => route('services').'#svc-'.$s->slug, 'provider' => ['@id' => \App\Support\Seo::orgId()], 'areaServed' => 'IR', 'image' => img($s->image)]]),
+    \App\Support\Seo::faqPage($faqs),
+]])
 
 @section('content')
   @include('partials.page-hero', [

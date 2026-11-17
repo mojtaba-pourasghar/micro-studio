@@ -1,4 +1,7 @@
-@extends('layouts.site', ['bodyClass' => 'home inner-page games-page', 'title' => 'بازی‌ها و اپ‌ها', 'preload' => setting('games.hero_image'), 'description' => setting('games.hero_lead')])
+@extends('layouts.site', ['bodyClass' => 'home inner-page games-page', 'title' => 'بازی‌ها و اپ‌ها', 'preload' => setting('games.hero_image'), 'description' => setting('games.hero_lead'), 'schema' => [
+    \App\Support\Seo::webPage('CollectionPage', ['name' => 'بازی‌ها و اپ‌های میکرو استودیو', 'description' => setting('games.hero_lead'), 'mainEntity' => ['@id' => url()->current().'#games']]),
+    \App\Support\Seo::itemList('games', $games, fn ($g) => ['url' => route('games.show', $g), 'name' => $g->title, 'image' => img($g->logo ?: $g->card_image)]),
+]])
 
 @section('content')
   @include('partials.page-hero', [

@@ -51,7 +51,8 @@ class SiteTest extends TestCase
 
     public function test_contact_form_stores_message(): void
     {
-        $this->postJson('/contact', ['name' => 'علی', 'email' => 'ali@example.com', 'message' => 'سلام، یک پروژه داریم.', 'newsletter' => '1'])
+        \Illuminate\Support\Facades\Http::fake();
+        $this->withSession(['captcha.contact' => ['code' => '12345', 'at' => time()]])->postJson('/contact', ['name' => 'علی', 'email' => 'ali@example.com', 'message' => 'سلام، یک پروژه داریم.', 'newsletter' => '1', 'captcha' => '12345'])
             ->assertOk()->assertJson(['ok' => true]);
         $this->assertDatabaseHas('contact_messages', ['email' => 'ali@example.com']);
         $this->assertDatabaseHas('newsletter_subscribers', ['email' => 'ali@example.com']);
@@ -59,7 +60,7 @@ class SiteTest extends TestCase
 
     public function test_contact_form_validates_and_blocks_honeypot(): void
     {
-        $this->postJson('/contact', ['name' => '', 'email' => 'bad', 'message' => 'short'])->assertStatus(422)->assertJsonValidationErrors(['name', 'email', 'message']);
+        $this->postJson('/contact', ['name' => '', 'email' => 'bad', 'message' => 'short'])->assertStatus(422)->assertJsonValidationErrors(['name', 'email', 'message', 'captcha']);
         $this->postJson('/contact', ['name' => 'bot', 'email' => 'b@b.com', 'message' => 'spam spam spam', 'website' => 'x'])->assertOk();
         $this->assertSame(0, ContactMessage::count());
     }

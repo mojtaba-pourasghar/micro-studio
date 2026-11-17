@@ -3,6 +3,19 @@
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/captcha/{key}.png', \App\Http\Controllers\CaptchaController::class)->middleware('throttle:60,1')->name('captcha');
+
+// lets an open admin tab notice that its session expired (see resources/views/filament/session-guard.blade.php)
+Route::get('/session/alive', fn () => response()->json(['auth' => auth()->check()])->header('Cache-Control', 'no-store'))->name('session.alive');
+
+Route::controller(\App\Http\Controllers\SeoController::class)->group(function () {
+    Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
+    Route::get('/feed.xml', 'feed')->name('feed');
+    Route::get('/robots.txt', 'robots')->name('robots');
+    Route::get('/manifest.webmanifest', 'manifest')->name('manifest');
+    Route::get('/llms.txt', 'llms')->name('llms');
+});
+
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/games', 'games')->name('games.index');
@@ -14,7 +27,6 @@ Route::controller(SiteController::class)->group(function () {
     Route::post('/newsletter', 'storeNewsletter')->middleware('throttle:6,1')->name('newsletter.store');
     Route::get('/blog', 'blog')->name('blog.index');
     Route::get('/blog/{post}', 'post')->name('blog.show');
-    Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
 });
 
 // one-time installer for cPanel hosts without SSH (needs INSTALL_KEY in .env)

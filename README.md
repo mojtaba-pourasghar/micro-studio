@@ -54,6 +54,29 @@
 
 راهنمای کامل ایجنت، شامل متن پیشنهادی تسک زمان‌بندی‌شده و روند کار با Canva: [`documents/claude-agent.md`](documents/claude-agent.md)
 
+## امنیت، پیامک و سئو
+- **کپچا:** در ورود به پنل و فرم تماس. سرویس خارجی ندارد؛ تصویر روی سرور خود سایت با GD ساخته می‌شود، پس در ایران مشکلی ندارد. هر کد فقط یک بار و تا ۱۰ دقیقه معتبر است.
+- **پایان نشست:** وقتی نشست پنل تمام شود، به‌جای پیغام خطا خودکار به صفحه‌ی ورود می‌روید. مدت نشست با `SESSION_LIFETIME` در `.env` تنظیم می‌شود (پیش‌فرض ۱۲۰ دقیقه).
+- **پیامک (sms.ir):** برای هر پیام فرم تماس و هر عضو تازه‌ی خبرنامه، به موبایل مدیر پیامک می‌رود. کلیدها **فقط** در `.env` قرار می‌گیرند و هرگز در گیت نیستند:
+  ```
+  SMSIR_API_KEY=...
+  SMSIR_LINE_NUMBER=...
+  SMSIR_BASE_URL=https://api.sms.ir/v1
+  SMSIR_ADMIN_MOBILE=09128915975
+  ```
+  شماره‌ی گیرنده را از پنل هم می‌توان عوض کرد: «متن صفحات و تنظیمات ← اطلاعات تماس». اگر کلید خالی باشد، پیامکی ارسال نمی‌شود و سایت بدون خطا کار می‌کند.
+- **سئو:**
+  - داده‌ی ساختاریافته‌ی JSON-LD در همه‌ی صفحات، در قالب یک گراف واحد:
+    - همه‌ی صفحه‌ها: Organization، WebSite (با جست‌وجو) و BreadcrumbList
+    - صفحه‌ی هر بازی: MobileApplication/VideoGame و VideoObject
+    - خدمات و تماس: FAQPage
+    - مطالب: BlogPosting
+    - فهرست‌ها: ItemList
+  - متاتگ‌ها: Open Graph و Twitter Card، canonical، hreflang و robots. نتایج جست‌وجو `noindex` هستند.
+  - مسیرها: `/sitemap.xml` (با تصویرها، ویدیوها و دسته‌های وبلاگ)، `/feed.xml` (RSS)، `/robots.txt` (پویا؛ روی محیط local همه‌چیز را می‌بندد)، `/manifest.webmanifest` و `/llms.txt` (خلاصه‌ی سایت برای موتورهای جست‌وجوی هوش مصنوعی).
+- **رسانه‌ی بازی‌ها:** در `public/assets/games/<slug>/`. ویدیوها برای وب فشرده شده‌اند (H.264، ۵۴۰×۹۶۰، faststart). محتوای کامل بازی‌ها در `database/seeders/GameContentSeeder.php` است.
+  - به‌روزرسانی سایت در حال اجرا: `php artisan migrate --force && php artisan db:seed --class=GameContentSeeder --force`
+
 ## نصب روی cPanel
 پیش‌نیاز: PHP 8.2 یا بالاتر با افزونه‌های `intl`، `zip`، `gd`، `fileinfo`، `mbstring` و `pdo_mysql`، به‌علاوه‌ی یک دیتابیس MySQL.
 

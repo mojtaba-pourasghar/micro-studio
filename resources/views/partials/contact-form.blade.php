@@ -40,6 +40,15 @@
     <textarea id="cf-msg" name="message" rows="{{ ! empty($subjects) ? 5 : 4 }}" required aria-describedby="cf-msg-err" @if (! empty($subjects)) placeholder="درباره‌ی ایده، مخاطب و زمان‌بندی پروژه بنویسید…" @endif></textarea>
     <p class="error" id="cf-msg-err" aria-live="polite"></p>
   </div>
+  <div class="field captcha-field">
+    <label for="cf-captcha">کد امنیتی <span aria-hidden="true">*</span></label>
+    <div class="captcha-row">
+      <img src="{{ route('captcha', 'contact') }}" alt="کد امنیتی؛ عددهای داخل تصویر را وارد کنید" width="170" height="56" data-captcha-img data-src="{{ route('captcha', 'contact') }}" loading="lazy">
+      <button class="captcha-refresh" type="button" data-captcha-refresh aria-label="کد تازه">↻</button>
+      <input id="cf-captcha" name="captcha" type="text" inputmode="numeric" autocomplete="off" dir="ltr" maxlength="10" required aria-describedby="cf-captcha-err" placeholder="عدد تصویر">
+    </div>
+    <p class="error" id="cf-captcha-err" aria-live="polite"></p>
+  </div>
   <label class="check"><input type="checkbox" name="newsletter" value="1"> مرا از بازی‌ها و رویدادهای جدید باخبر کنید</label>
   <button class="btn btn-primary" type="submit">ارسال درخواست <svg aria-hidden="true"><use href="#i-play"/></svg></button>
   <p class="form-status" role="status" aria-live="polite">@if (session('contact_ok')) درخواست شما ثبت شد؛ به‌زودی با شما تماس می‌گیریم. @endif</p>

@@ -17,15 +17,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{{ $pageTitle }}</title>
-  <meta name="description" content="{{ \Illuminate\Support\Str::limit(strip_tags($pageDescription), 300) }}">
+  @php
+      $metaDescription = \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/u', ' ', strip_tags($pageDescription))), 160);
+      $canonical = $canonical ?? url()->current();
+      $shareImage = img($ogImage ?? 'assets/brand/logo-horizontal-dark.png');
+      $robots = ! empty($noindex) ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+  @endphp
+  <meta name="description" content="{{ $metaDescription }}">
+  <meta name="robots" content="{{ $robots }}">
   <meta name="theme-color" content="#15162a">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="canonical" href="{{ url()->current() }}">
+  <meta name="author" content="{{ $siteName }}">
+  <link rel="canonical" href="{{ $canonical }}">
+  <link rel="alternate" hreflang="fa-IR" href="{{ $canonical }}">
+  <link rel="alternate" hreflang="x-default" href="{{ $canonical }}">
   <meta property="og:type" content="{{ $ogType ?? 'website' }}">
+  <meta property="og:locale" content="fa_IR">
   <meta property="og:site_name" content="{{ $siteName }}">
+  <meta property="og:url" content="{{ $canonical }}">
   <meta property="og:title" content="{{ $pageTitle }}">
-  <meta property="og:description" content="{{ \Illuminate\Support\Str::limit(strip_tags($pageDescription), 300) }}">
-  <meta property="og:image" content="{{ img($ogImage ?? 'assets/brand/logo-horizontal-dark.png') }}">
+  <meta property="og:description" content="{{ $metaDescription }}">
+  <meta property="og:image" content="{{ $shareImage }}">
+  <meta property="og:image:alt" content="{{ $title ?? $siteName }}">
+  @isset($ogExtra){!! $ogExtra !!}@endisset
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $pageTitle }}">
+  <meta name="twitter:description" content="{{ $metaDescription }}">
+  <meta name="twitter:image" content="{{ $shareImage }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} — وبلاگ" href="{{ route('feed') }}">
+  <link rel="manifest" href="{{ route('manifest') }}">
+  {{ \App\Support\Seo::script(array_merge(
+      [\App\Support\Seo::organization(), \App\Support\Seo::website(), \App\Support\Seo::breadcrumb(\App\Support\Seo::crumbsForRequest())],
+      $schema ?? [\App\Support\Seo::webPage()]
+  )) }}
   <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
   <link rel="icon" href="{{ asset('assets/brand/favicon-32.png') }}" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="{{ asset('assets/brand/apple-touch-icon.png') }}">
@@ -77,9 +101,9 @@
       <div class="f-col">
         <h3 class="sr-only">شبکه‌های اجتماعی</h3>
         <div class="f-social">
-          @if (setting('contact.instagram_url'))<a href="{{ setting('contact.instagram_url') }}" target="_blank" rel="noopener" aria-label="اینستاگرام"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>@endif
+          @if (setting('contact.instagram_url'))<a href="{{ setting('contact.instagram_url') }}" target="_blank" rel="noopener" aria-label="اینستاگرام میکرو استودیو"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>@endif
           @if (setting('contact.telegram_url'))<a href="{{ setting('contact.telegram_url') }}" target="_blank" rel="noopener" aria-label="تلگرام"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>@endif
-          @if (setting('contact.github_url'))<a href="{{ setting('contact.github_url') }}" target="_blank" rel="noopener" aria-label="گیت‌هاب"><svg aria-hidden="true"><use href="#i-github"/></svg></a>@endif
+          @if (setting('contact.whatsapp_url'))<a href="{{ setting('contact.whatsapp_url') }}" target="_blank" rel="noopener" aria-label="واتس‌اپ"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></a>@endif
           <a href="mailto:{{ setting('contact.email') }}" aria-label="ایمیل"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>
       </div>
@@ -111,7 +135,9 @@
       <img class="fm-dino" src="{{ asset('assets/img/characters/razino-dino.webp') }}" alt="" width="200" height="264" loading="lazy" data-x="200" data-depth="2.2">
       <img class="fm-right" src="{{ asset('assets/img/characters/razino-merchant.webp') }}" alt="" width="185" height="284" loading="lazy" data-x="-160" data-depth="1.8">
     </div>
-    <p class="footer-bottom">© <span id="year">{{ fa_digits(\App\Support\Jalali::year()) }}</span> <a href="{{ route('home') }}">{{ $siteName }}</a> - {{ setting('site.copyright') }}</p>
+    <p class="footer-bottom">© <span id="year">{{ fa_digits(\App\Support\Jalali::year()) }}</span> <a href="{{ route('home') }}">{{ $siteName }}</a> - {{ setting('site.copyright') }}
+      @if (setting('site.designer_url'))<span class="designer-credit">طراحی و توسعه: <a href="{{ setting('site.designer_url') }}" target="_blank" rel="noopener">{{ setting('site.designer_name') }}</a></span>@endif
+    </p>
   </footer>
 
   <a class="to-top" href="#top" aria-label="بازگشت به بالا"><svg aria-hidden="true"><use href="#i-up"/></svg></a>

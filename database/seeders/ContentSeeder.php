@@ -29,6 +29,12 @@ class ContentSeeder extends Seeder
 
     protected function games(): void
     {
+        $this->baseGames();
+        $this->call(GameContentSeeder::class);
+    }
+
+    protected function baseGames(): void
+    {
         $android = ['android'];
         $games = [
             [
@@ -37,7 +43,7 @@ class ContentSeeder extends Seeder
                 'tagline' => 'پلتفرمر معمایی پیکسل‌آرت دو شخصیتی؛ کایرو و ایلارا را زیر دو آسمان همراهی کن.',
                 'tags' => [['label' => 'ماجراجویی', 'color' => 'red'], ['label' => 'نقش‌آفرینی', 'color' => 'green']],
                 'card_image' => 'assets/img/scenes/sunset-cliff.webp', 'hero_image' => 'assets/img/scenes/hero-two-skies.webp',
-                'hero_character' => 'assets/img/characters/kairo.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/two-skies',
+                'hero_character' => 'assets/img/characters/kairo.webp',
                 'genre' => 'پلتفرمر معمایی پیکسل‌آرت', 'status' => 'in_development',
                 'characters' => [
                     ['name' => 'کایرو', 'role' => 'قهرمان دو آسمان', 'image' => 'assets/img/characters/kairo.webp'],
@@ -62,7 +68,7 @@ class ContentSeeder extends Seeder
                 'download_note' => 'نسخه‌ی اندروید به‌زودی منتشر می‌شود. برای باخبر شدن از انتشار، با ما در تماس باشید.',
                 'card_image' => 'assets/img/scenes/razino-screens.webp', 'hero_image' => 'assets/img/scenes/razino-menu.webp',
                 'hero_character' => 'assets/img/characters/razino-hero.webp', 'banner_image' => 'assets/img/scenes/puzzle-room.webp',
-                'trailer_url' => 'assets/video/trailer.mp4', 'repo_url' => 'https://github.com/mojtaba-pourasghar/razino',
+                'trailer_url' => 'assets/video/trailer.mp4',
                 'store_links' => [['store' => 'کافه‌بازار', 'url' => ''], ['store' => 'مایکت', 'url' => '']],
                 'stats' => [['value' => '10', 'label' => 'فصل داستانی'], ['value' => '166', 'label' => 'صحنه'], ['value' => '29', 'label' => 'معما'], ['value' => '21', 'label' => 'پایان متفاوت']],
                 'features' => [
@@ -93,7 +99,7 @@ class ContentSeeder extends Seeder
                 'summary' => 'سفری میان گذشته و حال با لنز زمان؛ ۹ جهان و ۷۲ مرحله، برای ۵ تا ۹ سال.',
                 'tags' => [['label' => 'پلتفرمر', 'color' => 'green'], ['label' => 'معمایی', 'color' => 'blue']],
                 'age_range' => '۵ تا ۹ سال', 'card_image' => 'assets/img/scenes/pilo-1.webp', 'hero_image' => 'assets/img/scenes/pilo-world.webp',
-                'repo_url' => 'https://github.com/mojtaba-pourasghar/pilo', 'genre' => 'پلتفرمر معمایی',
+                'genre' => 'پلتفرمر معمایی',
                 'stats' => [['value' => '9', 'label' => 'جهان'], ['value' => '72', 'label' => 'مرحله']],
                 'screenshots' => [['image' => 'assets/img/scenes/pilo-1.webp', 'caption' => 'رنگارستان'], ['image' => 'assets/img/scenes/pilo-3.webp', 'caption' => 'انتخاب مرحله'], ['image' => 'assets/img/scenes/pilo-world.webp', 'caption' => 'پیلو و دوستش']],
             ],
@@ -101,39 +107,39 @@ class ContentSeeder extends Seeder
                 'slug' => 'pashmak', 'title' => 'دنیای بازی پشمک', 'short_title' => 'پشمک', 'category' => 'game', 'card_is_phone' => true,
                 'summary' => 'کودک روی کاغذ نقاشی می‌کشد، با دوربین اسکن می‌کند و نقاشی‌اش کنار هیولای نارنجی پشمک جان می‌گیرد؛ ۳ تا ۸ سال.',
                 'tags' => [['label' => 'خلاقیت', 'color' => 'orange'], ['label' => 'کودکانه', 'color' => 'purple']],
-                'age_range' => '۳ تا ۸ سال', 'card_image' => 'assets/img/works/pashmak-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/pashmak_game',
+                'age_range' => '۳ تا ۸ سال', 'card_image' => 'assets/img/works/pashmak-shot.webp',
             ],
             [
                 'slug' => 'popo', 'title' => 'پوپو: ببین، لمس کن، کشف کن!', 'short_title' => 'پوپو', 'category' => 'game', 'card_is_phone' => true,
                 'summary' => 'پوپوی روباه با کمک کودک جشن جنگل را از نو می‌سازد؛ ۸ فصل و ۳۲ بخش، ۲ تا ۸ سال.',
                 'tags' => [['label' => 'ساختنی', 'color' => 'pink'], ['label' => 'کودکانه', 'color' => 'blue']],
-                'age_range' => '۲ تا ۸ سال', 'card_image' => 'assets/img/works/popo-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/pokpok',
+                'age_range' => '۲ تا ۸ سال', 'card_image' => 'assets/img/works/popo-shot.webp',
                 'stats' => [['value' => '8', 'label' => 'فصل'], ['value' => '32', 'label' => 'بخش']],
             ],
             [
                 'slug' => 'goshyar', 'title' => 'گوش‌یار', 'short_title' => 'گوش‌یار', 'category' => 'edu', 'card_is_phone' => true,
                 'summary' => 'تقویت شنیداری، تمرکز و حافظه با صدای حیوان‌ها، خانه، طبیعت و موسیقی؛ ۳ تا ۸ سال.',
                 'tags' => [['label' => 'آموزشی', 'color' => 'green'], ['label' => 'شنیداری', 'color' => 'orange']],
-                'age_range' => '۳ تا ۸ سال', 'card_image' => 'assets/img/works/goshyar-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/goshyar_game',
+                'age_range' => '۳ تا ۸ سال', 'card_image' => 'assets/img/works/goshyar-shot.webp',
             ],
             [
                 'slug' => 'hoho-farsi-3', 'title' => 'هوهو فارسی کلاس سوم', 'short_title' => 'هوهو', 'category' => 'edu', 'card_is_phone' => true,
                 'summary' => 'جغد معلم هوهو ۱۷ درس و ۱۱۹ صفحه‌ی کتاب فارسی سوم را با صدا درس می‌دهد.',
                 'tags' => [['label' => 'آموزشی', 'color' => 'purple'], ['label' => 'فارسی', 'color' => 'red']],
-                'card_image' => 'assets/img/works/hoho-farsi-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/hohoapp_farsi_p3e',
+                'card_image' => 'assets/img/works/hoho-farsi-shot.webp',
                 'stats' => [['value' => '17', 'label' => 'درس'], ['value' => '119', 'label' => 'صفحه']],
             ],
             [
                 'slug' => 'hoho-math-3', 'title' => 'هوهو ریاضی کلاس سوم', 'short_title' => 'هوهو', 'category' => 'edu', 'card_is_phone' => true, 'status' => 'designing',
                 'summary' => 'اپ ریاضی سوم دبستان با جغد معلم هوهو؛ تمرین، بازی و بازخورد صوتی.',
                 'tags' => [['label' => 'آموزشی', 'color' => 'purple'], ['label' => 'ریاضی', 'color' => 'blue']],
-                'card_image' => 'assets/img/works/hoho-math-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/hohoapp_math_p3e',
+                'card_image' => 'assets/img/works/hoho-math-shot.webp',
             ],
             [
                 'slug' => 'hoho-olom-3', 'title' => 'هوهو علوم کلاس سوم', 'short_title' => 'هوهو', 'category' => 'edu', 'card_is_phone' => true,
                 'summary' => '۱۴ درس و ۱۲۲ صفحه‌ی علوم سوم با صدا، زوم روی تصویر و آزمون.',
                 'tags' => [['label' => 'آموزشی', 'color' => 'purple'], ['label' => 'علوم', 'color' => 'green']],
-                'card_image' => 'assets/img/works/hoho-olom-shot.webp', 'repo_url' => 'https://github.com/mojtaba-pourasghar/hohoapp_olom_p3e',
+                'card_image' => 'assets/img/works/hoho-olom-shot.webp',
                 'stats' => [['value' => '14', 'label' => 'درس'], ['value' => '122', 'label' => 'صفحه']],
             ],
         ];
@@ -259,9 +265,9 @@ class ContentSeeder extends Seeder
                 ['title' => 'انتشار در کافه‌بازار', 'text' => 'آماده‌سازی صفحه‌ی فروشگاه، تصاویر و به‌روزرسانی‌ها.', 'icon' => 'store'],
             ],
             'support' => [
-                ['title' => 'حریم خصوصی کودکان', 'text' => 'بازی‌های ما ردیاب، تبلیغ و حساب کاربری ندارند و داده‌ها روی دستگاه می‌مانند. برای هر پرسشی درباره‌ی داده‌ها به ما بنویسید.', 'icon' => 'shield', 'link_label' => 'پرسش درباره‌ی حریم خصوصی', 'link_url' => 'mailto:mojtaba.pourasghar@gmail.com?subject=Privacy'],
+                ['title' => 'حریم خصوصی کودکان', 'text' => 'بازی‌های ما ردیاب، تبلیغ و حساب کاربری ندارند و داده‌ها روی دستگاه می‌مانند. برای هر پرسشی درباره‌ی داده‌ها به ما بنویسید.', 'icon' => 'shield', 'link_label' => 'پرسش درباره‌ی حریم خصوصی', 'link_url' => 'mailto:mojtaba.developer@gmail.com?subject=Privacy'],
                 ['title' => 'راهنمای والدین', 'text' => 'گروه سنی هر بازی، زمان پیشنهادی بازی و بخش قفل‌شده‌ی والدین را در صفحه‌ی هر بازی ببینید.', 'icon' => 'users', 'link_label' => 'بازی‌ها و گروه سنی', 'link_url' => '/games'],
-                ['title' => 'گزارش مشکل', 'text' => 'نام بازی، مدل گوشی و توضیح کوتاهی از مشکل را بفرستید؛ اگر بتوانید، یک عکس از صفحه هم ضمیمه کنید.', 'icon' => 'bug', 'link_label' => 'ارسال گزارش', 'link_url' => 'mailto:mojtaba.pourasghar@gmail.com?subject=Bug%20report'],
+                ['title' => 'گزارش مشکل', 'text' => 'نام بازی، مدل گوشی و توضیح کوتاهی از مشکل را بفرستید؛ اگر بتوانید، یک عکس از صفحه هم ضمیمه کنید.', 'icon' => 'bug', 'link_label' => 'ارسال گزارش', 'link_url' => 'mailto:mojtaba.developer@gmail.com?subject=Bug%20report'],
             ],
             'contact_steps' => [
                 ['title' => '۱. پیام شما را می‌خوانیم', 'text' => 'و ظرف ۲۴ ساعت کاری پاسخ می‌دهیم.'],
@@ -279,7 +285,7 @@ class ContentSeeder extends Seeder
     protected function posts(): void
     {
         $cats = [];
-        foreach ([['devlog', 'یادداشت ساخت'], ['art', 'هنر و طراحی'], ['edu', 'آموزش'], ['parents', 'والدین']] as $i => [$slug, $name]) {
+        foreach ([['our-work', 'کارهای ما'], ['news', 'اخبار استودیو'], ['trending', 'بازی‌های روز'], ['guides', 'راهنمای والدین']] as $i => [$slug, $name]) {
             $cats[$slug] = PostCategory::updateOrCreate(['slug' => $slug], ['name' => $name, 'sort_order' => $i + 1])->id;
         }
         $game = fn (string $slug) => Game::where('slug', $slug)->value('id');
@@ -305,13 +311,13 @@ class ContentSeeder extends Seeder
 HTML;
 
         $posts = [
-            ['razino-new-chapters', 'رازینو چطور فصل تازه می‌گیرد؟', 'فصل‌های رازینو داده هستند، نه کد. این یعنی فصل یازدهم بدون انتشار نسخه‌ی تازه در فروشگاه اضافه می‌شود؛ و یک بسته‌ی دانلودی هرگز نمی‌تواند کدی اجرا کند.', 'devlog', 'razino', 'assets/img/scenes/razino-board.webp', '2026-11-10', true, $razinoBody, ['رازینو', 'Godot', 'یادداشت_ساخت']],
-            ['pilo-time-lens', 'لنز زمان: طراحی معماهای گذشته و حال در سفر پیلو', 'پلی که در گذشته سالم بوده، جوانه‌ای که در حال درخت شده؛ چطور ۷۲ مرحله را با یک ایده‌ی ساده ساختیم.', 'devlog', 'pilo', 'assets/img/scenes/pilo-world.webp', '2026-11-03', false, null, ['پیلو']],
-            ['two-skies-pixel-art', 'پیکسل‌آرت دو آسمان: از برگه‌ی حالت تا صحنه', 'شش حالت چهره برای کایرو و ایلارا؛ چرا احساسات شخصیت‌ها را در چند پیکسل جا دادیم.', 'art', 'two-skies', 'assets/img/scenes/sunset-cliff.webp', '2026-10-27', false, null, ['دو_آسمان', 'پیکسل_آرت']],
-            ['hoho-farsi-119-pages', '۱۱۹ صفحه با صدای هوهو: کتاب فارسی سوم چطور اپ شد', 'جغد معلم هر صفحه‌ی کتاب را درس می‌دهد؛ از بریدن تصویرهای کتاب تا کاربرگ سه‌سطحی.', 'edu', 'hoho-farsi-3', 'assets/img/works/hoho-farsi-shot.webp', '2026-10-20', false, null, ['هوهو']],
-            ['ad-free-games-parents', 'بازی بدون تبلیغ و ردیاب: والدین به چه چیزی نگاه کنند؟', 'دروازه‌ی والدین، داده‌ی فقط‌روی‌دستگاه و بازی آفلاین؛ چک‌لیست ساده برای انتخاب بازی کودک.', 'parents', null, 'assets/img/works/goshyar-shot.webp', '2026-10-13', false, null, ['والدین']],
-            ['popo-173-cartoons', '۱۷۳ کارتون زنده با کد: انیمیشن‌های پوپو', 'هر شیء نفس می‌کشد، پلک می‌زند و چهار حال دارد؛ همه با کد کشیده شده‌اند.', 'art', 'popo', 'assets/img/works/popo-shot.webp', '2026-10-06', false, null, ['پوپو']],
-            ['making-pashmak', 'نقاشی روی کاغذ، جان‌گرفتن روی تبلت: ساخت پشمک', 'کودک نقاشی می‌کشد، دوربین آن را اسکن می‌کند و نقاشی کنار پشمک زنده می‌شود.', 'devlog', 'pashmak', 'assets/img/works/pashmak-shot.webp', '2026-09-29', false, null, ['پشمک']],
+            ['razino-new-chapters', 'رازینو چطور فصل تازه می‌گیرد؟', 'فصل‌های رازینو داده هستند، نه کد. این یعنی فصل یازدهم بدون انتشار نسخه‌ی تازه در فروشگاه اضافه می‌شود؛ و یک بسته‌ی دانلودی هرگز نمی‌تواند کدی اجرا کند.', 'our-work', 'razino', 'assets/img/scenes/razino-board.webp', '2026-11-10', true, $razinoBody, ['رازینو', 'Godot', 'یادداشت_ساخت']],
+            ['pilo-time-lens', 'لنز زمان: طراحی معماهای گذشته و حال در سفر پیلو', 'پلی که در گذشته سالم بوده، جوانه‌ای که در حال درخت شده؛ چطور ۷۲ مرحله را با یک ایده‌ی ساده ساختیم.', 'our-work', 'pilo', 'assets/img/scenes/pilo-world.webp', '2026-11-03', false, null, ['پیلو']],
+            ['two-skies-pixel-art', 'پیکسل‌آرت دو آسمان: از برگه‌ی حالت تا صحنه', 'شش حالت چهره برای کایرو و ایلارا؛ چرا احساسات شخصیت‌ها را در چند پیکسل جا دادیم.', 'our-work', 'two-skies', 'assets/img/scenes/sunset-cliff.webp', '2026-10-27', false, null, ['دو_آسمان', 'پیکسل_آرت']],
+            ['hoho-farsi-119-pages', '۱۱۹ صفحه با صدای هوهو: کتاب فارسی سوم چطور اپ شد', 'جغد معلم هر صفحه‌ی کتاب را درس می‌دهد؛ از بریدن تصویرهای کتاب تا کاربرگ سه‌سطحی.', 'our-work', 'hoho-farsi-3', 'assets/img/works/hoho-farsi-shot.webp', '2026-10-20', false, null, ['هوهو']],
+            ['ad-free-games-parents', 'بازی بدون تبلیغ و ردیاب: والدین به چه چیزی نگاه کنند؟', 'دروازه‌ی والدین، داده‌ی فقط‌روی‌دستگاه و بازی آفلاین؛ چک‌لیست ساده برای انتخاب بازی کودک.', 'guides', null, 'assets/img/works/goshyar-shot.webp', '2026-10-13', false, null, ['والدین']],
+            ['popo-173-cartoons', '۱۷۳ کارتون زنده با کد: انیمیشن‌های پوپو', 'هر شیء نفس می‌کشد، پلک می‌زند و چهار حال دارد؛ همه با کد کشیده شده‌اند.', 'our-work', 'popo', 'assets/img/works/popo-shot.webp', '2026-10-06', false, null, ['پوپو']],
+            ['making-pashmak', 'نقاشی روی کاغذ، جان‌گرفتن روی تبلت: ساخت پشمک', 'کودک نقاشی می‌کشد، دوربین آن را اسکن می‌کند و نقاشی کنار پشمک زنده می‌شود.', 'our-work', 'pashmak', 'assets/img/works/pashmak-shot.webp', '2026-09-29', false, null, ['پشمک']],
         ];
         foreach ($posts as [$slug, $title, $excerpt, $cat, $gameSlug, $cover, $date, $featured, $body, $tags]) {
             Post::updateOrCreate(['slug' => $slug], [

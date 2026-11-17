@@ -1,4 +1,12 @@
-@extends('layouts.site', ['bodyClass' => 'home blog-page', 'title' => 'وبلاگ', 'preload' => setting('blog.hero_image'), 'description' => setting('blog.hero_lead')])
+@extends('layouts.site', ['bodyClass' => 'home blog-page', 'preload' => setting('blog.hero_image'), 'description' => setting('blog.hero_lead'),
+    'canonical' => route('blog.index', array_filter(['cat' => request('cat'), 'page' => $posts->currentPage() > 1 ? $posts->currentPage() : null])),
+    'noindex' => filled(request('q')) || $posts->isEmpty(),
+    'title' => request('cat') ? (optional($categories->firstWhere('slug', request('cat')))->name.' | وبلاگ') : 'وبلاگ',
+    'schema' => [
+        \App\Support\Seo::webPage('CollectionPage', ['name' => 'وبلاگ میکرو استودیو', 'description' => setting('blog.hero_lead'), 'mainEntity' => ['@id' => url()->current().'#posts']]),
+        \App\Support\Seo::itemList('posts', $posts->getCollection(), fn ($p) => ['url' => route('blog.show', $p), 'name' => $p->title]),
+    ],
+])
 
 @section('content')
   @include('partials.page-hero', [
@@ -85,6 +93,7 @@
       <h2 id="nl-title" class="display-md" data-split>{{ heading(setting('blog.newsletter_title')) }}</h2>
       <form class="nl-form reveal zoom" style="--d:.4s" action="{{ route('newsletter.store') }}" method="post" novalidate>
         @csrf
+        <div class="sr-only" aria-hidden="true"><label>وب‌سایت<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <label class="sr-only" for="nl-email">ایمیل شما</label>
         <input id="nl-email" name="email" type="email" dir="ltr" placeholder="you@example.com" autocomplete="email" required>
         <button class="btn btn-primary" type="submit">عضویت <svg aria-hidden="true"><use href="#i-play"/></svg></button>

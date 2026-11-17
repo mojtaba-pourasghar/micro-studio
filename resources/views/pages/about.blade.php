@@ -1,4 +1,6 @@
-@extends('layouts.site', ['bodyClass' => 'home inner-page about-page', 'title' => 'درباره ما', 'preload' => setting('about.hero_image'), 'description' => setting('about.hero_lead')])
+@extends('layouts.site', ['bodyClass' => 'home inner-page about-page', 'title' => 'درباره ما', 'preload' => setting('about.hero_image'), 'description' => setting('about.hero_lead'), 'schema' => [
+    \App\Support\Seo::webPage('AboutPage', ['name' => 'درباره میکرو استودیو', 'description' => setting('about.hero_lead'), 'mainEntity' => ['@id' => \App\Support\Seo::orgId()]]),
+]])
 
 @section('content')
   @include('partials.page-hero', [

@@ -83,6 +83,7 @@ class GameResource extends Resource
                 ]),
                 Tab::make('تصاویر و تریلر')->icon(Heroicon::OutlinedPhoto)->schema([
                     Grid::make(2)->schema([
+                        Fields::image('logo', 'لوگو / آیکن اپ (مربعی)'),
                         Fields::image('card_image', 'تصویر کارت')->required(),
                         Toggle::make('card_is_phone')->label('تصویر کارت اسکرین‌شات موبایل است (عمودی)'),
                         Fields::image('hero_image', 'پس‌زمینه‌ی Hero'),
@@ -91,6 +92,14 @@ class GameResource extends Resource
                         Fields::image('banner_image', 'پس‌زمینه‌ی بنر تریلر'),
                     ]),
                     TextInput::make('trailer_url')->label('فایل یا لینک تریلر (mp4)')->maxLength(255),
+                    Repeater::make('videos')->label('ویدیوها')->schema([
+                        TextInput::make('title')->label('عنوان')->maxLength(120),
+                        TextInput::make('src')->label('مسیر فایل mp4')->required()->placeholder('assets/games/slug/trailer.mp4 یا uploads/...')->maxLength(255),
+                        Fields::image('poster', 'تصویر پیش‌نمایش'),
+                        TextInput::make('duration')->label('مدت (ثانیه)')->numeric(),
+                        Toggle::make('vertical')->label('عمودی (ویدیوی موبایل)')->default(true),
+                    ])->columns(2)->defaultItems(0)->reorderable()->collapsible()->addActionLabel('افزودن ویدیو')
+                        ->helperText('فایل mp4 را در «کتابخانه‌ی رسانه» بارگذاری کنید و مسیرش را اینجا بگذارید.'),
                     Repeater::make('screenshots')->label('گالری تصاویر')->schema([
                         Fields::image('image', 'تصویر')->required(),
                         TextInput::make('caption')->label('توضیح')->maxLength(80),
@@ -104,6 +113,12 @@ class GameResource extends Resource
                         TextInput::make('value')->label('عدد')->required()->maxLength(12),
                         TextInput::make('label')->label('عنوان')->required()->maxLength(40),
                     ])->columns(2)->grid(4)->maxItems(4)->defaultItems(0)->addActionLabel('افزودن آمار'),
+                    TextInput::make('gameplay_title')->label('تیتر بخش گیم‌پلی')->helperText('[[متن توخالی]]  {{متن گرادیان}}  | = خط بعد')->maxLength(190),
+                    Repeater::make('gameplay')->label('گیم‌پلی (چطور بازی می‌شود، گام‌به‌گام)')->schema([
+                        TextInput::make('title')->label('عنوان گام')->required()->maxLength(80),
+                        Textarea::make('text')->label('توضیح')->rows(2)->maxLength(400),
+                    ])->columns(2)->defaultItems(0)->reorderable()->collapsible()->addActionLabel('افزودن گام'),
+                    Fields::stringList('benefits', 'کاربرد / مهارت‌هایی که تقویت می‌کند'),
                     Repeater::make('features')->label('ویژگی‌ها')->schema([
                         Fields::icon(),
                         TextInput::make('title')->label('عنوان')->required()->maxLength(60),
@@ -123,7 +138,6 @@ class GameResource extends Resource
                         TextInput::make('engine')->label('موتور / فناوری')->maxLength(60),
                         TextInput::make('language')->label('زبان')->maxLength(60),
                         TextInput::make('internet')->label('نیاز به اینترنت')->maxLength(90),
-                        TextInput::make('repo_url')->label('لینک گیت‌هاب')->url()->maxLength(255),
                     ]),
                     Textarea::make('download_note')->label('متن بخش دریافت')->rows(2),
                     Repeater::make('store_links')->label('فروشگاه‌ها')->schema([
