@@ -24,6 +24,7 @@ class ContentSeeder extends Seeder
         $this->faqs();
         $this->blocks();
         $this->posts();
+        $this->call(ArticleSeeder::class); // full article texts
         $this->rules();
     }
 
