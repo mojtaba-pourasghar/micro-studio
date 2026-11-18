@@ -15,12 +15,12 @@ class MediaStore
 
     public const MIMES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp', 'image/gif' => 'gif', 'image/avif' => 'avif', 'video/mp4' => 'mp4'];
 
-    public static function fromUpload(UploadedFile $file, ?string $alt = null, string $source = 'admin'): Media
+    public static function fromUpload(UploadedFile $file, ?string $alt = null, string $source = 'admin', bool $watermark = true): Media
     {
-        return static::fromContents(file_get_contents($file->getRealPath()), $file->getClientOriginalName(), $alt, $source);
+        return static::fromContents(file_get_contents($file->getRealPath()), $file->getClientOriginalName(), $alt, $source, $watermark);
     }
 
-    public static function fromBase64(string $data, string $filename, ?string $alt = null, string $source = 'agent'): Media
+    public static function fromBase64(string $data, string $filename, ?string $alt = null, string $source = 'agent', bool $watermark = true): Media
     {
         if (str_contains($data, ',') && str_starts_with($data, 'data:')) {
             $data = substr($data, strpos($data, ',') + 1);
@@ -30,10 +30,10 @@ class MediaStore
             throw new InvalidArgumentException('Invalid base64 data.');
         }
 
-        return static::fromContents($bytes, $filename, $alt, $source);
+        return static::fromContents($bytes, $filename, $alt, $source, $watermark);
     }
 
-    public static function fromUrl(string $url, ?string $filename = null, ?string $alt = null, string $source = 'agent'): Media
+    public static function fromUrl(string $url, ?string $filename = null, ?string $alt = null, string $source = 'agent', bool $watermark = true): Media
     {
         if (! preg_match('~^https://~i', $url)) {
             throw new InvalidArgumentException('Only https:// URLs are allowed.');
@@ -44,10 +44,10 @@ class MediaStore
         }
         $filename ??= basename(parse_url($url, PHP_URL_PATH) ?: 'image') ?: 'image';
 
-        return static::fromContents($res->body(), $filename, $alt, $source);
+        return static::fromContents($res->body(), $filename, $alt, $source, $watermark);
     }
 
-    public static function fromContents(string $bytes, string $filename, ?string $alt = null, string $source = 'admin'): Media
+    public static function fromContents(string $bytes, string $filename, ?string $alt = null, string $source = 'admin', bool $watermark = true): Media
     {
         $size = strlen($bytes);
         if ($size === 0 || $size > self::MAX_BYTES) {
@@ -56,6 +56,10 @@ class MediaStore
         $mime = (new \finfo(FILEINFO_MIME_TYPE))->buffer($bytes) ?: '';
         if (! isset(self::MIMES[$mime])) {
             throw new InvalidArgumentException("Unsupported file type: $mime (allowed: jpg, png, webp, gif, avif, mp4).");
+        }
+        if ($watermark && Watermark::enabled()) {
+            $bytes = Watermark::bytes($bytes, $mime);
+            $size = strlen($bytes);
         }
         $base = Str::slug(pathinfo($filename, PATHINFO_FILENAME)) ?: 'image';
         $dir = 'uploads/'.now()->format('Y/m');

@@ -83,7 +83,7 @@ class GameResource extends Resource
                 ]),
                 Tab::make('تصاویر و تریلر')->icon(Heroicon::OutlinedPhoto)->schema([
                     Grid::make(2)->schema([
-                        Fields::image('logo', 'لوگو / آیکن اپ (مربعی)'),
+                        Fields::image('logo', 'لوگو / آیکن اپ (مربعی)', watermark: false),
                         Fields::image('card_image', 'تصویر کارت')->required(),
                         Toggle::make('card_is_phone')->label('تصویر کارت اسکرین‌شات موبایل است (عمودی)'),
                         Fields::image('hero_image', 'پس‌زمینه‌ی Hero'),

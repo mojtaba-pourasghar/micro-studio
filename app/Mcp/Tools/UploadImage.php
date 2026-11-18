@@ -8,7 +8,7 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Attributes\Description;
 
-#[Description('Upload an image (jpg, png, webp, gif, avif; max 10 MB) to the media library and get its "path" to put in image fields. Give either base64 (raw or data: URI) or an https url. The site server is in Iran and may not reach foreign URLs (e.g. Canva exports): if a url fails, download the file yourself and send base64, or use the REST endpoint POST /api/agent/media (multipart "file", same token as Bearer).')]
+#[Description('Upload an image (jpg, png, webp, gif, avif; max 10 MB) to the media library and get its "path" to put in image fields. Give either base64 (raw or data: URI) or an https url. The site server is in Iran and may not reach foreign URLs (e.g. Canva exports): if a url fails, download the file yourself and send base64, or use the REST endpoint POST /api/agent/media (multipart "file", same token as Bearer). The studio logo is stamped on uploads automatically; pass watermark=false for logos/icons/avatars.')]
 class UploadImage extends AgentTool
 {
     public function handle(Request $request): Response
@@ -19,11 +19,12 @@ class UploadImage extends AgentTool
         $filename = (string) ($request->get('filename') ?: 'image');
         $alt = $request->get('alt');
         $source = $request->get('source') === 'canva' ? 'canva' : 'agent';
+        $wm = $request->get('watermark') !== false;
         try {
             if ($b64 = $request->get('base64')) {
-                $media = MediaStore::fromBase64((string) $b64, $filename, $alt, $source);
+                $media = MediaStore::fromBase64((string) $b64, $filename, $alt, $source, $wm);
             } elseif ($url = $request->get('url')) {
-                $media = MediaStore::fromUrl((string) $url, $request->get('filename'), $alt, $source);
+                $media = MediaStore::fromUrl((string) $url, $request->get('filename'), $alt, $source, $wm);
             } else {
                 return Response::error('Give "base64" or "url".');
             }
@@ -42,6 +43,7 @@ class UploadImage extends AgentTool
             'base64' => $schema->string()->description('Image bytes as base64 or a data: URI.'),
             'url' => $schema->string()->description('https URL to download from (may be unreachable from Iran).'),
             'source' => $schema->string()->enum(['agent', 'canva'])->description('Where the image was made.'),
+            'watermark' => $schema->boolean()->description('Stamp the Micro Studio logo on the image (default true). Send false only for logos, app icons and avatars.'),
         ];
     }
 }

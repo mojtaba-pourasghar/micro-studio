@@ -19,6 +19,12 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  toTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    history.replaceState(null, '', location.pathname + location.search);
+    (header.querySelector('a') || document.body).focus({ preventScroll: true });
+  });
 
   /* ---------- mobile navigation (off-canvas, Esc + backdrop close, focus return) ---------- */
   const nav = $('#main-nav');
@@ -226,6 +232,14 @@
       e.preventDefault();
       items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length].focus();
     }
+  });
+  /* ---------- muted background motion: load + play only while visible ---------- */
+  $$('video[data-autoplay-visible]').forEach((v) => {
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+    v.addEventListener('playing', () => v.classList.add('playing'));
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+    }, { rootMargin: '200px' }).observe(v);
   });
   /* ---------- contact form: inline validation + submit to the Laravel backend (JSON) ---------- */
   /* captcha image refresh (contact form) */

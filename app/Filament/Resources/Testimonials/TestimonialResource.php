@@ -18,7 +18,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -48,7 +47,6 @@ class TestimonialResource extends Resource
             TextInput::make('name')->label('نام')->required()->maxLength(90),
             TextInput::make('role')->label('نقش')->maxLength(90),
             Textarea::make('quote')->label('متن نظر')->required()->rows(3)->maxLength(400)->columnSpanFull(),
-            Fields::image('avatar', 'چهره'),
             TextInput::make('rating')->label('امتیاز (۱ تا ۵)')->numeric()->minValue(1)->maxValue(5)->default(5),
             Toggle::make('is_published')->label('نمایش')->default(true),
             TextInput::make('sort_order')->label('ترتیب')->numeric()->default(0),
@@ -59,7 +57,6 @@ class TestimonialResource extends Resource
     {
         return $table->defaultSort('sort_order')->reorderable('sort_order')
             ->columns([
-                ImageColumn::make('avatar')->label('')->disk('site')->circular()->height(40),
                 TextColumn::make('name')->label('نام')->searchable()->weight('bold')->description(fn ($record) => $record->role),
                 TextColumn::make('quote')->label('نظر')->limit(80),
                 IconColumn::make('is_published')->label('نمایش')->boolean(),

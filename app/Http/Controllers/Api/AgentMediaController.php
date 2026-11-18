@@ -22,8 +22,9 @@ class AgentMediaController extends Controller
             'file' => ['required', 'file', 'max:10240', 'mimetypes:'.implode(',', array_keys(MediaStore::MIMES))],
             'alt' => ['nullable', 'string', 'max:190'],
             'source' => ['nullable', 'in:agent,canva'],
+            'watermark' => ['nullable', 'boolean'],
         ]);
-        $media = MediaStore::fromUpload($request->file('file'), $request->input('alt'), $request->input('source', 'agent'));
+        $media = MediaStore::fromUpload($request->file('file'), $request->input('alt'), $request->input('source', 'agent'), $request->boolean('watermark', true));
 
         return response()->json(['ok' => true, 'id' => $media->id, 'path' => $media->path, 'url' => $media->url(), 'width' => $media->width, 'height' => $media->height], 201);
     }

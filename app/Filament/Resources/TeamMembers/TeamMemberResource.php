@@ -48,7 +48,7 @@ class TeamMemberResource extends Resource
             TextInput::make('tag')->label('برچسب')->maxLength(30),
             Fields::tagColor('tag_color'),
             Textarea::make('bio')->label('معرفی')->rows(2)->columnSpanFull(),
-            Fields::image('avatar', 'تصویر / آواتار'),
+            Fields::image('avatar', 'تصویر / آواتار', watermark: false),
             Toggle::make('is_published')->label('نمایش')->default(true),
             TextInput::make('sort_order')->label('ترتیب')->numeric()->default(0),
         ]);

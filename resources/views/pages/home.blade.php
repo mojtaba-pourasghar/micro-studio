@@ -97,6 +97,9 @@
   <!-- ============ VIDEO BANNER ============ -->
   <section class="video-banner notch-top" aria-labelledby="vb-title">
     <img class="vb-bg" src="{{ img(setting('home.banner_image')) }}" alt="" width="1456" height="818" loading="lazy" data-parallax="0.1">
+    @if (setting('home.banner_video'))
+      <video class="vb-bg vb-motion" muted loop playsinline preload="none" aria-hidden="true" data-autoplay-visible src="{{ img(setting('home.banner_video')) }}"></video>
+    @endif
     <div class="vb-inner">
       <h2 id="vb-title" class="display-md" data-split>{{ heading(setting('home.banner_title')) }}</h2>
       <button class="play-btn reveal zoom" style="--d:.5s" data-magnetic type="button" data-video="{{ img(setting('site.trailer_url')) }}" aria-label="پخش تریلر"><svg aria-hidden="true"><use href="#i-play"/></svg></button>

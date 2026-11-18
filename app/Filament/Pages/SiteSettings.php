@@ -56,6 +56,7 @@ class SiteSettings extends Page
                 $key = "$group.$name";
                 $fields[] = match ($f['type']) {
                     'image' => Fields::image($key, $f['label']),
+                    'toggle' => \Filament\Forms\Components\Toggle::make($key)->label($f['label'])->helperText('هر تصویری که از پنل یا ایجنت آپلود شود، خودکار لوگو می‌خورد. برای لوگو و آواتار هیچ‌وقت اعمال نمی‌شود.'),
                     'textarea' => Textarea::make($key)->label($f['label'])->rows(3)->columnSpanFull(),
                     'heading' => TextInput::make($key)->label($f['label'])->helperText('[[توخالی]]  {{گرادیان}}  | = خط بعد'),
                     default => TextInput::make($key)->label($f['label']),

@@ -64,7 +64,7 @@ class ContentTypes
             ],
             'testimonials' => [
                 'model' => Testimonial::class, 'label' => 'Family testimonials (home, /about)', 'ability' => 'content.write', 'write' => true, 'title' => 'name', 'search' => ['name', 'quote'],
-                'fields' => ['name' => 'required', 'role' => 'e.g. "مادر دانش‌آموز سوم"', 'quote' => 'required, without «» quotes', 'avatar' => self::IMAGE, 'rating' => 'int 1-5', 'is_published' => 'bool', 'sort_order' => 'int'],
+                'fields' => ['name' => 'required', 'role' => 'e.g. "مادر دانش‌آموز سوم"', 'quote' => 'required, without «» quotes', 'rating' => 'int 1-5', 'is_published' => 'bool', 'sort_order' => 'int'],
             ],
             'faqs' => [
                 'model' => Faq::class, 'label' => 'FAQ (/services#faq, /contact#faq)', 'ability' => 'content.write', 'write' => true, 'title' => 'question', 'search' => ['question', 'answer'],
@@ -164,7 +164,7 @@ class ContentTypes
             ],
             'testimonials' => [
                 'name' => $req(['string', 'max:90']), 'quote' => $req(['string', 'max:400']), 'role' => ['nullable', 'string', 'max:90'],
-                'avatar' => $img, 'rating' => ['integer', 'between:1,5'], 'is_published' => $bool, 'sort_order' => $int,
+                'rating' => ['integer', 'between:1,5'], 'is_published' => $bool, 'sort_order' => $int,
             ],
             'faqs' => ['page' => $req([Rule::in(['services', 'contact'])]), 'question' => $req(['string', 'max:190']), 'answer' => $req(['string', 'max:2000']), 'is_published' => $bool, 'sort_order' => $int],
             'blocks' => [

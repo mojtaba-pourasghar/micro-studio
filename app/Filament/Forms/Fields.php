@@ -14,9 +14,10 @@ class Fields
 {
     /**
      * Image picker stored as a public path ("assets/…" or "uploads/…").
+     * New uploads get the studio logo stamped on them (unless $watermark is false, e.g. logos and avatars).
      * New uploads go through MediaStore (so they appear in the media library); files are never deleted from disk.
      */
-    public static function image(string $name, string $label): FileUpload
+    public static function image(string $name, string $label, bool $watermark = true): FileUpload
     {
         return FileUpload::make($name)
             ->label($label)
@@ -25,7 +26,7 @@ class Fields
             ->maxSize(10240)
             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif'])
             ->imagePreviewHeight('140')
-            ->saveUploadedFileUsing(fn (TemporaryUploadedFile $file) => MediaStore::fromUpload($file, null, 'admin')->path)
+            ->saveUploadedFileUsing(fn (TemporaryUploadedFile $file) => MediaStore::fromUpload($file, null, 'admin', $watermark)->path)
             ->deleteUploadedFileUsing(fn () => null);
     }
 
