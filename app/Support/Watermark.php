@@ -82,6 +82,10 @@ class Watermark
         if ($corner) { // fixed corner (e.g. wide hero backgrounds, where a centred mark would sit behind the page text)
             $x = str_ends_with($corner, 'right') ? $w - $tw - $margin : $margin;
             $y = str_starts_with($corner, 'top') ? $margin : $h - $th - $margin;
+            if (str_ends_with($corner, '-inset')) { // stays visible when a square image is shown cropped to 4:3
+                $y = (int) round($h * 0.86) - $th;
+                $x = (int) round($w * 0.06);
+            }
             $bright = static::meanLum($img, $x, $y, $tw, $th);
         }
         // White-text logo on dark/mid areas, dark-text logo on bright areas.

@@ -49,7 +49,7 @@ class WatermarkImages extends Command
 
                 continue;
             }
-            if (Watermark::file($file, (str_ends_with($file, "/hero.webp") || str_ends_with($file, "/story.webp") || str_contains($file, "/img/scenes/")) ? "bottom-left" : null)) {
+            if (Watermark::file($file, str_ends_with($file, "/story.webp") ? "bottom-left-inset" : ((str_ends_with($file, "/hero.webp") || str_contains($file, "/img/scenes/")) ? "bottom-left" : null))) {
                 $stamped++;
                 $this->line("stamped: $rel");
             }
