@@ -16,6 +16,10 @@ Route::controller(\App\Http\Controllers\SeoController::class)->group(function ()
     Route::get('/llms.txt', 'llms')->name('llms');
 });
 
+// renamed pages keep their old links working ("Pilo" is now "Time Guardians")
+Route::permanentRedirect('/games/pilo', '/games/time-guardians');
+Route::permanentRedirect('/blog/pilo-time-lens', '/blog/time-lens-puzzles');
+
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/games', 'games')->name('games.index');

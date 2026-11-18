@@ -447,6 +447,8 @@ svg use { pointer-events: none; }
 
 .create-copy { padding-inline-start: 56px; }
 .vertical-label { top: 0; white-space: nowrap; }
+.create-copy .vertical-label { inset-inline-start: auto; right: 0; left: auto; top: 6px; direction: ltr; unicode-bidi: plaintext; }
+.create-copy .vertical-label svg { order: 0; }
 .svc-num { -webkit-text-stroke-color: rgba(171,141,255,.85); }
 .rail-progress span { background: linear-gradient(90deg, var(--brand-deep), var(--brand-2)); }
 .gem.g1, .gem.g2 { background: linear-gradient(135deg, #d9ccff, #8b6bff 55%, #4a2fd6); box-shadow: inset 0 0 0 5px rgba(255,255,255,.35), 0 14px 26px -8px rgba(91,62,245,.6); }
@@ -1225,6 +1227,7 @@ main, .site-footer { overflow-x: hidden; overflow-x: clip; }
 @media (max-width: 900px) {
   .benefits-grid { grid-template-columns: 1fr; }
   .hero-app-icon img { width: clamp(150px, 40vw, 220px); }
+  .hero-app-icon { margin-top: 28px; }
   .step-grid.five { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {

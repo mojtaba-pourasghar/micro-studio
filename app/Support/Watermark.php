@@ -16,7 +16,7 @@ class Watermark
     }
 
     /** Watermark image bytes; returns the original bytes when the format is unsupported or the image is too small. */
-    public static function bytes(string $bytes, ?string $mime = null): string
+    public static function bytes(string $bytes, ?string $mime = null, ?string $corner = null): string
     {
         $mime ??= (new \finfo(FILEINFO_MIME_TYPE))->buffer($bytes) ?: '';
         if (! in_array($mime, ['image/jpeg', 'image/png', 'image/webp'], true) || ! function_exists('imagecreatefromstring')) {
@@ -26,7 +26,7 @@ class Watermark
         if (! $img) {
             return $bytes;
         }
-        if (! static::stamp($img)) {
+        if (! static::stamp($img, $corner)) {
             imagedestroy($img);
 
             return $bytes;
@@ -43,13 +43,14 @@ class Watermark
     }
 
     /** Watermark a file in place. */
-    public static function file(string $path): bool
+    /** @param string|null $corner force a corner ("bottom-left", "bottom-right") instead of picking the calmest spot */
+    public static function file(string $path, ?string $corner = null): bool
     {
         if (! is_file($path)) {
             return false;
         }
         $orig = file_get_contents($path);
-        $out = static::bytes($orig);
+        $out = static::bytes($orig, null, $corner);
         if ($out === $orig) {
             return false;
         }
@@ -59,7 +60,7 @@ class Watermark
     }
 
     /** Draw the logo onto a GD image (~15% of the width, in whichever corner has the least detail). */
-    public static function stamp(\GdImage $img): bool
+    public static function stamp(\GdImage $img, ?string $corner = null): bool
     {
         $w = imagesx($img);
         $h = imagesy($img);
@@ -78,6 +79,11 @@ class Watermark
         $th = (int) round($lh * $tw / $lw);
         $margin = (int) round(max(10, min($w, $h) * 0.025));
         [$x, $y, $bright] = static::calmestSpot($img, $tw, $th, $margin);
+        if ($corner) { // fixed corner (e.g. wide hero backgrounds, where a centred mark would sit behind the page text)
+            $x = str_ends_with($corner, 'right') ? $w - $tw - $margin : $margin;
+            $y = str_starts_with($corner, 'top') ? $margin : $h - $th - $margin;
+            $bright = static::meanLum($img, $x, $y, $tw, $th);
+        }
         // White-text logo on dark/mid areas, dark-text logo on bright areas.
         $logo = @imagecreatefrompng(static::logoPath($bright > 175));
         if (! $logo) {
@@ -140,6 +146,20 @@ class Watermark
         }
 
         return $best;
+    }
+
+    protected static function meanLum(\GdImage $img, int $x, int $y, int $tw, int $th): float
+    {
+        $sum = $n = 0;
+        for ($px = $x; $px < $x + $tw; $px += 6) {
+            for ($py = $y; $py < $y + $th; $py += 6) {
+                $c = imagecolorat($img, min(imagesx($img) - 1, $px), min(imagesy($img) - 1, $py));
+                $sum += 0.299 * (($c >> 16) & 255) + 0.587 * (($c >> 8) & 255) + 0.114 * ($c & 255);
+                $n++;
+            }
+        }
+
+        return $n ? $sum / $n : 0;
     }
 
     public static function logoPath(bool $forBrightBackground = false): string

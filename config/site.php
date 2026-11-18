@@ -31,7 +31,7 @@ return [
                 'brand_first' => ['label' => 'لوگو - بخش اول', 'type' => 'text', 'default' => 'میکرو'],
                 'brand_second' => ['label' => 'لوگو - بخش دوم (بنفش)', 'type' => 'text', 'default' => 'استودیو'],
                 'meta_title' => ['label' => 'عنوان صفحه‌ی اصلی (SEO)', 'type' => 'text', 'default' => 'میکرو استودیو | سازنده‌ی بازی‌های داستانی و اپ‌های آموزشی فارسی'],
-                'meta_description' => ['label' => 'توضیح سایت (SEO)', 'type' => 'textarea', 'default' => 'میکرو استودیو؛ تیم کوچک و پرانرژی سازنده‌ی بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی فارسی مثل دو آسمان، رازینو، سفر پیلو و هوهو.'],
+                'meta_description' => ['label' => 'توضیح سایت (SEO)', 'type' => 'textarea', 'default' => 'میکرو استودیو؛ تیم کوچک و پرانرژی سازنده‌ی بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی فارسی مثل دو آسمان، رازینو، نگهبانان زمان و هوهو.'],
                 'header_cta' => ['label' => 'دکمه‌ی هدر', 'type' => 'text', 'default' => 'در تماس باشید'],
                 'trailer_url' => ['label' => 'فایل یا لینک تریلر', 'type' => 'url', 'default' => 'assets/video/studio-motion.mp4'],
                 'copyright' => ['label' => 'متن کپی‌رایت فوتر', 'type' => 'text', 'default' => 'همه‌ی حقوق محفوظ است.'],
@@ -67,9 +67,9 @@ return [
                 'hero_cta' => ['label' => 'دکمه‌ی گرد Hero', 'type' => 'heading', 'default' => 'شروع|پروژه'],
                 'about_eyebrow' => ['label' => 'ما که هستیم - برچسب', 'type' => 'text', 'default' => 'ما که هستیم'],
                 'about_title' => ['label' => 'ما که هستیم - تیتر', 'type' => 'heading', 'default' => 'تمرکز ما روی [[ساخت]]|[[بازی‌های زیبا]]'],
-                'about_lead' => ['label' => 'ما که هستیم - متن', 'type' => 'textarea', 'default' => 'میکرو استودیو یک تیم کوچک و پرانرژی است که بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی فارسی می‌سازد؛ راست‌چین از روز اول، با صداگذاری فارسی، بدون تبلیغ مزاحم و با احترام به حریم خصوصی کودکان.'],
+                'about_lead' => ['label' => 'ما که هستیم - متن', 'type' => 'textarea', 'default' => 'میکرو استودیو یک تیم کوچک و پرانرژی است که بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی فارسی می‌سازد؛ راست‌چین از روز اول، با صداگذاری فارسی و با احترام به حریم خصوصی کودکان.'],
                 'about_image' => ['label' => 'ما که هستیم - تصویر اصلی', 'type' => 'image', 'default' => 'assets/img/canva/world-map.webp'],
-                'about_thumb' => ['label' => 'ما که هستیم - تصویر کوچک', 'type' => 'image', 'default' => 'assets/img/scenes/pilo-world.webp'],
+                'about_thumb' => ['label' => 'ما که هستیم - تصویر کوچک', 'type' => 'image', 'default' => 'assets/img/scenes/tg-gate.webp'],
                 'about_character' => ['label' => 'ما که هستیم - کاراکتر', 'type' => 'image', 'default' => 'assets/img/characters/razino-hero.webp'],
                 'services_eyebrow' => ['label' => 'خدمات - برچسب', 'type' => 'text', 'default' => 'خدمات ما'],
                 'services_title' => ['label' => 'خدمات - تیتر', 'type' => 'heading', 'default' => 'طراحی هنری و|توسعه‌ی بازی'],
@@ -98,7 +98,7 @@ return [
 
         'games' => [
             'label' => 'صفحه‌ی بازی‌ها و اپ‌ها',
-            'fields' => $hero('دنیای بازی‌ها|و اپ‌های ما', 'از ماجراجویی پیکسل‌آرت «دو آسمان» و معماهای «رازینو» تا اپ‌های درسی «هوهو»؛ همه فارسی، راست‌چین، بدون تبلیغ مزاحم و ساخته‌شده برای خانواده‌ها.', 'assets/img/scenes/sunset-cliff.webp', 'assets/img/characters/ilara.webp', 'ایلارا', 'دو آسمان') + [
+            'fields' => $hero('دنیای بازی‌ها|و اپ‌های ما', 'از ماجراجویی پیکسل‌آرت «دو آسمان» و معماهای «رازینو» تا اپ‌های درسی «هوهو»؛ همه فارسی، راست‌چین و ساخته‌شده برای خانواده‌ها.', 'assets/img/scenes/sunset-cliff.webp', 'assets/img/characters/ilara.webp', 'ایلارا', 'دو آسمان') + [
                 'list_eyebrow' => ['label' => 'فهرست - برچسب', 'type' => 'text', 'default' => 'همه‌ی محصولات'],
                 'list_title' => ['label' => 'فهرست - تیتر', 'type' => 'heading', 'default' => 'بازی کن، [[یاد بگیر،]]|[[کشف کن]]'],
                 'spotlight_eyebrow' => ['label' => 'بازی ویژه - برچسب', 'type' => 'text', 'default' => 'بازی ویژه'],
@@ -110,8 +110,8 @@ return [
                 'cta_eyebrow' => ['label' => 'دعوت - برچسب عمودی', 'type' => 'text', 'default' => 'بازی بعدی'],
                 'cta_title' => ['label' => 'دعوت - تیتر', 'type' => 'heading', 'default' => 'بازی بعدی|[[مال شما باشد]]'],
                 'cta_lead' => ['label' => 'دعوت - متن', 'type' => 'textarea', 'default' => 'ایده‌ی یک بازی یا اپ آموزشی دارید؟ از سند طراحی و شخصیت‌پردازی تا انتشار در کافه‌بازار کنارتان هستیم.'],
-                'cta_image' => ['label' => 'دعوت - تصویر دایره', 'type' => 'image', 'default' => 'assets/img/scenes/pilo-world.webp'],
-                'cta_character' => ['label' => 'دعوت - کاراکتر', 'type' => 'image', 'default' => 'assets/img/characters/kairo.webp'],
+                'cta_image' => ['label' => 'دعوت - تصویر دایره', 'type' => 'image', 'default' => 'assets/img/scenes/tg-gate-circle.webp'],
+                'cta_character' => ['label' => 'دعوت - کاراکتر', 'type' => 'image', 'default' => 'assets/img/characters/arsam.webp'],
             ],
         ],
 
@@ -137,10 +137,10 @@ return [
 
         'about' => [
             'label' => 'صفحه‌ی درباره ما',
-            'fields' => $hero('قصه‌ی|میکرو استودیو', 'یک تیم کوچک با یک هدف بزرگ: بازی‌هایی بسازیم که کودکان ایرانی با زبان خودشان بازی کنند و پدر و مادرها با خیال راحت نصبشان کنند.', 'assets/img/scenes/pilo-world.webp', 'assets/img/characters/razino-hero.webp', 'رازینو', 'میکرو استودیو') + [
+            'fields' => $hero('قصه‌ی|میکرو استودیو', 'یک تیم کوچک با یک هدف بزرگ: بازی‌هایی بسازیم که کودکان ایرانی با زبان خودشان بازی کنند و پدر و مادرها با خیال راحت نصبشان کنند.', 'assets/img/scenes/tg-gate.webp', 'assets/img/characters/razino-hero.webp', 'رازینو', 'میکرو استودیو') + [
                 'story_eyebrow' => ['label' => 'داستان - برچسب', 'type' => 'text', 'default' => 'داستان ما'],
                 'story_title' => ['label' => 'داستان - تیتر', 'type' => 'heading', 'default' => 'بازی، [[زبان نسل]]|[[امروز است]]'],
-                'story_lead' => ['label' => 'داستان - متن', 'type' => 'textarea', 'default' => 'میکرو استودیو با یک سؤال ساده شروع شد: چرا کودکان ما باید بهترین بازی‌هایشان را به زبانی غیر از فارسی بازی کنند؟ از آن روز، بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی می‌سازیم که راست‌چین، صداگذاری‌شده به فارسی و بدون تبلیغ مزاحم‌اند.'],
+                'story_lead' => ['label' => 'داستان - متن', 'type' => 'textarea', 'default' => 'میکرو استودیو با یک سؤال ساده شروع شد: چرا کودکان ما باید بهترین بازی‌هایشان را به زبانی غیر از فارسی بازی کنند؟ از آن روز، بازی‌های داستانی، پلتفرمر و اپ‌های آموزشی می‌سازیم که راست‌چین و صداگذاری‌شده به فارسی‌اند.'],
                 'story_image' => ['label' => 'داستان - تصویر اصلی', 'type' => 'image', 'default' => 'assets/img/scenes/hero-two-skies.webp'],
                 'story_thumb' => ['label' => 'داستان - تصویر کوچک', 'type' => 'image', 'default' => 'assets/img/scenes/razino-map.webp'],
                 'values_eyebrow' => ['label' => 'ارزش‌ها - برچسب', 'type' => 'text', 'default' => 'ارزش‌های ما'],
@@ -170,11 +170,11 @@ return [
 
         'blog' => [
             'label' => 'وبلاگ',
-            'fields' => $hero('یادداشت‌های|ساخت بازی', 'پشت صحنه‌ی رازینو، سفر پیلو، دو آسمان و هوهو؛ از معماری بازی و پیکسل‌آرت تا راهنمای والدین برای انتخاب بازی مناسب.', 'assets/img/scenes/night-portal.webp', 'assets/img/characters/razino-wizard.webp', 'وبلاگ', 'میکرو استودیو') + [
+            'fields' => $hero('یادداشت‌های|ساخت بازی', 'پشت صحنه‌ی رازینو، نگهبانان زمان، دو آسمان و هوهو؛ از معماری بازی و پیکسل‌آرت تا راهنمای والدین برای انتخاب بازی مناسب.', 'assets/img/scenes/night-portal.webp', 'assets/img/characters/razino-wizard.webp', 'وبلاگ', 'میکرو استودیو') + [
                 'newsletter_title' => ['label' => 'خبرنامه - تیتر', 'type' => 'heading', 'default' => 'یادداشت تازه را|از دست نده'],
                 'newsletter_image' => ['label' => 'خبرنامه - تصویر', 'type' => 'image', 'default' => 'assets/img/scenes/temple-gate.webp'],
                 'author_avatar' => ['label' => 'تصویر نویسنده', 'type' => 'image', 'default' => 'assets/img/characters/kairo-face-5.webp'],
-                'author_bio' => ['label' => 'معرفی نویسنده', 'type' => 'textarea', 'default' => 'سازنده‌ی بازی‌های داستانی و اپ‌های آموزشی فارسی برای کودکان؛ بدون تبلیغ و با احترام به حریم خصوصی.'],
+                'author_bio' => ['label' => 'معرفی نویسنده', 'type' => 'textarea', 'default' => 'سازنده‌ی بازی‌های داستانی و اپ‌های آموزشی فارسی برای کودکان، با احترام به حریم خصوصی.'],
             ],
         ],
     ],

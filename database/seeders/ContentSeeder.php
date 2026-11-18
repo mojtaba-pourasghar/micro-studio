@@ -68,8 +68,8 @@ class ContentSeeder extends Seeder
                 'download_note' => 'نسخه‌ی اندروید به‌زودی منتشر می‌شود. برای باخبر شدن از انتشار، با ما در تماس باشید.',
                 'card_image' => 'assets/img/scenes/razino-screens.webp', 'hero_image' => 'assets/img/scenes/razino-menu.webp',
                 'hero_character' => 'assets/img/characters/razino-hero.webp', 'banner_image' => 'assets/img/scenes/puzzle-room.webp',
-                'trailer_url' => 'assets/video/trailer.mp4',
-                'store_links' => [['store' => 'کافه‌بازار', 'url' => ''], ['store' => 'مایکت', 'url' => '']],
+                'trailer_url' => null,
+                'store_links' => [['store' => 'کافه‌بازار', 'url' => '']],
                 'stats' => [['value' => '10', 'label' => 'فصل داستانی'], ['value' => '166', 'label' => 'صحنه'], ['value' => '29', 'label' => 'معما'], ['value' => '21', 'label' => 'پایان متفاوت']],
                 'features' => [
                     ['icon' => 'branch', 'title' => 'داستان چندپایانی', 'text' => '۵۴ انتخاب در طول بازی و ۲۱ پایان متفاوت؛ هر بار یک ماجرای تازه.'],
@@ -95,13 +95,13 @@ class ContentSeeder extends Seeder
                 ],
             ],
             [
-                'slug' => 'pilo', 'title' => 'سفر پیلو در رنگارستان', 'short_title' => 'پیلو', 'category' => 'game',
+                'slug' => 'time-guardians', 'title' => 'نگهبانان زمان', 'short_title' => 'نگهبانان زمان', 'category' => 'game',
                 'summary' => 'سفری میان گذشته و حال با لنز زمان؛ ۹ جهان و ۷۲ مرحله، برای ۵ تا ۹ سال.',
                 'tags' => [['label' => 'پلتفرمر', 'color' => 'green'], ['label' => 'معمایی', 'color' => 'blue']],
-                'age_range' => '۵ تا ۹ سال', 'card_image' => 'assets/img/scenes/pilo-1.webp', 'hero_image' => 'assets/img/scenes/pilo-world.webp',
+                'age_range' => '۵ تا ۹ سال', 'card_image' => 'assets/img/scenes/tg-forest.webp', 'hero_image' => 'assets/img/scenes/tg-gate.webp',
                 'genre' => 'پلتفرمر معمایی',
                 'stats' => [['value' => '9', 'label' => 'جهان'], ['value' => '72', 'label' => 'مرحله']],
-                'screenshots' => [['image' => 'assets/img/scenes/pilo-1.webp', 'caption' => 'رنگارستان'], ['image' => 'assets/img/scenes/pilo-3.webp', 'caption' => 'انتخاب مرحله'], ['image' => 'assets/img/scenes/pilo-world.webp', 'caption' => 'پیلو و دوستش']],
+                'screenshots' => [['image' => 'assets/img/scenes/tg-forest.webp', 'caption' => 'آرسام و روباه در جنگل'], ['image' => 'assets/games/time-guardians/shot-03.webp', 'caption' => 'کوله‌پشتی و ابزارها'], ['image' => 'assets/img/scenes/tg-gate.webp', 'caption' => 'دروازه‌ی زمان']],
             ],
             [
                 'slug' => 'pashmak', 'title' => 'دنیای بازی پشمک', 'short_title' => 'پشمک', 'category' => 'game', 'card_is_phone' => true,
@@ -164,7 +164,7 @@ class ContentSeeder extends Seeder
                 'assets/img/scenes/sunset-cliff.webp', false, 'assets/img/characters/razino-companion.webp', 'سفارش طراحی'],
             ['edu', 'اپ آموزشی', 'اپ‌های درسی تعاملی هم‌گام با کتاب‌های دبستان؛ تمرین، بازی و بازخورد صوتی برای یادگیری شاد.',
                 'اپ‌های درسی تعاملی هم‌گام با کتاب‌های دبستان؛ مثل هوهو فارسی و علوم کلاس سوم با ۲۴۱ صفحه‌ی درسی صوتی، تمرین و آزمون.',
-                ['تبدیل کتاب درسی به درس‌های تعاملی', 'روایت صوتی برای هر صفحه', 'کاربرگ، تمرین و آزمون سطح‌بندی‌شده', 'کار آفلاین، بدون تبلیغ و ردیاب'],
+                ['تبدیل کتاب درسی به درس‌های تعاملی', 'روایت صوتی برای هر صفحه', 'کاربرگ، تمرین و آزمون سطح‌بندی‌شده', 'کار آفلاین و بدون نیاز به اینترنت'],
                 'assets/img/works/hoho-farsi-shot.webp', true, 'assets/img/characters/razino-girl.webp', 'سفارش اپ آموزشی'],
             ['voice', 'صداگذاری فارسی', 'دوبله، موسیقی و افکت‌های صوتی؛ صدای فارسی طبیعی برای شخصیت‌ها و درس‌ها.',
                 'دوبله، موسیقی و افکت‌های صوتی؛ صدای فارسی طبیعی و گرم برای شخصیت‌ها، راوی داستان و معلم درس‌ها.',
@@ -192,7 +192,7 @@ class ContentSeeder extends Seeder
         }
 
         $testimonials = [
-            ['علی رضایی', 'پدر و گیمر', 'معماهای رازینو واقعاً فکر کردن را یاد می‌دهند؛ بدون تبلیغ و بدون اینترنت، خیالم راحت است.', 'assets/img/characters/kairo-face-5.webp'],
+            ['علی رضایی', 'پدر و گیمر', 'معماهای رازینو واقعاً فکر کردن را یاد می‌دهند؛ بدون اینترنت هم کار می‌کند و خیالم راحت است.', 'assets/img/characters/kairo-face-5.webp'],
             ['سارا محمدی', 'مربی پیش‌دبستانی', 'دخترم نقاشی‌هایش را با پشمک زنده می‌کند؛ شوقی که در چشمانش است قیمت ندارد.', 'assets/img/characters/ilara-face-5.webp'],
             ['حمید کریمی', 'مدیر مجموعه‌ی آموزشی', 'تیم میکرو استودیو اپ آموزشی ما را از صفر تا انتشار ساخت؛ دقیق، خوش‌قول و خلاق.', 'assets/img/characters/kairo-face-1.webp'],
             ['مریم احمدی', 'مادر دانش‌آموز سوم', 'پسرم هر شب درس فارسی فردا را با هوهو گوش می‌دهد؛ صدای گرم معلم را از حفظ شده!', 'assets/img/characters/ilara-face-1.webp'],
@@ -232,19 +232,19 @@ class ContentSeeder extends Seeder
         $groups = [
             'honors' => [
                 ['title' => 'بازی و اپ منتشرشده و در حال ساخت', 'value' => '9', 'label' => 'نمونه‌کار'],
-                ['title' => 'مرحله‌ی طراحی‌شده در سفر پیلو', 'value' => '72', 'label' => 'پلتفرمر'],
+                ['title' => 'مرحله‌ی طراحی‌شده در نگهبانان زمان', 'value' => '72', 'label' => 'پلتفرمر'],
                 ['title' => 'صحنه‌ی داستانی در ده فصل رازینو', 'value' => '166', 'label' => 'ماجراجویی'],
                 ['title' => 'صفحه‌ی درسی صوتی در هوهو فارسی و علوم', 'value' => '241', 'label' => 'آموزشی'],
             ],
             'promises' => [
-                ['title' => 'بدون تبلیغ', 'text' => 'هیچ تبلیغ ناگهانی و پاپ‌آپی وسط بازی کودک ظاهر نمی‌شود.', 'icon' => 'noads'],
+                ['title' => 'دروازه‌ی والدین', 'text' => 'تنظیمات و خریدها پشت دروازه‌ی والدین است تا کودک ناخواسته به آن‌ها نرسد.', 'icon' => 'users'],
                 ['title' => 'آفلاین', 'text' => 'بعد از نصب، بدون اینترنت کار می‌کند؛ در سفر، مدرسه یا خانه.', 'icon' => 'offline'],
                 ['title' => 'فارسی و راست‌چین', 'text' => 'متن، رابط و صداگذاری از روز اول فارسی طراحی شده است.', 'icon' => 'text'],
                 ['title' => 'حریم خصوصی کودک', 'text' => 'بدون ردیاب و حساب کاربری؛ داده‌ها فقط روی دستگاه می‌مانند.', 'icon' => 'shield'],
             ],
             'values' => [
                 ['title' => 'فارسی از روز اول', 'text' => 'رابط راست‌چین، متن روان و صداگذاری فارسی؛ نه ترجمه‌ی بعد از ساخت.', 'icon' => 'text'],
-                ['title' => 'بدون تبلیغ مزاحم', 'text' => 'کودک وسط بازی با تبلیغ و پیشنهاد خرید ناگهانی روبه‌رو نمی‌شود.', 'icon' => 'noads'],
+                ['title' => 'مناسب سن کودک', 'text' => 'محتوا، رنگ‌ها و اندازه‌ی دکمه‌ها برای همان رده‌ی سنی طراحی و با بچه‌ها تست می‌شود.', 'icon' => 'age'],
                 ['title' => 'حریم خصوصی کودک', 'text' => 'بدون ردیاب و حساب کاربری؛ داده‌ها روی دستگاه می‌ماند و بخش والدین قفل است.', 'icon' => 'shield'],
                 ['title' => 'یادگیری با بازی', 'text' => 'معما، داستان و تمرین طوری طراحی می‌شوند که یادگرفتن حس بازی بدهد.', 'icon' => 'bulb'],
                 ['title' => 'تست با کودکان', 'text' => 'هر نسخه پیش از انتشار با کودکان گروه سنی هدف آزموده می‌شود.', 'icon' => 'test'],
@@ -257,7 +257,7 @@ class ContentSeeder extends Seeder
                 ['title' => 'انتشار', 'text' => 'آماده‌سازی فروشگاه، انتشار در کافه‌بازار و پشتیبانی و به‌روزرسانی.', 'value' => 'خروجی: بازی منتشرشده'],
             ],
             'tools' => [
-                ['title' => 'Godot Engine', 'text' => 'موتور بازی‌های داستانی و پلتفرمر مثل رازینو و سفر پیلو.', 'icon' => 'pad'],
+                ['title' => 'Godot Engine', 'text' => 'موتور بازی‌های داستانی و پلتفرمر مثل رازینو و نگهبانان زمان.', 'icon' => 'pad'],
                 ['title' => 'Flutter', 'text' => 'اپ‌های آموزشی سریع و روان برای اندروید، مثل هوهو.', 'icon' => 'code'],
                 ['title' => 'پیکسل‌آرت و نقاشی دیجیتال', 'text' => 'شخصیت‌ها و صحنه‌های دو آسمان و رازینو.', 'icon' => 'brush'],
                 ['title' => 'استودیوی صدا', 'text' => 'ضبط، دوبله و میکس صدای فارسی شخصیت‌ها و درس‌ها.', 'icon' => 'mic'],
@@ -265,7 +265,7 @@ class ContentSeeder extends Seeder
                 ['title' => 'انتشار در کافه‌بازار', 'text' => 'آماده‌سازی صفحه‌ی فروشگاه، تصاویر و به‌روزرسانی‌ها.', 'icon' => 'store'],
             ],
             'support' => [
-                ['title' => 'حریم خصوصی کودکان', 'text' => 'بازی‌های ما ردیاب، تبلیغ و حساب کاربری ندارند و داده‌ها روی دستگاه می‌مانند. برای هر پرسشی درباره‌ی داده‌ها به ما بنویسید.', 'icon' => 'shield', 'link_label' => 'پرسش درباره‌ی حریم خصوصی', 'link_url' => 'mailto:mojtaba.developer@gmail.com?subject=Privacy'],
+                ['title' => 'حریم خصوصی کودکان', 'text' => 'حریم خصوصی کودکان برای ما مهم است و تا جای ممکن داده‌ها روی خود دستگاه می‌مانند. برای هر پرسشی درباره‌ی داده‌ها به ما بنویسید.', 'icon' => 'shield', 'link_label' => 'پرسش درباره‌ی حریم خصوصی', 'link_url' => 'mailto:mojtaba.developer@gmail.com?subject=Privacy'],
                 ['title' => 'راهنمای والدین', 'text' => 'گروه سنی هر بازی، زمان پیشنهادی بازی و بخش قفل‌شده‌ی والدین را در صفحه‌ی هر بازی ببینید.', 'icon' => 'users', 'link_label' => 'بازی‌ها و گروه سنی', 'link_url' => '/games'],
                 ['title' => 'گزارش مشکل', 'text' => 'نام بازی، مدل گوشی و توضیح کوتاهی از مشکل را بفرستید؛ اگر بتوانید، یک عکس از صفحه هم ضمیمه کنید.', 'icon' => 'bug', 'link_label' => 'ارسال گزارش', 'link_url' => 'mailto:mojtaba.developer@gmail.com?subject=Bug%20report'],
             ],
@@ -312,10 +312,10 @@ HTML;
 
         $posts = [
             ['razino-new-chapters', 'رازینو چطور فصل تازه می‌گیرد؟', 'فصل‌های رازینو داده هستند، نه کد. این یعنی فصل یازدهم بدون انتشار نسخه‌ی تازه در فروشگاه اضافه می‌شود؛ و یک بسته‌ی دانلودی هرگز نمی‌تواند کدی اجرا کند.', 'our-work', 'razino', 'assets/img/scenes/razino-board.webp', '2026-11-10', true, $razinoBody, ['رازینو', 'Godot', 'یادداشت_ساخت']],
-            ['pilo-time-lens', 'لنز زمان: طراحی معماهای گذشته و حال در سفر پیلو', 'پلی که در گذشته سالم بوده، جوانه‌ای که در حال درخت شده؛ چطور ۷۲ مرحله را با یک ایده‌ی ساده ساختیم.', 'our-work', 'pilo', 'assets/img/scenes/pilo-world.webp', '2026-11-03', false, null, ['پیلو']],
+            ['time-lens-puzzles', 'لنز زمان: طراحی معماهای گذشته و حال در نگهبانان زمان', 'پلی که در گذشته سالم بوده، جوانه‌ای که در حال درخت شده؛ چطور ۷۲ مرحله را با یک ایده‌ی ساده ساختیم.', 'our-work', 'time-guardians', 'assets/img/scenes/tg-gate.webp', '2026-11-03', false, null, ['نگهبانان زمان']],
             ['two-skies-pixel-art', 'پیکسل‌آرت دو آسمان: از برگه‌ی حالت تا صحنه', 'شش حالت چهره برای کایرو و ایلارا؛ چرا احساسات شخصیت‌ها را در چند پیکسل جا دادیم.', 'our-work', 'two-skies', 'assets/img/scenes/sunset-cliff.webp', '2026-10-27', false, null, ['دو_آسمان', 'پیکسل_آرت']],
             ['hoho-farsi-119-pages', '۱۱۹ صفحه با صدای هوهو: کتاب فارسی سوم چطور اپ شد', 'جغد معلم هر صفحه‌ی کتاب را درس می‌دهد؛ از بریدن تصویرهای کتاب تا کاربرگ سه‌سطحی.', 'our-work', 'hoho-farsi-3', 'assets/img/works/hoho-farsi-shot.webp', '2026-10-20', false, null, ['هوهو']],
-            ['ad-free-games-parents', 'بازی بدون تبلیغ و ردیاب: والدین به چه چیزی نگاه کنند؟', 'دروازه‌ی والدین، داده‌ی فقط‌روی‌دستگاه و بازی آفلاین؛ چک‌لیست ساده برای انتخاب بازی کودک.', 'guides', null, 'assets/img/works/goshyar-shot.webp', '2026-10-13', false, null, ['والدین']],
+            ['ad-free-games-parents', 'بازی امن برای کودک: والدین به چه چیزی نگاه کنند؟', 'دروازه‌ی والدین، داده‌ی فقط‌روی‌دستگاه و بازی آفلاین؛ چک‌لیست ساده برای انتخاب بازی کودک.', 'guides', null, 'assets/img/works/goshyar-shot.webp', '2026-10-13', false, null, ['والدین']],
             ['popo-173-cartoons', '۱۷۳ کارتون زنده با کد: انیمیشن‌های پوپو', 'هر شیء نفس می‌کشد، پلک می‌زند و چهار حال دارد؛ همه با کد کشیده شده‌اند.', 'our-work', 'popo', 'assets/img/works/popo-shot.webp', '2026-10-06', false, null, ['پوپو']],
             ['making-pashmak', 'نقاشی روی کاغذ، جان‌گرفتن روی تبلت: ساخت پشمک', 'کودک نقاشی می‌کشد، دوربین آن را اسکن می‌کند و نقاشی کنار پشمک زنده می‌شود.', 'our-work', 'pashmak', 'assets/img/works/pashmak-shot.webp', '2026-09-29', false, null, ['پشمک']],
         ];

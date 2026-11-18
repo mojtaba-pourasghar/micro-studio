@@ -18,7 +18,7 @@ class WatermarkImages extends Command
 
     public const DEFAULT_GLOBS = [
         'assets/img/scenes/*.webp', 'assets/img/canva/*.webp', 'assets/img/works/*-shot.webp',
-        'assets/games/*/shot-*.webp', 'assets/games/*/*-poster.webp', 'assets/games/*/mascot-*.webp',
+        'assets/games/*/shot-*.webp', 'assets/games/*/hero.webp', 'assets/games/*/*-poster.webp', 'assets/games/*/mascot-*.webp',
     ];
 
     public function handle(): int
@@ -49,7 +49,7 @@ class WatermarkImages extends Command
 
                 continue;
             }
-            if (Watermark::file($file)) {
+            if (Watermark::file($file, (str_ends_with($file, "/hero.webp") || str_contains($file, "/img/scenes/")) ? "bottom-left" : null)) {
                 $stamped++;
                 $this->line("stamped: $rel");
             }

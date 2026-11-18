@@ -92,15 +92,15 @@ class AgentMcpTest extends TestCase
 
     public function test_partial_update_validation_and_rollback(): void
     {
-        $r = $this->call_tool('save_item', ['type' => 'games', 'id' => 'pilo', 'data' => ['age_range' => '۵ تا ۱۰ سال']]);
+        $r = $this->call_tool('save_item', ['type' => 'games', 'id' => 'time-guardians', 'data' => ['age_range' => '۵ تا ۱۰ سال']]);
         $this->assertFalse($r['error'], $r['text']);
-        $this->assertSame('۵ تا ۱۰ سال', Game::where('slug', 'pilo')->value('age_range'));
+        $this->assertSame('۵ تا ۱۰ سال', Game::where('slug', 'time-guardians')->value('age_range'));
 
-        $this->assertTrue($this->call_tool('save_item', ['type' => 'games', 'id' => 'pilo', 'data' => ['category' => 'bogus']])['error']);
+        $this->assertTrue($this->call_tool('save_item', ['type' => 'games', 'id' => 'time-guardians', 'data' => ['category' => 'bogus']])['error']);
 
         $log = ActivityLog::where('actor', 'agent:test')->latest('id')->first();
         $this->assertFalse($this->call_tool('rollback_change', ['log_id' => $log->id])['error']);
-        $this->assertSame('۵ تا ۹ سال', Game::where('slug', 'pilo')->value('age_range'));
+        $this->assertSame('۵ تا ۹ سال', Game::where('slug', 'time-guardians')->value('age_range'));
     }
 
     public function test_abilities_are_enforced(): void

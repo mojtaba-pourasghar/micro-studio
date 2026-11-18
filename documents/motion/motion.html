@@ -37,7 +37,9 @@ html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; backgrou
 .screen { position: absolute; inset: 0; background: linear-gradient(180deg, #fff7ec, #ffe9d2); }
 .ubtn { position: absolute; left: 22px; right: 22px; border-radius: 18px; color: #fff; display: grid; place-items: center; font-family: Lalezar; font-size: 30px; box-shadow: 0 8px 0 rgba(0,0,0,.18); }
 .line { position: absolute; height: 12px; border-radius: 6px; background: #d9cdbd; }
-.ad { position: absolute; left: 14px; right: 14px; bottom: 16px; height: 64px; border-radius: 12px; background: repeating-linear-gradient(45deg, #ff5d73, #ff5d73 14px, #ff7d8f 14px, #ff7d8f 28px); display: grid; place-items: center; font-weight: 900; font-size: 22px; color: #fff; }
+.ad { position: absolute; left: 14px; right: 14px; bottom: 16px; height: 70px; border-radius: 12px; background: #efe4d4; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px; }
+.ad span { border-radius: 3px; background: repeating-linear-gradient(0deg, #b9a990 0 3px, transparent 3px 7px); transform: rotate(-3deg); }
+.ad span:nth-child(2n) { transform: rotate(4deg); background: repeating-linear-gradient(0deg, #c6967a 0 3px, transparent 3px 7px); }
 .stamp { position: absolute; padding: 8px 18px; border: 4px solid #2bd47d; border-radius: 12px; color: #2bd47d; font-family: Lalezar; font-size: 34px; background: rgba(13,13,29,.85); }
 .tap { position: absolute; width: 70px; height: 70px; border-radius: 50%; border: 4px solid rgba(116,87,255,.9); background: rgba(116,87,255,.25); }
 /* sound */
@@ -90,7 +92,7 @@ html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; backgrou
     <div id="wordmark" class="abs wm" style="left:0;right:0;top:470px;text-align:center"><b>میکرو</b> <s>استودیو</s></div>
     <div id="latin" class="abs" style="left:0;right:0;top:600px;text-align:center;font-weight:900;font-size:26px;letter-spacing:.5em;color:#cfc4ff;direction:ltr">MICRO STUDIO</div>
     <div id="pills" class="abs" style="left:0;right:0;top:600px;display:flex;justify-content:center;gap:14px">
-      <span class="pill">فارسی</span><span class="pill">امن برای کودکان</span><span class="pill">بدون تبلیغ</span>
+      <span class="pill">فارسی</span><span class="pill">مناسب کودکان</span><span class="pill">تست‌شده با بچه‌ها</span>
     </div>
     <div id="insta" class="abs" style="left:0;right:0;top:668px;text-align:center;font-weight:800;font-size:24px;color:#bfb3ff;direction:ltr">instagram.com/micro_studio.ir</div>
   </div>
@@ -140,7 +142,7 @@ html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; backgrou
   <!-- ===== 03 UI ===== -->
   <div class="scene" id="s3">
     <div class="copy"><div class="num">۰۳</div><div class="ttl">طراحی رابط</div>
-      <div class="checks"><div class="chk" id="k31"><i>✓</i>دکمه‌های بزرگ و ساده</div><div class="chk" id="k32"><i>✓</i>راست‌چین و خوانا</div><div class="chk" id="k33"><i>✓</i>بدون تبلیغ</div></div>
+      <div class="checks"><div class="chk" id="k31"><i>✓</i>دکمه‌های بزرگ و ساده</div><div class="chk" id="k32"><i>✓</i>راست‌چین و خوانا</div><div class="chk" id="k33"><i>✓</i>شلوغی کمتر، تمرکز بیشتر</div></div>
     </div>
     <div class="phone" id="ph" style="left:200px;top:40px;width:330px;height:640px">
       <div class="screen">
@@ -150,11 +152,11 @@ html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; backgrou
         <div class="ubtn" id="u1" style="background:#ff8a2b">بازی‌ها</div>
         <div class="ubtn" id="u2" style="background:#7a4fd8">قصه‌ها</div>
         <div class="ubtn" id="u3" style="background:#2e9be6">نقاشی</div>
-        <div class="ad" id="ad">تبلیغ تبلیغ تبلیغ</div>
+        <div class="ad" id="ad"><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
       <div class="tap" id="tap"></div>
     </div>
-    <div class="stamp" id="stamp" style="left:250px;top:560px">بدون تبلیغ!</div>
+    <div class="stamp" id="stamp" style="left:250px;top:560px">ساده و خوانا!</div>
   </div>
 
   <!-- ===== 04 SOUND ===== -->
