@@ -12,10 +12,10 @@ return new class extends Migration
             Setting::put('home.about_image', 'assets/img/canva/world-map.webp');
         }
         if (Setting::where('key', 'site.trailer_url')->value('value') === 'assets/video/trailer.mp4') {
-            Setting::put('site.trailer_url', 'assets/video/studio-trailer.mp4');
+            Setting::put('site.trailer_url', 'assets/video/studio-motion.mp4');
         }
         if (Setting::where('key', 'home.banner_image')->value('value') === 'assets/img/scenes/puzzle-room.webp') {
-            Setting::put('home.banner_image', 'assets/video/studio-trailer-poster.webp');
+            Setting::put('home.banner_image', 'assets/video/studio-motion-poster.webp');
         }
         Setting::where('key', 'home.testi_image')->delete();
         \Illuminate\Support\Facades\Cache::forget('settings.all');

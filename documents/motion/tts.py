@@ -7,7 +7,7 @@ MODEL = sys.argv[1] if len(sys.argv) > 1 else 'gemini-2.5-pro-preview-tts'
 VOICE = sys.argv[2] if len(sys.argv) > 2 else 'Puck'
 
 LINES = json.load(open(os.path.join(HERE, 'script.json'), encoding='utf-8'))
-STYLE = 'Say in Persian, as an energetic and warm game-trailer narrator: '
+STYLE = 'Say in Persian, as a very energetic, exciting and confident male trailer narrator: '
 
 
 def tts(text, key):

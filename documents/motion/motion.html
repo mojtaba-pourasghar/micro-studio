@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Lalezar; src: url(../../../../../../home/user/micro-studio/public/assets/fonts/Lalezar-Regular.ttf); }
+@font-face { font-family: Vaz; src: url(../../../../../../home/user/micro-studio/public/assets/fonts/Vazirmatn-var.woff2); font-weight: 100 900; }
+:root { --brand: #7457ff; --brand2: #ab8dff; --night: #15162a; --orange: #ffb547; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: var(--night); font-family: Vaz; color: #fff; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(80% 90% at 75% 20%, #2c2170 0%, #1a1a3a 45%, #121226 100%); }
+#grid { position: absolute; inset: -80px; background-image: linear-gradient(rgba(171,141,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(171,141,255,.07) 1px, transparent 1px); background-size: 64px 64px; }
+.dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--brand2); }
+.scene { position: absolute; inset: 0; opacity: 0; }
+.abs { position: absolute; }
+/* text block (right side) */
+.copy { position: absolute; right: 90px; top: 50%; width: 470px; transform: translateY(-50%); }
+.num { font-family: Lalezar; font-size: 150px; line-height: .9; color: transparent; -webkit-text-stroke: 2px rgba(171,141,255,.75); }
+.ttl { font-family: Lalezar; font-size: 78px; line-height: 1.15; margin-top: 6px; text-shadow: 0 8px 30px rgba(0,0,0,.4); }
+.sub { font-size: 27px; font-weight: 700; color: #d6ccff; margin-top: 14px; line-height: 1.6; }
+.checks { margin-top: 22px; display: grid; gap: 12px; }
+.chk { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 800; }
+.chk i { width: 38px; height: 38px; border-radius: 11px; background: var(--brand); display: grid; place-items: center; font-style: normal; font-size: 22px; box-shadow: 0 8px 24px rgba(116,87,255,.55); }
+/* HUD */
+#hud-logo { position: absolute; left: 40px; top: 30px; width: 150px; }
+#hud-chip { position: absolute; right: 40px; top: 34px; padding: 8px 18px; border-radius: 12px; background: rgba(116,87,255,.9); font-weight: 900; font-size: 22px; box-shadow: 0 10px 30px rgba(116,87,255,.45); }
+#dots { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); display: flex; gap: 10px; direction: rtl; }
+#dots span { height: 10px; width: 10px; border-radius: 6px; background: rgba(255,255,255,.25); }
+/* wipe */
+#wipe { position: absolute; top: -10%; height: 120%; width: 70%; background: linear-gradient(90deg, #5b3ef5, #7457ff 40%, #ab8dff); transform: skewX(-14deg); box-shadow: 0 0 80px rgba(116,87,255,.7); }
+#wipe2 { position: absolute; top: -10%; height: 120%; width: 18%; background: var(--orange); transform: skewX(-14deg); }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+/* sticky notes */
+.note { position: absolute; width: 170px; height: 130px; border-radius: 14px; display: grid; place-items: center; font-family: Lalezar; font-size: 40px; color: #2a1f5c; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+/* phone */
+.phone { position: absolute; border-radius: 40px; background: #0d0d1d; border: 10px solid #26264a; box-shadow: 0 30px 70px rgba(0,0,0,.5), inset 0 0 0 2px rgba(255,255,255,.06); overflow: hidden; }
+.screen { position: absolute; inset: 0; background: linear-gradient(180deg, #fff7ec, #ffe9d2); }
+.ubtn { position: absolute; left: 22px; right: 22px; border-radius: 18px; color: #fff; display: grid; place-items: center; font-family: Lalezar; font-size: 30px; box-shadow: 0 8px 0 rgba(0,0,0,.18); }
+.line { position: absolute; height: 12px; border-radius: 6px; background: #d9cdbd; }
+.ad { position: absolute; left: 14px; right: 14px; bottom: 16px; height: 64px; border-radius: 12px; background: repeating-linear-gradient(45deg, #ff5d73, #ff5d73 14px, #ff7d8f 14px, #ff7d8f 28px); display: grid; place-items: center; font-weight: 900; font-size: 22px; color: #fff; }
+.stamp { position: absolute; padding: 8px 18px; border: 4px solid #2bd47d; border-radius: 12px; color: #2bd47d; font-family: Lalezar; font-size: 34px; background: rgba(13,13,29,.85); }
+.tap { position: absolute; width: 70px; height: 70px; border-radius: 50%; border: 4px solid rgba(116,87,255,.9); background: rgba(116,87,255,.25); }
+/* sound */
+.bar { position: absolute; bottom: 0; width: 14px; border-radius: 7px; background: linear-gradient(0deg, #7457ff, #ab8dff 60%, #ffb547); }
+.bubble { position: absolute; padding: 12px 24px; border-radius: 22px; background: #fff; color: #2a1f5c; font-family: Lalezar; font-size: 38px; box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+/* test */
+.dev { position: absolute; border-radius: 26px; background: #0d0d1d; border: 8px solid #2e2e58; overflow: hidden; box-shadow: 0 26px 60px rgba(0,0,0,.5); }
+.dev img { width: 100%; height: 100%; object-fit: cover; }
+.scan { position: absolute; left: 0; right: 0; height: 3px; background: #2bd47d; box-shadow: 0 0 20px #2bd47d; }
+.ok { position: absolute; width: 54px; height: 54px; border-radius: 50%; background: #2bd47d; display: grid; place-items: center; font-size: 32px; font-weight: 900; box-shadow: 0 10px 30px rgba(43,212,125,.6); }
+.card { position: absolute; border-radius: 22px; background: #fff; color: #2a1f5c; box-shadow: 0 26px 60px rgba(0,0,0,.45); }
+.star { display: inline-block; font-size: 44px; color: #ddd; }
+/* release */
+.prog { position: absolute; left: 110px; top: 260px; width: 520px; height: 34px; border-radius: 17px; background: rgba(255,255,255,.12); overflow: hidden; direction: ltr; }
+.prog b { display: block; height: 100%; background: linear-gradient(90deg, #7457ff, #ab8dff, #ffb547); border-radius: 17px; }
+.pct { position: absolute; left: 110px; top: 190px; width: 520px; text-align: center; font-family: Lalezar; font-size: 64px; }
+.rbtn { position: absolute; left: 245px; top: 340px; width: 250px; height: 84px; border-radius: 22px; background: linear-gradient(180deg, #8a70ff, #5b3ef5); display: grid; place-items: center; font-family: Lalezar; font-size: 42px; box-shadow: 0 10px 0 #3e27b8, 0 24px 50px rgba(116,87,255,.6); }
+.conf { position: absolute; width: 12px; height: 18px; border-radius: 3px; }
+.node { position: absolute; width: 150px; height: 64px; margin: -32px 0 0 -75px; border-radius: 18px; background: #fff; color: #2a1f5c; display: grid; place-items: center; font-family: Lalezar; font-size: 32px; box-shadow: 0 16px 36px rgba(0,0,0,.4); }
+/* outro */
+.wm { font-family: Lalezar; font-size: 120px; line-height: 1; white-space: nowrap; }
+.wm b { font-weight: 400; color: #fff; } .wm s { text-decoration: none; color: #ab8dff; }
+.pill { padding: 10px 24px; border-radius: 14px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); font-weight: 800; font-size: 26px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="grid"></div>
+  <div id="particles"></div>
+
+  <!-- ===== LOGO (intro + outro) ===== -->
+  <div class="scene" id="s-logo">
+    <svg id="logo" class="abs" viewBox="0 0 200 132" width="420" style="left:430px;top:170px;overflow:visible">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ab8dff"/><stop offset=".45" stop-color="#7457ff"/><stop offset="1" stop-color="#5b3ef5"/></linearGradient>
+        <linearGradient id="gloss" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="body"><path d="M22 28H72L100 64L128 28H178Q192 28 192 44L194 118Q194 146 168 140L146 118Q138 108 126 108H74Q62 108 54 118L32 140Q6 146 6 118L8 44Q8 28 22 28Z" transform="translate(0 -18)"/></clipPath>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g transform="translate(0 -18)">
+        <path id="outline" d="M22 28H72L100 64L128 28H178Q192 28 192 44L194 118Q194 146 168 140L146 118Q138 108 126 108H74Q62 108 54 118L32 140Q6 146 6 118L8 44Q8 28 22 28Z" fill="url(#g)" fill-opacity="0" stroke="#ab8dff" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>
+        <g id="plus" fill="#fff"><rect x="34" y="56" width="12" height="36"/><rect x="22" y="68" width="36" height="12"/></g>
+        <rect id="b1" x="150" y="54" width="14" height="14" fill="#ffb547"/>
+        <rect id="b2" x="164" y="70" width="14" height="14" fill="#fff"/>
+        <rect id="b3" x="136" y="70" width="14" height="14" fill="#d9ccff"/>
+        <rect id="b4" x="150" y="86" width="14" height="14" fill="#d9ccff"/>
+      </g>
+      <rect id="sweep" x="-80" y="0" width="60" height="140" fill="url(#gloss)" clip-path="url(#body)" transform="skewX(-15)"/>
+    </svg>
+    <div id="wordmark" class="abs wm" style="left:0;right:0;top:470px;text-align:center"><b>میکرو</b> <s>استودیو</s></div>
+    <div id="latin" class="abs" style="left:0;right:0;top:600px;text-align:center;font-weight:900;font-size:26px;letter-spacing:.5em;color:#cfc4ff;direction:ltr">MICRO STUDIO</div>
+    <div id="pills" class="abs" style="left:0;right:0;top:600px;display:flex;justify-content:center;gap:14px">
+      <span class="pill">فارسی</span><span class="pill">امن برای کودکان</span><span class="pill">بدون تبلیغ</span>
+    </div>
+    <div id="insta" class="abs" style="left:0;right:0;top:668px;text-align:center;font-weight:800;font-size:24px;color:#bfb3ff;direction:ltr">instagram.com/micro_studio.ir</div>
+  </div>
+
+  <!-- ===== 01 IDEA ===== -->
+  <div class="scene" id="s1">
+    <div class="copy"><div class="num">۰۱</div><div class="ttl">ایده</div><div class="sub" id="s1sub"></div></div>
+    <svg class="abs" width="700" height="720" style="left:0;top:0">
+      <g stroke="#ab8dff" stroke-width="3" stroke-dasharray="10 10" fill="none" opacity=".8">
+        <path id="c1" d="M340 360 L150 190"/><path id="c2" d="M340 360 L560 200"/><path id="c3" d="M340 360 L140 540"/><path id="c4" d="M340 360 L560 540"/>
+      </g>
+    </svg>
+    <div class="note" id="n1" style="left:70px;top:130px;background:#ffe27a">یادگیری</div>
+    <div class="note" id="n2" style="left:480px;top:140px;background:#ffb8d2">سرگرمی</div>
+    <div class="note" id="n3" style="left:60px;top:480px;background:#9ff0c9">قصه</div>
+    <div class="note" id="n4" style="left:480px;top:480px;background:#ffc98a">فارسی</div>
+    <div id="bulbglow" class="abs" style="left:190px;top:210px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,213,107,.85),rgba(255,181,71,0) 65%)"></div>
+    <svg id="bulb" class="abs" viewBox="0 0 100 140" width="150" style="left:265px;top:270px">
+      <path d="M50 6C26 6 10 24 10 46c0 15 8 25 16 33 5 5 8 11 8 17v6h32v-6c0-6 3-12 8-17 8-8 16-18 16-33C90 24 74 6 50 6Z" fill="#ffd56b" stroke="#2a1f5c" stroke-width="5"/>
+      <rect x="34" y="106" width="32" height="10" rx="3" fill="#cfc4ff" stroke="#2a1f5c" stroke-width="4"/><rect x="38" y="118" width="24" height="10" rx="3" fill="#cfc4ff" stroke="#2a1f5c" stroke-width="4"/>
+      <path d="M38 62 L46 74 L54 62 L62 74" fill="none" stroke="#2a1f5c" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <div id="q1" class="abs" style="left:300px;top:150px;font-family:Lalezar;font-size:70px;color:#ffb547">؟</div>
+    <div id="q2" class="abs" style="left:420px;top:330px;font-family:Lalezar;font-size:54px;color:#ab8dff">؟</div>
+  </div>
+
+  <!-- ===== 02 STORY ===== -->
+  <div class="scene" id="s2">
+    <div class="copy"><div class="num">۰۲</div><div class="ttl">داستان و طراحی</div><div class="sub">قصه، شخصیت‌ها و دنیای هر بازی را خودمان طراحی می‌کنیم.</div></div>
+    <div id="sheet" class="abs" style="left:70px;top:90px;width:600px;height:540px;border-radius:26px;background:#f5f0e6;box-shadow:0 30px 70px rgba(0,0,0,.45);overflow:hidden">
+      <div class="abs" style="inset:0;background-image:linear-gradient(rgba(42,31,92,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(42,31,92,.08) 1px,transparent 1px);background-size:28px 28px"></div>
+      <img id="ksk" class="abs" src="../../../../../../home/user/micro-studio/public/assets/img/characters/kairo.webp" style="left:40px;top:30px;height:480px;filter:grayscale(1) contrast(2.2) brightness(1.5) opacity(.85)">
+      <img id="kcol" class="abs" src="../../../../../../home/user/micro-studio/public/assets/img/characters/kairo.webp" style="left:40px;top:30px;height:480px">
+      <svg id="pencil" class="abs" viewBox="0 0 40 160" width="34" style="top:120px"><rect x="8" y="10" width="24" height="110" fill="#ffb547" stroke="#2a1f5c" stroke-width="3"/><path d="M8 120 L20 150 L32 120Z" fill="#f5d6a8" stroke="#2a1f5c" stroke-width="3"/><path d="M16 140 L20 150 L24 140Z" fill="#2a1f5c"/><rect x="8" y="4" width="24" height="10" fill="#ff8fab" stroke="#2a1f5c" stroke-width="3"/></svg>
+      <img id="ila" class="abs" src="../../../../../../home/user/micro-studio/public/assets/img/characters/ilara.webp" style="left:300px;top:110px;height:400px">
+      <div id="faces" class="abs" style="right:24px;top:24px;width:190px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/kairo-face-1.webp" style="width:90px;border-radius:12px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/kairo-face-2.webp" style="width:90px;border-radius:12px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/kairo-face-3.webp" style="width:90px;border-radius:12px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/ilara-face-2.webp" style="width:90px;border-radius:12px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/ilara-face-4.webp" style="width:90px;border-radius:12px">
+        <img class="face" src="../../../../../../home/user/micro-studio/public/assets/img/characters/ilara-face-5.webp" style="width:90px;border-radius:12px">
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 03 UI ===== -->
+  <div class="scene" id="s3">
+    <div class="copy"><div class="num">۰۳</div><div class="ttl">طراحی رابط</div>
+      <div class="checks"><div class="chk" id="k31"><i>✓</i>دکمه‌های بزرگ و ساده</div><div class="chk" id="k32"><i>✓</i>راست‌چین و خوانا</div><div class="chk" id="k33"><i>✓</i>بدون تبلیغ</div></div>
+    </div>
+    <div class="phone" id="ph" style="left:200px;top:40px;width:330px;height:640px">
+      <div class="screen">
+        <div class="abs" style="right:26px;top:36px;font-family:Lalezar;font-size:38px;color:#e2504f">دنیای بازی</div>
+        <div class="line" id="l1" style="top:104px;width:200px"></div>
+        <div class="line" id="l2" style="top:128px;width:150px"></div>
+        <div class="ubtn" id="u1" style="background:#ff8a2b">بازی‌ها</div>
+        <div class="ubtn" id="u2" style="background:#7a4fd8">قصه‌ها</div>
+        <div class="ubtn" id="u3" style="background:#2e9be6">نقاشی</div>
+        <div class="ad" id="ad">تبلیغ تبلیغ تبلیغ</div>
+      </div>
+      <div class="tap" id="tap"></div>
+    </div>
+    <div class="stamp" id="stamp" style="left:250px;top:560px">بدون تبلیغ!</div>
+  </div>
+
+  <!-- ===== 04 SOUND ===== -->
+  <div class="scene" id="s4">
+    <div class="copy"><div class="num">۰۴</div><div class="ttl">صدا و موسیقی</div><div class="sub">صداگذاری فارسی و موسیقی، حس بازی را کامل می‌کند.</div></div>
+    <div id="eq" class="abs" style="left:60px;top:200px;width:640px;height:320px"></div>
+    <div id="mic" class="abs" style="left:290px;top:250px;width:180px;height:180px;border-radius:50%;background:linear-gradient(180deg,#8a70ff,#5b3ef5);display:grid;place-items:center;box-shadow:0 0 0 16px rgba(116,87,255,.18),0 30px 60px rgba(0,0,0,.45)">
+      <svg viewBox="0 0 24 24" width="88" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8"/></svg>
+    </div>
+    <div class="bubble" id="bb1" style="left:80px;top:120px">سلام!</div>
+    <div class="bubble" id="bb2" style="left:480px;top:150px">آفرین!</div>
+    <div class="bubble" id="bb3" style="left:120px;top:520px">بزن بریم!</div>
+    <div class="bubble" id="bb4" style="left:470px;top:500px">♪ ♫</div>
+  </div>
+
+  <!-- ===== 05 TEST ===== -->
+  <div class="scene" id="s5">
+    <div class="copy" style="width:440px"><div class="num">۰۵</div><div class="ttl">تست با بچه‌ها</div>
+      <div class="checks"><div class="chk" id="k51"><i>✓</i>گوشی و تبلت‌های مختلف</div><div class="chk" id="k52"><i>✓</i>تست با خود بچه‌ها</div><div class="chk" id="k53"><i>✓</i>نظر پدر و مادرها</div><div class="chk" id="k54"><i>✓</i>تکرار تا بی‌نقص شدن</div></div>
+    </div>
+    <div id="devs" class="abs" style="left:0;top:0;width:760px;height:720px">
+      <div class="dev" id="d1" style="left:60px;top:120px;width:420px;height:290px"><img src="../../../../../../home/user/micro-studio/public/assets/games/razino/shot-01.webp"><div class="scan" id="sc1"></div></div>
+      <div class="dev" id="d2" style="left:510px;top:90px;width:170px;height:340px"><img src="../../../../../../home/user/micro-studio/public/assets/games/pashmak/shot-01.webp"><div class="scan" id="sc2"></div></div>
+      <div class="dev" id="d3" style="left:300px;top:440px;width:150px;height:240px"><img src="../../../../../../home/user/micro-studio/public/assets/games/popo/shot-02.webp" style="object-position:top"><div class="scan" id="sc3"></div></div>
+      <div class="dev" id="d4" style="left:80px;top:440px;width:190px;height:240px"><img src="../../../../../../home/user/micro-studio/public/assets/games/hoho-math-3/shot-01.webp"><div class="scan" id="sc4"></div></div>
+      <div class="ok" id="o1" style="left:450px;top:100px">✓</div><div class="ok" id="o2" style="left:650px;top:70px">✓</div><div class="ok" id="o3" style="left:420px;top:420px">✓</div><div class="ok" id="o4" style="left:240px;top:420px">✓</div>
+      <svg id="bug" class="abs" viewBox="0 0 60 60" width="70" style="overflow:visible">
+        <g stroke="#2a1f5c" stroke-width="3" stroke-linecap="round"><path id="legs1" d="M14 24 L4 18 M14 32 L2 32 M14 40 L4 46 M46 24 L56 18 M46 32 L58 32 M46 40 L56 46"/></g>
+        <ellipse cx="30" cy="34" rx="16" ry="20" fill="#ff5d73" stroke="#2a1f5c" stroke-width="3"/><circle cx="30" cy="12" r="9" fill="#2a1f5c"/>
+        <circle cx="24" cy="30" r="3.5" fill="#2a1f5c"/><circle cx="36" cy="38" r="3.5" fill="#2a1f5c"/><circle cx="26" cy="44" r="3" fill="#2a1f5c"/>
+      </svg>
+      <div id="splat" class="abs" style="width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,#ff5d73 35%,rgba(255,93,115,0) 70%)"></div>
+      <div id="bugfix" class="abs" style="padding:8px 18px;border-radius:12px;background:#2bd47d;font-weight:900;font-size:24px">باگ رفع شد!</div>
+      <svg id="lens" class="abs" viewBox="0 0 60 60" width="110"><circle cx="24" cy="24" r="16" fill="rgba(255,255,255,.25)" stroke="#fff" stroke-width="5"/><path d="M36 36 L54 54" stroke="#fff" stroke-width="7" stroke-linecap="round"/></svg>
+    </div>
+    <div class="card" id="rate" style="left:80px;top:150px;width:560px;height:180px;padding:26px 30px">
+      <div style="font-family:Lalezar;font-size:38px">نظر بچه‌ها و والدین</div>
+      <div id="stars" style="margin-top:8px;direction:ltr;text-align:right"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+    </div>
+    <div class="card" id="chart" style="left:80px;top:360px;width:560px;height:260px;padding:20px 26px">
+      <div style="font-family:Lalezar;font-size:32px">کیفیت بعد از هر دور تست</div>
+      <svg width="508" height="170" style="margin-top:6px"><path d="M0 168 H508 M0 0 V168" stroke="#ddd" stroke-width="2"/><path id="cline" d="M10 150 L90 128 L170 132 L250 96 L330 84 L410 46 L495 18" fill="none" stroke="#7457ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle id="cdot" r="10" fill="#ffb547" stroke="#fff" stroke-width="4"/></svg>
+    </div>
+  </div>
+
+  <!-- ===== 06 RELEASE ===== -->
+  <div class="scene" id="s6">
+    <div class="copy"><div class="num">۰۶</div><div class="ttl">انتشار و به‌روزرسانی</div><div class="sub">منتشر می‌کنیم، گوش می‌دهیم و دوباره بهترش می‌کنیم.</div></div>
+    <div id="relA" class="abs" style="inset:0">
+      <div class="pct" id="pct">۰٪</div>
+      <div class="prog"><b id="pbar" style="width:0"></b></div>
+      <div class="rbtn" id="rbtn">انتشار</div>
+    </div>
+    <div id="confs"></div>
+    <div id="cycle" class="abs" style="left:370px;top:370px;width:0;height:0">
+      <svg class="abs" width="420" height="420" style="left:-210px;top:-210px"><circle cx="210" cy="210" r="165" fill="none" stroke="rgba(171,141,255,.5)" stroke-width="4" stroke-dasharray="14 12"/></svg>
+      <div class="abs" style="left:-55px;top:-55px;width:110px;height:110px;border-radius:50%;background:linear-gradient(180deg,#8a70ff,#5b3ef5);display:grid;place-items:center;font-size:56px;box-shadow:0 20px 50px rgba(116,87,255,.6)">↻</div>
+      <div class="node" data-a="0">ایده</div><div class="node" data-a="1">طراحی</div><div class="node" data-a="2">تست</div><div class="node" data-a="3">به‌روزرسانی</div>
+    </div>
+  </div>
+
+  <img id="hud-logo" src="../../../../../../home/user/micro-studio/public/assets/brand/logo-horizontal-dark.png">
+  <div id="hud-chip">۰۱ · ایده</div>
+  <div id="dots"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div id="wipe"></div><div id="wipe2"></div>
+  <div id="flash"></div>
+</div>
+
+<script>
+const BAR = 1.875, B = BAR / 4;
+const CUT = [0, 3.75, 9.375, 16.875, 24.375, 30, 41.25, 46.875, 54.9];
+const NAMES = ['ایده', 'داستان و طراحی', 'طراحی رابط', 'صدا و موسیقی', 'تست با بچه‌ها', 'انتشار و به‌روزرسانی'];
+const FA = (n) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (t, a, d) => clamp((t - a) / d);
+const eo = (x) => 1 - Math.pow(1 - x, 3);
+const eio = (x) => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const back = (x) => { const c1 = 1.9, c3 = c1 + 1; return x <= 0 ? 0 : 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const pop = (t, a, d = .35) => back(P(t, a, d));
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => Array.from(document.querySelectorAll(s));
+const st = (el, o) => { for (const k in o) el.style[k] = o[k]; };
+let AMP = window.AMP || [];
+
+// deterministic particles
+const parts = [];
+for (let i = 0; i < 26; i++) {
+  const d = document.createElement('div'); d.className = 'dot';
+  $('#particles').appendChild(d);
+  parts.push({ el: d, x: (i * 397) % 1280, y: (i * 211) % 720, s: .4 + (i % 5) * .25, v: 14 + (i % 7) * 6 });
+}
+const confs = [];
+const COLS = ['#ffb547', '#ab8dff', '#2bd47d', '#ff5d73', '#5cc8ff', '#fff'];
+for (let i = 0; i < 90; i++) {
+  const d = document.createElement('div'); d.className = 'conf'; d.style.background = COLS[i % 6];
+  $('#confs').appendChild(d);
+  const a = (i / 90) * Math.PI * 2 + (i % 3) * .3, sp = 380 + (i * 37) % 420;
+  confs.push({ el: d, vx: Math.cos(a) * sp * .9, vy: Math.sin(a) * sp - 420, r: (i * 53) % 360, vr: ((i % 5) - 2) * 300 });
+}
+const bars = [];
+for (let i = 0; i < 40; i++) {
+  const d = document.createElement('div'); d.className = 'bar'; d.style.left = (i * 16) + 'px';
+  $('#eq').appendChild(d); bars.push(d);
+}
+const outline = $('#outline'); const OL = outline.getTotalLength();
+const cline = $('#cline'); const CL = cline.getTotalLength();
+outline.style.strokeDasharray = OL;
+cline.style.strokeDasharray = CL;
+['#c1', '#c2', '#c3', '#c4'].forEach((s) => { const p = $(s); p.dataset.len = p.getTotalLength(); });
+const SUB1 = 'بچه‌ها از این بازی چه یاد می‌گیرند؟';
+
+function sceneAlpha(i, t) { // i: 1..6 → CUT[i]..CUT[i+1]
+  return t >= CUT[i] && t < CUT[i + 1] ? 1 : 0;
+}
+
+function logo(t, t0, fast) {
+  // t0: start; returns nothing, drives #s-logo
+  const k = fast ? .6 : 1;
+  const lt = t - t0;
+  outline.style.strokeDashoffset = OL * (1 - eio(P(lt, .25 * k, 1.1 * k)));
+  outline.setAttribute('fill-opacity', eo(P(lt, 1.15 * k, .45 * k)));
+  const pops = fast ? [.5, .735, .965, 1.2, 1.2] : [1.1625, 1.45, 1.74, 2.03, 2.325];
+  ['#plus', '#b1', '#b2', '#b3', '#b4'].forEach((s, i) => {
+    const e = $(s), p = pop(t, t0 + pops[i], .3);
+    const bb = e.getBBox(); const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+    e.setAttribute('transform', `translate(${cx} ${cy}) scale(${p}) translate(${-cx} ${-cy})`);
+  });
+  const sw = P(lt, fast ? 1.4 : 2.6, .6);
+  $('#sweep').setAttribute('x', -80 + sw * 330);
+}
+
+function render(t) {
+  // background drift + particles
+  st($('#grid'), { transform: `translate(${(t * 18) % 64}px, ${(t * 10) % 64}px)` });
+  const beat = Math.exp(-((t % B) / B) * 5) * (t > 3.75 && t < 54 ? 1 : 0);
+  parts.forEach((p) => {
+    const y = (p.y - t * p.v) % 760; const yy = y < -20 ? y + 760 : y;
+    st(p.el, { transform: `translate(${p.x + Math.sin(t * .6 + p.x) * 20}px, ${yy}px) scale(${p.s * (1 + beat * .6)})`, opacity: .35 + beat * .3 });
+  });
+
+  // ===== logo intro / outro =====
+  const L = $('#s-logo');
+  if (t < CUT[1]) {
+    L.style.opacity = 1;
+    logo(t, 0, false);
+    const zoom = 1 + eio(P(t, 3.35, .4)) * 2.6;
+    st($('#logo'), { transform: `scale(${zoom})`, opacity: 1 - P(t, 3.55, .2) });
+    const wmP = eo(P(t, 2.55, .5));
+    st($('#wordmark'), { clipPath: `inset(0 0 0 ${(1 - wmP) * 100}%)`, opacity: 1 - P(t, 3.35, .2), top: '470px' });
+    st($('#latin'), { opacity: P(t, 2.9, .3) * (1 - P(t, 3.35, .2)), letterSpacing: (1.2 - .7 * eo(P(t, 2.9, .6))) + 'em' });
+    st($('#pills'), { opacity: 0 }); st($('#insta'), { opacity: 0 });
+  } else if (t >= CUT[7]) {
+    L.style.opacity = 1;
+    logo(t, CUT[7], true);
+    const s = .78 + .22 * eo(P(t, CUT[7], .5)) + (P(t, 50.6, .1) - P(t, 50.7, .5)) * .05;
+    st($('#logo'), { transform: `translateY(-70px) scale(${s})`, opacity: 1 });
+    const wmP = eo(P(t, 48.2, .6));
+    st($('#wordmark'), { clipPath: `inset(0 0 0 ${(1 - wmP) * 100}%)`, opacity: 1, top: '380px' });
+    st($('#latin'), { opacity: P(t, 48.7, .4), top: '505px', letterSpacing: (1.1 - .6 * eo(P(t, 48.7, .8))) + 'em' });
+    st($('#pills'), { opacity: P(t, 49.3, .3), top: '565px', transform: `translateY(${(1 - eo(P(t, 49.3, .5))) * 30}px)` });
+    $$('#pills .pill').forEach((p, i) => st(p, { opacity: P(t, 49.3 + i * .22, .3), transform: `scale(${pop(t, 49.3 + i * .22)})` }));
+    st($('#insta'), { opacity: P(t, 50.2, .5), top: '640px' });
+  } else L.style.opacity = 0;
+  // fade to black at the very end
+  st($('#flash'), { background: t > 53 ? '#000' : '#fff', opacity: t > 53.6 ? P(t, 53.6, 1.2) : Math.max(0, 1 - Math.abs(t - 3.75) / .18) * .9 + Math.max(0, 1 - Math.abs(t - 46.875) / .2) * .7 });
+
+  // ===== HUD =====
+  const si = CUT.findIndex((c, i) => t >= c && t < CUT[i + 1]); // 0 intro, 1..6 scenes, 7 outro
+  const inScenes = si >= 1 && si <= 6;
+  st($('#hud-logo'), { opacity: inScenes ? 1 : 0 });
+  st($('#hud-chip'), { opacity: inScenes ? 1 : 0, transform: `scale(${inScenes ? pop(t, CUT[si] + .1, .35) : 0})` });
+  if (inScenes) $('#hud-chip').textContent = FA('0' + si) + ' · ' + NAMES[si - 1];
+  st($('#dots'), { opacity: inScenes ? 1 : 0 });
+  $$('#dots span').forEach((d, i) => st(d, { width: i + 1 === si ? '34px' : '10px', background: i + 1 <= si ? '#ab8dff' : 'rgba(255,255,255,.25)' }));
+
+  // ===== wipes at cuts 2..7 =====
+  let wx = 2000;
+  for (let i = 2; i <= 7; i++) {
+    const p = P(t, CUT[i] - .28, .56);
+    if (p > 0 && p < 1) wx = 1400 - eio(p) * 2600;
+  }
+  st($('#wipe'), { left: wx + 'px' }); st($('#wipe2'), { left: (wx + 960) + 'px' });
+
+  // ===== copy block entrance per scene =====
+  for (let i = 1; i <= 6; i++) {
+    const sc = $('#s' + i); const a = sceneAlpha(i, t); sc.style.opacity = a;
+    if (!a) continue;
+    const lt = t - CUT[i];
+    const cp = sc.querySelector('.copy');
+    st(cp.querySelector('.num'), { opacity: P(lt, .1, .3), transform: `translateX(${(1 - eo(P(lt, .1, .5))) * -60}px)` });
+    st(cp.querySelector('.ttl'), { opacity: P(lt, .25, .3), transform: `translateY(${(1 - eo(P(lt, .25, .5))) * 40}px)` });
+    const sb = cp.querySelector('.sub'); if (sb) st(sb, { opacity: P(lt, .5, .4) });
+    // gentle camera push on the visual side
+    sc.style.transform = `scale(${1 + lt * .006})`;
+  }
+
+  // ===== 01 IDEA =====
+  if (sceneAlpha(1, t)) {
+    const lt = t - CUT[1];
+    const n = Math.round(clamp((lt - .6) / 1.6) * SUB1.length); $('#s1sub').textContent = SUB1.slice(0, n);
+    const bl = pop(t, 4.0, .45);
+    st($('#bulb'), { transform: `scale(${bl}) rotate(${Math.sin(t * 3) * 4}deg)` });
+    st($('#bulbglow'), { opacity: P(t, 4.5, .3) * (.7 + beat * .3), transform: `scale(${.8 + beat * .25})` });
+    [['#n1', 4.45, -6], ['#n2', 4.92, 5], ['#n3', 5.39, 4], ['#n4', 5.86, -4]].forEach(([s, a, r], i) => {
+      st($(s), { transform: `scale(${pop(t, a, .4)}) rotate(${r + Math.sin(t * 2 + i) * 2}deg)`, opacity: P(t, a, .1) });
+      const c = $('#c' + (i + 1)); const len = +c.dataset.len;
+      c.style.strokeDasharray = `10 10`; c.style.opacity = P(t, a - .2, .3);
+    });
+    st($('#q1'), { opacity: P(t, 6.6, .3), transform: `translateY(${-((t - 6.6) * 30)}px) rotate(-10deg)` });
+    st($('#q2'), { opacity: P(t, 7.0, .3), transform: `translateY(${-((t - 7) * 26)}px) rotate(12deg)` });
+  }
+
+  // ===== 02 STORY =====
+  if (sceneAlpha(2, t)) {
+    const lt = t - CUT[2];
+    st($('#sheet'), { transform: `translateY(${(1 - eo(P(lt, 0, .6))) * 60}px) rotate(${(1 - eo(P(lt, 0, .6))) * -4}deg)` });
+    const rv = eio(P(t, 10.6, 2.0));                  // colour wipe
+    st($('#kcol'), { clipPath: `inset(0 ${100 - rv * 100}% 0 0)` });
+    const ksk = $('#ksk'); const kw = 480 * 350 / 668;
+    st($('#pencil'), { left: (40 + kw * rv - 8) + 'px', top: (110 + Math.sin(t * 22) * 30) + 'px', opacity: P(t, 10.4, .2) * (1 - P(t, 12.7, .2)) });
+    st($('#ila'), { opacity: P(t, 12.9, .3), transform: `translateX(${(1 - eo(P(t, 12.9, .6))) * 120}px)` });
+    $$('.face').forEach((f, i) => { const a = 13.6 + i * B; st(f, { opacity: P(t, a, .1), transform: `scale(${pop(t, a, .3)})` }); });
+    // faces flip expression on the beat after they arrive
+    const cur = Math.floor((t - 15.0) / B) % 6;
+    $$('.face').forEach((f, i) => { if (t > 15) f.style.outline = i === cur ? '4px solid #7457ff' : 'none'; });
+  }
+
+  // ===== 03 UI =====
+  if (sceneAlpha(3, t)) {
+    const lt = t - CUT[3];
+    st($('#ph'), { transform: `translateY(${(1 - eo(P(lt, 0, .6))) * 80}px)` });
+    const g = back(P(t, 18.2, .5));                   // buttons grow
+    ['#u1', '#u2', '#u3'].forEach((s, i) => {
+      const h = 34 + 46 * g; const top = 170 + i * (h + 16 + 10 * g);
+      st($(s), { height: h + 'px', top: top + 'px', fontSize: (16 + 14 * g) + 'px', left: (90 - 68 * g) + 'px', right: (90 - 68 * g) + 'px' });
+    });
+    const al = eio(P(t, 19.2, .5));                   // text snaps right (RTL)
+    st($('#l1'), { right: (26 + (1 - al) * 80) + 'px' }); st($('#l2'), { right: (26 + (1 - al) * 130) + 'px' });
+    const adOut = P(t, 20.6, .35);
+    st($('#ad'), { transform: `scale(${1 - eo(adOut)})`, opacity: 1 - adOut });
+    st($('#stamp'), { opacity: P(t, 20.7, .1) * (1 - P(t, 22.8, .3)), transform: `rotate(-8deg) scale(${pop(t, 20.7, .35) * 1})` });
+    [['#k31', 18.3], ['#k32', 19.3], ['#k33', 20.7]].forEach(([s, a]) => st($(s), { opacity: P(t, a, .2), transform: `translateX(${(1 - eo(P(t, a, .4))) * -40}px)` }));
+    // taps on the big buttons
+    const taps = [21.6, 22.3, 23.0];
+    let tp = 0, ty = 0, tx = 0;
+    taps.forEach((a, i) => { const p = P(t, a, .45); if (p > 0 && p < 1) { tp = p; ty = 200 + i * 106; tx = 130; } });
+    st($('#tap'), { left: tx + 'px', top: ty + 'px', opacity: tp ? 1 - tp : 0, transform: `scale(${.4 + tp * 1.4})` });
+  }
+
+  // ===== 04 SOUND =====
+  if (sceneAlpha(4, t)) {
+    const f = Math.floor(t * 30); const a = AMP[f] || 0;
+    bars.forEach((b, i) => {
+      const k = Math.abs(Math.sin(i * 1.7 + t * 9)) * .5 + Math.abs(Math.sin(i * .45 - t * 5)) * .5;
+      const h = 18 + Math.min(1, a * 1.8) * 300 * (.3 + .7 * k) * (1 - Math.abs(i - 19.5) / 24);
+      st(b, { height: h + 'px', bottom: (160 - h / 2) + 'px' });
+    });
+    st($('#mic'), { transform: `scale(${pop(t, 24.6, .4) * (1 + a * .12)})` });
+    [['#bb1', 25.3], ['#bb2', 26.2], ['#bb3', 27.1], ['#bb4', 28.0]].forEach(([s, at], i) =>
+      st($(s), { opacity: P(t, at, .1), transform: `scale(${pop(t, at, .35)}) translateY(${Math.sin(t * 2.5 + i) * 8}px)` }));
+  }
+
+  // ===== 05 TEST =====
+  if (sceneAlpha(5, t)) {
+    const lt = t - CUT[5];
+    const dim = 1 - .7 * eio(P(t, 36.7, .5));
+    st($('#devs'), { opacity: dim, transform: `scale(${1 - .08 * eio(P(t, 36.7, .5))})` });
+    [['#d1', 30.15], ['#d2', 30.4], ['#d4', 30.65], ['#d3', 30.9]].forEach(([s, a]) => st($(s), { transform: `scale(${pop(t, a, .4)})` }));
+    [1, 2, 3, 4].forEach((i) => {
+      const sc = $('#sc' + i); const h = $('#d' + i).clientHeight;
+      const p = ((t - 30.8 - i * .3) % 1.6) / 1.6;
+      st(sc, { top: (p * h) + 'px', opacity: t > 31 && t < 36.5 ? 1 : 0 });
+    });
+    [['#o1', 31.9], ['#o2', 32.4], ['#o4', 32.9], ['#o3', 33.4]].forEach(([s, a]) => st($(s), { transform: `scale(${pop(t, a, .35)})` }));
+    // bug walks across the tablet, gets found and squashed
+    const bw = P(t, 33.6, 2.0); const squash = P(t, 35.85, .12);
+    const bx = 110 + bw * 270, by = 250 + Math.sin(bw * 12) * 14;
+    st($('#bug'), { left: bx + 'px', top: by + 'px', opacity: t > 33.5 && t < 36.4 ? 1 : 0, transform: `rotate(${90 + Math.sin(bw * 30) * 8}deg) scale(${1 + squash * .5}, ${1 - squash * .9})` });
+    $('#legs1').setAttribute('transform', `translate(0 ${Math.sin(t * 40) * 2})`);
+    st($('#lens'), { left: (bx - 40 + (1 - eo(P(t, 34.8, .6))) * 300) + 'px', top: (by - 50) + 'px', opacity: P(t, 34.8, .2) * (1 - P(t, 35.85, .15)) });
+    st($('#splat'), { left: (bx - 20) + 'px', top: (by - 20) + 'px', opacity: P(t, 35.9, .05) * (1 - P(t, 36.2, .4)), transform: `scale(${eo(P(t, 35.9, .2))})` });
+    st($('#bugfix'), { left: (bx - 40) + 'px', top: (by - 80) + 'px', opacity: P(t, 36.0, .1) * (1 - P(t, 36.7, .3)), transform: `scale(${pop(t, 36.0, .3)})` });
+    // rating + chart
+    st($('#rate'), { opacity: P(t, 36.9, .2), transform: `translateY(${(1 - back(P(t, 36.9, .5))) * 60}px)` });
+    $$('#stars .star').forEach((s, i) => { const a = 37.4 + i * B; s.style.color = t > a ? '#ffb547' : '#ddd'; s.style.transform = `scale(${t > a ? pop(t, a, .3) : 1})`; });
+    st($('#chart'), { opacity: P(t, 38.1, .2), transform: `translateY(${(1 - back(P(t, 38.1, .5))) * 60}px)` });
+    const cp = eio(P(t, 38.5, 2.0));
+    cline.style.strokeDashoffset = CL * (1 - cp);
+    const pt = cline.getPointAtLength(CL * cp); $('#cdot').setAttribute('cx', pt.x); $('#cdot').setAttribute('cy', pt.y);
+    [['#k51', 31.0], ['#k52', 33.2], ['#k53', 37.2], ['#k54', 39.2]].forEach(([s, a]) => st($(s), { opacity: P(t, a, .2), transform: `translateX(${(1 - eo(P(t, a, .4))) * -40}px)` }));
+  }
+
+  // ===== 06 RELEASE =====
+  if (sceneAlpha(6, t)) {
+    const p = eio(P(t, 41.6, 1.4));
+    $('#pbar').style.width = (p * 100) + '%';
+    $('#pct').textContent = FA(Math.round(p * 100)) + '٪';
+    const press = P(t, 43.1, .12) - P(t, 43.22, .25);
+    st($('#rbtn'), { transform: `scale(${pop(t, 41.5, .4) * (1 - press * .12)})`, boxShadow: `0 ${10 - press * 8}px 0 #3e27b8, 0 24px 50px rgba(116,87,255,.6)` });
+    st($('#relA'), { opacity: 1 - P(t, 44.0, .35), transform: `translateY(${-P(t, 44.0, .35) * 40}px)` });
+    const ct = t - 43.25;
+    confs.forEach((c) => {
+      const x = 370 + c.vx * ct, y = 380 + c.vy * ct + 900 * ct * ct;
+      st(c.el, { left: x + 'px', top: y + 'px', opacity: ct > 0 && ct < 2.2 ? 1 - P(ct, 1.4, .8) : 0, transform: `rotate(${c.r + c.vr * ct}deg)` });
+    });
+    const cyc = $('#cycle'); st(cyc, { opacity: P(t, 44.2, .3), transform: `scale(${pop(t, 44.2, .5)})` });
+    const rot = (t - 44.2) * 40;
+    $$('.node').forEach((n) => { const a = (+n.dataset.a * 90 - 90 + rot) * Math.PI / 180; st(n, { left: Math.cos(a) * 165 + 'px', top: Math.sin(a) * 165 + 'px' }); });
+  }
+}
+window.render = render;
+window.setAmp = (a) => { AMP = a; };
+</script>
+</body>
+</html>
