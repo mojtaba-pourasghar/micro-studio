@@ -17,7 +17,7 @@ class WatermarkImages extends Command
     protected $description = 'Put the Micro Studio logo on site images (safe to run more than once)';
 
     public const DEFAULT_GLOBS = [
-        'assets/img/scenes/*.webp', 'assets/img/canva/*.webp', 'assets/img/works/*-shot.webp',
+        'assets/img/scenes/*.webp', 'assets/img/canva/*.webp', 'assets/img/services/*.webp', 'assets/img/works/*-shot.webp',
         'assets/games/*/shot-*.webp', 'assets/games/*/hero.webp', 'assets/games/*/story.webp', 'assets/games/*/*-poster.webp', 'assets/games/*/mascot-*.webp',
     ];
 

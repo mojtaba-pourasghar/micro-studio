@@ -165,11 +165,11 @@ class ContentSeeder extends Seeder
             ['edu', 'اپ آموزشی', 'اپ‌های درسی تعاملی هم‌گام با کتاب‌های دبستان؛ تمرین، بازی و بازخورد صوتی برای یادگیری شاد.',
                 'اپ‌های درسی تعاملی هم‌گام با کتاب‌های دبستان؛ مثل هوهو فارسی و علوم کلاس سوم با ۲۴۱ صفحه‌ی درسی صوتی، تمرین و آزمون.',
                 ['تبدیل کتاب درسی به درس‌های تعاملی', 'روایت صوتی برای هر صفحه', 'کاربرگ، تمرین و آزمون سطح‌بندی‌شده', 'کار آفلاین و بدون نیاز به اینترنت'],
-                'assets/img/works/hoho-farsi-shot.webp', true, 'assets/img/characters/razino-girl.webp', 'سفارش اپ آموزشی'],
+                'assets/img/services/edu-app.webp', false, 'assets/img/characters/razino-girl.webp', 'سفارش اپ آموزشی'],
             ['voice', 'صداگذاری فارسی', 'دوبله، موسیقی و افکت‌های صوتی؛ صدای فارسی طبیعی برای شخصیت‌ها و درس‌ها.',
                 'دوبله، موسیقی و افکت‌های صوتی؛ صدای فارسی طبیعی و گرم برای شخصیت‌ها، راوی داستان و معلم درس‌ها.',
                 ['دوبله‌ی شخصیت‌ها و روایت فارسی', 'موسیقی متن اختصاصی', 'افکت‌های صوتی رابط و محیط', 'میکس و آماده‌سازی برای موبایل'],
-                'assets/img/scenes/puzzle-room.webp', false, 'assets/img/characters/razino-merchant.webp', 'سفارش صداگذاری'],
+                'assets/img/services/voice.webp', false, 'assets/img/characters/razino-merchant.webp', 'سفارش صداگذاری'],
         ];
         foreach ($rows as $i => [$slug, $title, $summary, $desc, $deliv, $image, $phone, $char, $cta]) {
             Service::updateOrCreate(['slug' => $slug], [
@@ -188,7 +188,7 @@ class ContentSeeder extends Seeder
             ['صدا و محتوای آموزشی', 'دوبله‌ی فارسی، موسیقی و درس‌ها', 'صدا', 'orange', 'assets/img/characters/ilara-face-4.webp'],
         ];
         foreach ($team as $i => [$name, $role, $tag, $color, $avatar]) {
-            TeamMember::updateOrCreate(['name' => $name], ['role' => $role, 'tag' => $tag, 'tag_color' => $color, 'avatar' => $avatar, 'sort_order' => $i + 1]);
+            TeamMember::updateOrCreate(['name' => $name], ['role' => $role, 'tag' => $tag, 'tag_color' => $color, 'avatar' => $avatar, 'sort_order' => $i + 1, 'is_published' => false]);
         }
 
         $testimonials = [

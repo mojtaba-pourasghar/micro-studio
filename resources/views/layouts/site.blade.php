@@ -109,7 +109,7 @@
       </div>
       <nav class="f-col" aria-label="درباره ما">
         <h3>درباره ما</h3>
-        <a href="{{ route('about') }}">معرفی استودیو</a><a href="{{ route('about') }}#team">تیم ما</a><a href="{{ route('games.index') }}">بازی‌های ما</a><a href="{{ route('blog.index') }}">وبلاگ</a>
+        <a href="{{ route('about') }}">معرفی استودیو</a>@if (\App\Models\TeamMember::visible()->exists())<a href="{{ route('about') }}#team">تیم ما</a>@endif<a href="{{ route('games.index') }}">بازی‌های ما</a><a href="{{ route('blog.index') }}">وبلاگ</a>
       </nav>
       <nav class="f-col" aria-label="خدمات">
         <h3>خدمات</h3>

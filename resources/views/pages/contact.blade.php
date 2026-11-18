@@ -38,7 +38,7 @@
         <p class="eyebrow reveal from-right" style="grid-column:1/-1"><svg aria-hidden="true"><use href="#i-gem"/></svg> فرم تماس</p>
         <h2 id="contact-title" class="h2 big" data-split>{{ heading(setting('home.contact_title')) }}</h2>
         <p class="lead reveal blur" style="--d:.35s">{{ setting('contact_page.form_lead') }}</p>
-        <img class="contact-char" src="{{ asset('assets/img/characters/razino-companion.webp') }}" alt="" width="207" height="294" loading="lazy" data-x="140" data-speed="-0.25" data-depth="1.5">
+        <img class="contact-char" src="{{ asset('assets/img/characters/razino-companion.webp') }}" alt="" width="213" height="450" loading="lazy" data-x="140" data-speed="-0.25" data-depth="1.5">
         @if ($steps->isNotEmpty())
           <ul class="check-list contact-steps stagger">
             @foreach ($steps as $s)<li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b>{{ $s->title }}</b>{{ $s->text }}</span></li>@endforeach
