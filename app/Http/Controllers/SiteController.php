@@ -40,6 +40,7 @@ class SiteController extends Controller
             'games' => Game::visible()->get(),
             'honors' => $this->blocks('honors'),
             'testimonials' => Testimonial::visible()->get(),
+            'latestPosts' => Post::published()->with('category')->limit(3)->get(),
         ]);
     }
 

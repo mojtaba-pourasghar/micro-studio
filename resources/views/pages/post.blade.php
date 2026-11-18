@@ -61,7 +61,7 @@
         </nav>
         @if ($post->game)
           <a class="aside-game" href="{{ route('games.show', $post->game) }}">
-            <img src="{{ img($post->game->hero_character ?: 'assets/img/characters/razino-hero.webp') }}" alt="" loading="lazy">
+            <img src="{{ img($post->game->logo ?: ($post->game->hero_character ?: $post->game->card_image)) }}" alt="" loading="lazy">
             <span><small>بازی این مطلب</small><b>{{ $post->game->title }}</b></span>
           </a>
         @endif

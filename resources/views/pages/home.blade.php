@@ -108,6 +108,33 @@
 
   @include('partials.testimonials', ['testimonials' => $testimonials])
 
+  @if ($latestPosts->isNotEmpty())
+  <!-- ============ LATEST ARTICLES ============ -->
+  <section class="section latest-posts" id="articles" aria-labelledby="articles-title">
+    <div class="container">
+      <div class="works-head">
+        <div>
+          <p class="eyebrow reveal from-right"><svg aria-hidden="true"><use href="#i-gem"/></svg> وبلاگ</p>
+          <h2 id="articles-title" class="h2" data-split>{{ heading('تازه‌ترین [[مطالب]]') }}</h2>
+        </div>
+        <a class="btn btn-primary reveal" href="{{ route('blog.index') }}">همه‌ی مطالب <svg aria-hidden="true"><use href="#i-play"/></svg></a>
+      </div>
+      <div class="post-grid stagger">
+        @foreach ($latestPosts as $post)
+          <article class="post-card">
+            <a class="post-thumb" href="{{ route('blog.show', $post) }}"><img src="{{ img($post->cover_image) }}" alt="{{ $post->title }}" loading="lazy">@if ($post->category)<span class="post-cat">{{ $post->category->name }}</span>@endif</a>
+            <div class="post-body">
+              <h3><a href="{{ route('blog.show', $post) }}">{{ $post->title }}</a></h3>
+              <p>{{ $post->excerpt }}</p>
+              @include('partials.post-meta', ['post' => $post, 'plain' => true])
+            </div>
+          </article>
+        @endforeach
+      </div>
+    </div>
+  </section>
+  @endif
+
   <!-- ============ CONTACT ============ -->
   <section class="section contact" id="contact" aria-labelledby="contact-title">
     <div class="container contact-grid">
